@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aleph1.Skeletons.CustomWizard", "Aleph1.Skeletons.CustomWizard\Aleph1.Skeletons.CustomWizard.csproj", "{D7FAA416-1DED-47AA-9107-3898741D5A9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aleph1.Skeleton.Packager", "Aleph1.Skeleton.Packager\Aleph1.Skeleton.Packager.csproj", "{461A5D05-B963-41D9-8C61-166090E7E338}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aleph1.Skeletons.Packager", "Aleph1.Skeletons.Packager\Aleph1.Skeletons.Packager.csproj", "{461A5D05-B963-41D9-8C61-166090E7E338}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C418625D-64DA-4A04-9938-0D467AF1ACAB}"
 	ProjectSection(SolutionItems) = preProject

@@ -3,7 +3,4 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DeployTargetInstanceId />
   </PropertyGroup>
-  <PropertyGroup>
-    <ProjectView>ProjectFiles</ProjectView>
-  </PropertyGroup>
 </Project>

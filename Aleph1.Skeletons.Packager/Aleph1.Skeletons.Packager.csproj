@@ -7,6 +7,7 @@
     <StartAction>Program</StartAction>
     <StartProgram>$(DevEnvDir)\devenv.exe</StartProgram>
     <StartArguments>/rootsuffix Exp</StartArguments>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -17,9 +18,9 @@
     <ProjectGuid>{461A5D05-B963-41D9-8C61-166090E7E338}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Aleph1.Skeleton.Packager</RootNamespace>
-    <AssemblyName>Aleph1.Skeleton.Packager</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <RootNamespace>Aleph1.Skeletons.Packager</RootNamespace>
+    <AssemblyName>Aleph1.Skeletons.Packager</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <GeneratePkgDefFile>false</GeneratePkgDefFile>
     <IncludeAssemblyInVSIXContainer>false</IncludeAssemblyInVSIXContainer>
     <IncludeDebugSymbolsInVSIXContainer>false</IncludeDebugSymbolsInVSIXContainer>
@@ -54,7 +55,7 @@
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
-    <None Include="template\templatepack.Aleph1.Skeleton.Packager.proj" />
+    <None Include="template\templatepack.Aleph1.Skeletons.Packager.proj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\project-icon.png">
