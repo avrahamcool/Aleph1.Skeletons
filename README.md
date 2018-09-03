@@ -1,5 +1,6 @@
-# Aleph1.Skeletons.WebAPI
-This extension will add a new WebAPI Project Template Skeleton type for WebAPI projects.  
+# Aleph1.Skeletons
+This extension will add a new WebAPI Project Template Skeleton type for WebAPI projects.
+and a new layer trio projects template.
 
 ### Project Template Features
 * N-Tier project using DI (includes DAL-BL-API with moqs).
