@@ -5,6 +5,7 @@
         <DisplayName>Aleph1.Skeletons</DisplayName>
         <Description xml:space="preserve">WebAPI skeleton includes Auth, Logging, Exception Handling, ModelValidation, Swagger, full N-TIER with DI.</Description>
         <ReleaseNotes>multiple project templates in the same VSIX</ReleaseNotes>
+        <Icon>Properties\project-icon.png</Icon>
         <Tags>skeleton Aleph1 WebAPI Logging FluentValidation, Swagger, DI</Tags>
     </Metadata>
     <Installation>
