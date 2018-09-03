@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+    <Metadata>
+        <Identity Id="6DBE7E10-35CF-444F-93A1-AD1B2B4119DE" Version="2.0.0" Language="en-US" Publisher="Avraham Essoudry" />
+        <DisplayName>Aleph1.Skeletons</DisplayName>
+        <Description xml:space="preserve">WebAPI skeleton includes Auth, Logging, Exception Handling, ModelValidation, Swagger, full N-TIER with DI.</Description>
+        <ReleaseNotes>multiple project templates in the same VSIX</ReleaseNotes>
+        <Tags>skeleton Aleph1 WebAPI Logging FluentValidation, Swagger, DI</Tags>
+    </Metadata>
+    <Installation>
+        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0]" />
+    </Installation>
+    <Dependencies>
+        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+    </Dependencies>
+    <Prerequisites>
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0,16.0)" DisplayName="Visual Studio core editor" />
+    </Prerequisites>
+    <Assets>
+        <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" Path="Output\Templates" />
+        <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="Aleph1.Skeletons.CustomWizard" Path="|Aleph1.Skeletons.CustomWizard|" AssemblyName="|Aleph1.Skeletons.CustomWizard;AssemblyName|" />
+    </Assets>
+</PackageManifest>
