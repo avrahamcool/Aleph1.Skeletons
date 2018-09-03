@@ -39,7 +39,8 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AfterWizard.cs" />
+    <Compile Include="AfterWizardLayer.cs" />
+    <Compile Include="AfterWizardWebAPI.cs" />
     <Compile Include="BeforeWizard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

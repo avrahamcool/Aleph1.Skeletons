@@ -6,7 +6,7 @@
   "name": "Aleph1.Layer",
   "defaultName": "Aleph1.Layer",
   "identity": "Aleph1.Skeletons.Layer",
-  "groupIdentity": "Aleph1.Skeletons",
+  "groupIdentity": "Aleph1.Skeletons.Layer",
   "tags": {
     "language": "C#",
     "type": "project"

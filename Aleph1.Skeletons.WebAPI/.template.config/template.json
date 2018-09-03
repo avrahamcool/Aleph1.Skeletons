@@ -6,7 +6,7 @@
   "name": "Aleph1.WebAPI",
   "defaultName": "Aleph1.WebAPI",
   "identity": "Aleph1.Skeletons.WebAPI",
-  "groupIdentity": "Aleph1.Skeletons",
+  "groupIdentity": "Aleph1.Skeletons.WebAPI",
   "tags": {
     "language": "C#",
     "type": "project"

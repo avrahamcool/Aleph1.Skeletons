@@ -10,17 +10,16 @@ namespace Aleph1.Skeletons.CustomWizard
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
             // Close new solution
-            var dte = (DTE)automationObject;
-            dte.Solution.Close();
+            ((DTE)automationObject).Solution.Close();
 
             // Delete old directory(in my case VS creating it) and change destination
-            var oldDestinationDirectory = replacementsDictionary["$destinationdirectory$"];
+            string oldDestinationDirectory = replacementsDictionary["$destinationdirectory$"];
             if (Directory.Exists(oldDestinationDirectory))
             {
                 Directory.Delete(oldDestinationDirectory, true);
             }
 
-            var newDestinationDirectory = Path.Combine($"{oldDestinationDirectory}", @"..\");
+            string newDestinationDirectory = Path.Combine($"{oldDestinationDirectory}", @"..\");
             replacementsDictionary["$destinationdirectory$"] = Path.GetFullPath(newDestinationDirectory);
         }
 

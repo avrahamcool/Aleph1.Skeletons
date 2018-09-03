@@ -21,7 +21,7 @@
     <CustomParameters>
       <CustomParameter Name = "$language$" Value="CSharp" />
       <CustomParameter Name = "$uistyle$" Value="none"/>
-      <CustomParameter Name = "$groupid$" Value="Aleph1.Skeletons" />
+      <CustomParameter Name = "$groupid$" Value="Aleph1.Skeletons.WebAPI" />
       <CustomParameter Name = "SideWaffleNewProjNode" Value="CSharp\Web\Aleph1"/>
     </CustomParameters>
   </TemplateContent>
@@ -39,6 +39,6 @@
   <!-- AfterWizard -->
   <WizardExtension>
     <Assembly>Aleph1.Skeletons.CustomWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Assembly>
-    <FullClassName>Aleph1.Skeletons.CustomWizard.AfterWizard</FullClassName>
+    <FullClassName>Aleph1.Skeletons.CustomWizard.AfterWizardWebAPI</FullClassName>
   </WizardExtension>
 </VSTemplate>
