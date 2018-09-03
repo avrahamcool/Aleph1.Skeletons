@@ -3,7 +3,38 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aleph1.Skeletons.Layer.Contracts", "Aleph1.Skeletons.Layer.Contracts\Aleph1.Skeletons.Layer.Contracts.csproj", "{9586565D-5FAB-434A-87B4-F8BEB5BBB015}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aleph1.Skeletons.Layer.Implementation", "Aleph1.Skeletons.Layer.Implementation\Aleph1.Skeletons.Layer.Implementation.csproj", "{C44C841C-AFC1-4A32-8AF7-2FE8A0FCE65E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aleph1.Skeletons.Layer.Moq", "Aleph1.Skeletons.Layer.Moq\Aleph1.Skeletons.Layer.Moq.csproj", "{7EE86318-5634-41F8-9400-41CEC70740D9}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Dev|Any CPU = Dev|Any CPU
+		Prod|Any CPU = Prod|Any CPU
+		Test|Any CPU = Test|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9586565D-5FAB-434A-87B4-F8BEB5BBB015}.Dev|Any CPU.ActiveCfg = Dev|Any CPU
+		{9586565D-5FAB-434A-87B4-F8BEB5BBB015}.Dev|Any CPU.Build.0 = Dev|Any CPU
+		{9586565D-5FAB-434A-87B4-F8BEB5BBB015}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
+		{9586565D-5FAB-434A-87B4-F8BEB5BBB015}.Prod|Any CPU.Build.0 = Prod|Any CPU
+		{9586565D-5FAB-434A-87B4-F8BEB5BBB015}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{9586565D-5FAB-434A-87B4-F8BEB5BBB015}.Test|Any CPU.Build.0 = Test|Any CPU
+		{C44C841C-AFC1-4A32-8AF7-2FE8A0FCE65E}.Dev|Any CPU.ActiveCfg = Dev|Any CPU
+		{C44C841C-AFC1-4A32-8AF7-2FE8A0FCE65E}.Dev|Any CPU.Build.0 = Dev|Any CPU
+		{C44C841C-AFC1-4A32-8AF7-2FE8A0FCE65E}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
+		{C44C841C-AFC1-4A32-8AF7-2FE8A0FCE65E}.Prod|Any CPU.Build.0 = Prod|Any CPU
+		{C44C841C-AFC1-4A32-8AF7-2FE8A0FCE65E}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{C44C841C-AFC1-4A32-8AF7-2FE8A0FCE65E}.Test|Any CPU.Build.0 = Test|Any CPU
+		{7EE86318-5634-41F8-9400-41CEC70740D9}.Dev|Any CPU.ActiveCfg = Dev|Any CPU
+		{7EE86318-5634-41F8-9400-41CEC70740D9}.Dev|Any CPU.Build.0 = Dev|Any CPU
+		{7EE86318-5634-41F8-9400-41CEC70740D9}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
+		{7EE86318-5634-41F8-9400-41CEC70740D9}.Prod|Any CPU.Build.0 = Prod|Any CPU
+		{7EE86318-5634-41F8-9400-41CEC70740D9}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{7EE86318-5634-41F8-9400-41CEC70740D9}.Test|Any CPU.Build.0 = Test|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection

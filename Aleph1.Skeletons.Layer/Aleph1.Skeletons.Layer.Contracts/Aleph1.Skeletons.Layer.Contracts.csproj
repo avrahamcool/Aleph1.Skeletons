@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net471</TargetFramework>
+	<Version>1.0.0</Version>
+    <Authors>Avraham Essoudry</Authors>
+	<Company>Aleph1</Company>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Copyright>Copyright Aleph1 © 2018</Copyright>
+    <Description>Contracts for Aleph1.Skeletons.Layer</Description>
+    <DebugType>full</DebugType>
+    <Configurations>Dev;Prod;Test</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DocumentationFile>..\Output\$(Configuration)\Documentation\Aleph1.Skeletons.Layer.Contracts.xml</DocumentationFile>
+    <OutputPath>bin\$(Configuration)</OutputPath>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Dev|net471|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE;DEV;NET471</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  
+</Project>
