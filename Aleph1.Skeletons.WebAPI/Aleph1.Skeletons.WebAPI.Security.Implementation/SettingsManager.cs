@@ -6,17 +6,10 @@ namespace Aleph1.Skeletons.WebAPI.Security.Implementation
     /// <summary>Handle settings from config</summary>
     internal static class SettingsManager
     {
-        private static string _appPrefix;
         public static string AppPrefix
         {
-            get
-            {
-                if (_appPrefix == default(string))
-                {
-                    _appPrefix = ConfigurationManager.AppSettings["AppPrefix"];
-                }
-                return _appPrefix;
-            }
+            // randomly generated guid for each project - you can change this to whatever you want
+            get => "{5BEE28FC-635A-4BB3-A82F-611BB51900F9}";
         }
 
         private static int? _ticketDurationMin;
