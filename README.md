@@ -12,7 +12,7 @@ and a new layer trio projects template.
 * ModelValidation on the webapi controllers (hebrew locale by default).
 * Build & Config & Publish for 3 Environment (Dev - Test - Prod)
 * Security measurments (removing extra server headers & adding security headers)
-* Models and WebAPI proxy are exported as Nuget packages
+* Models are exported as Nuget packages
 
 # Prerequisites
 * [Visual Studio](https://www.visualstudio.com/) 2017
