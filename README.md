@@ -14,6 +14,9 @@ and a new layer trio projects template.
 * Security measurments (removing extra server headers & adding security headers)
 * Models are exported as Nuget packages
 
+# CHANGELOG
+https://github.com/avrahamcool/Aleph1.Skeletons/blob/master/CHANGELOG.md
+
 # Prerequisites
 * [Visual Studio](https://www.visualstudio.com/) 2017
 * [VS Extensibility Tools](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.ExtensibilityTools) installed.
