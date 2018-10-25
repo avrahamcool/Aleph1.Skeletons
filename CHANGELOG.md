@@ -1,3 +1,9 @@
+# 2.1.0:
+using ActivityID as default CorrelationID (shared between all function in the same request lifcycle)
+removed eextra folders: fixes https://github.com/avrahamcool/Aleph1.Skeletons/issues/6
+defaults to https: fixes https://github.com/avrahamcool/Aleph1.Skeletons/issues/5
+removed webdav module - enabling delete and put: fixes https://github.com/avrahamcool/Aleph1.Skeletons/issues/4
+
 # 2.0.3:
 fixed metadata for extention
 

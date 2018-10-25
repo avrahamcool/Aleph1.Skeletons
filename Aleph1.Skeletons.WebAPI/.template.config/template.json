@@ -64,6 +64,7 @@
       "exclude": [
         "**/[Bb]in/**",
         "**/[Oo]bj/**",
+		"**/Logs/**",
 		"Output/**",
 		"packages/**",
         ".template.config/**/*",
