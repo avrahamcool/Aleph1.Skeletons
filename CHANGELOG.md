@@ -1,3 +1,6 @@
+# 2.1.1:
+ CorrelationID is now fixed even afte async/await: fixes https://github.com/avrahamcool/Aleph1.Skeletons/issues/7
+
 # 2.1.0:
 using ActivityID as default CorrelationID (shared between all function in the same request lifcycle)
 
