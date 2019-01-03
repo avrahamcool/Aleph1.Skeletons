@@ -2,6 +2,10 @@
 This extension will add a new WebAPI Project Template Skeleton type for WebAPI projects.
 and a new layer trio projects template.
 
+![Creating a new project](https://raw.githubusercontent.com/avrahamcool/Aleph1.Skeletons/master/Assets/CreatingNewProject.gif)
+        
+      
+      
 ### Project Template Features
 * N-Tier project using DI (includes DAL-BL-API with moqs).
 * WebAPI Auth using Tokens, with custom security project (includes moq).
