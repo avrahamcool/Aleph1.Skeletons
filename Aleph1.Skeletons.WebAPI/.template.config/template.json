@@ -65,6 +65,7 @@
         "**/[Bb]in/**",
         "**/[Oo]bj/**",
 		"**/Logs/**",
+		"**/*.user",
 		"Output/**",
 		"packages/**",
         ".template.config/**/*",

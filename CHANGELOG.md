@@ -1,3 +1,8 @@
+# 2.2.0
+ Backup before publish - https://github.com/avrahamcool/Aleph1.Skeletons/issues/11
+
+ Moved all setting from user files to csproj - https://github.com/avrahamcool/Aleph1.Skeletons/issues/12
+
 # 2.1.1:
  CorrelationID is now fixed even afte async/await: fixes https://github.com/avrahamcool/Aleph1.Skeletons/issues/7
 
