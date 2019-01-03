@@ -17,7 +17,7 @@
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44331</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -225,7 +225,16 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49382</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44331/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>
@@ -246,21 +255,19 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  
   <!-- Given a list of dates (ModifiedTime), find the Max and return as formated string. if the list is empty return empty string. -->
-  <UsingTask TaskName="GenerateBackupDate" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" >
+  <UsingTask TaskName="GenerateBackupDate" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
     <ParameterGroup>
       <FileDates ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
       <BackupDate Output="true" />
     </ParameterGroup>
     <Task>
-      <Using Namespace="System.Linq"/>
+      <Using Namespace="System.Linq" />
       <Code Type="Fragment" Language="cs">
-        BackupDate = FileDates.Length > 0 ? FileDates.Select(t => t.ToString()).Select(d => DateTime.Parse(d)).Max().ToString("yyyy-MM-dd HH.mm.ss") : "";
+        BackupDate = FileDates.Length &gt; 0 ? FileDates.Select(t =&gt; t.ToString()).Select(d =&gt; DateTime.Parse(d)).Max().ToString("yyyy-MM-dd HH.mm.ss") : "";
       </Code>
     </Task>
   </UsingTask>
-  
   <!-- Backup the old published files - if any -->
   <Target Name="BackupOldProject" BeforeTargets="GatherAllFilesToPublish">
     <PropertyGroup>
@@ -268,25 +275,20 @@
     </PropertyGroup>
     <ItemGroup>
       <OldFiles Include="$(PublishUrl)\**\*" Exclude="$(BackupDir)\**\*" />
-      <OldFolders Include="$([System.IO.Directory]::GetDirectories(&quot;$(PublishUrl)&quot;))" Exclude="$(BackupDir)"/>
+      <OldFolders Include="$([System.IO.Directory]::GetDirectories(&quot;$(PublishUrl)&quot;))" Exclude="$(BackupDir)" />
     </ItemGroup>
-    
     <!-- Find the last Modified Item - this will be the Backup name -->
     <GenerateBackupDate FileDates="@(OldFiles->'%(ModifiedTime)')">
       <Output PropertyName="BackupDate" TaskParameter="BackupDate" />
     </GenerateBackupDate>
-    
     <PropertyGroup Condition="$(BackupDate) != ''">
       <CurrentBackupDir>$(BackupDir)\$(BackupDate)</CurrentBackupDir>
       <CurrentBackupZip>$(CurrentBackupDir).zip</CurrentBackupZip>
     </PropertyGroup>
-    
-    <Message Condition="$(BackupDate) != ''" Text="Copying @(OldFiles->Count()) files to Backup Directory" Importance="high" />
-    <Copy Condition="$(BackupDate) != ''" SourceFiles="@(OldFiles)" DestinationFiles="@(OldFiles->'$(CurrentBackupDir)\%(RecursiveDir)%(Filename)%(Extension)')" Retries="1" RetryDelayMilliseconds="1000"/>
-    
+    <Message Condition="$(BackupDate) != ''" Text="Copying @(OldFiles-&gt;Count()) files to Backup Directory" Importance="high" />
+    <Copy Condition="$(BackupDate) != ''" SourceFiles="@(OldFiles)" DestinationFiles="@(OldFiles->'$(CurrentBackupDir)\%(RecursiveDir)%(Filename)%(Extension)')" Retries="1" RetryDelayMilliseconds="1000" />
     <ZipDirectory Condition="$(BackupDate) != ''" SourceDirectory="$(CurrentBackupDir)" DestinationFile="$(CurrentBackupZip)" Overwrite="true" />
     <RemoveDir Directories="$(CurrentBackupDir)" />
-    
     <Delete Condition="$(BackupDate) != ''" Files="@(OldFiles)" />
     <RemoveDir Condition="$(BackupDate) != ''" Directories="$(OldFolders)" />
   </Target>
