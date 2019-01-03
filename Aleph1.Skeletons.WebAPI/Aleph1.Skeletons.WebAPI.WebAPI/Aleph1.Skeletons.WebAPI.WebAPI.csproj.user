@@ -16,7 +16,7 @@
     <WebStackScaffolding_IsReferencingScriptLibrariesSelected>True</WebStackScaffolding_IsReferencingScriptLibrariesSelected>
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
-    <NameOfLastUsedPublishProfile>Test</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>Dev</NameOfLastUsedPublishProfile>
     <LastActiveSolutionConfig>Dev|Any CPU</LastActiveSolutionConfig>
     <ProjectView>ProjectFiles</ProjectView>
   </PropertyGroup>
