@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Aleph1.Skeletons.CustomWizard
 {
-    public class BeforeWizard : IWizard
+    public class BeforeWizardWebAPI : IWizard
     {
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
