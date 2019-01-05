@@ -11,7 +11,7 @@
     "language": "C#",
     "type": "project"
   },
-  "shortName": "api",
+  "shortName": "layer",
   "sourceName": "Aleph1.Skeletons.Layer",
   "guids": [
     "{9586565D-5FAB-434A-87B4-F8BEB5BBB015}", //Layer.Contracts

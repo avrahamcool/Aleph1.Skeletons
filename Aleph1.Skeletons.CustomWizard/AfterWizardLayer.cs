@@ -1,5 +1,7 @@
 ﻿using EnvDTE;
+using EnvDTE80;
 using Microsoft.VisualStudio.TemplateWizard;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,36 +10,60 @@ namespace Aleph1.Skeletons.CustomWizard
 {
     public class AfterWizardLayer : IWizard
     {
-        private DTE dte;
-        private string destinationDirectory;
-        private string solutionName;
+        private DTE2 dte;
+        private Solution2 solution;
+        private string selectedFolderName;
+        private string pathToNewSolution;
+        private string pathToOldSolution;
+        private List<string> projectsToAdd;
 
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
-            dte = (DTE)automationObject;
-            destinationDirectory = replacementsDictionary["$destinationdirectory$"];
-            solutionName = replacementsDictionary["$safeprojectname$"];
-        }
+            dte = (DTE2)automationObject;
+            solution = (Solution2)(dte.Solution);
 
+            string destinationDirectory = replacementsDictionary["$destinationdirectory$"];
+            string solutionName = replacementsDictionary["$safeprojectname$"];
+
+            pathToNewSolution = Path.Combine(destinationDirectory, solutionName + ".sln");
+            pathToOldSolution = Directory.EnumerateFiles(destinationDirectory, "*.sln").FirstOrDefault(path => path != pathToNewSolution);
+
+            //if a foder is seclected - we will add the project to that folder
+            selectedFolderName = ((Array)dte.ActiveSolutionProjects).Cast<Project>().Select(p => p.Name).FirstOrDefault();
+            if (selectedFolderName != null)
+            {
+                // Closing the solution will cause the projects to not get added
+                solution.SaveAs(pathToOldSolution);
+                solution.Close();
+
+                projectsToAdd = new List<string>()
+                {
+                    Path.Combine(destinationDirectory, solutionName + ".Contracts", solutionName + ".Contracts.csproj"),
+                    Path.Combine(destinationDirectory, solutionName + ".Implementation", solutionName + ".Implementation.csproj"),
+                    Path.Combine(destinationDirectory, solutionName + ".Moq", solutionName + ".Moq.csproj")
+                };
+            }
+        }
         public void RunFinished()
         {
-            string pathToNewSolution = Path.Combine(destinationDirectory, solutionName + ".sln");
-            string pathToOldSolution = Directory.EnumerateFiles(destinationDirectory, "*.sln").FirstOrDefault(path => path != pathToNewSolution);
-
-            if (pathToOldSolution != null)
+            if (File.Exists(pathToNewSolution))
             {
                 File.Delete(pathToNewSolution);
-
-                dte.Solution.Open(pathToOldSolution);
-
-                dte.Solution.AddFromFile(Path.Combine(destinationDirectory, solutionName + ".Contracts", solutionName + ".Contracts.csproj"));
-                dte.Solution.AddFromFile(Path.Combine(destinationDirectory, solutionName + ".Implementation", solutionName + ".Implementation.csproj"));
-                dte.Solution.AddFromFile(Path.Combine(destinationDirectory, solutionName + ".Moq", solutionName + ".Moq.csproj"));
             }
-            else
+
+            //if the selected folder exist - we will add the project manually
+            if (selectedFolderName != null)
             {
-                // Open newly created solution
-                dte.Solution.Open(pathToNewSolution);
+                solution.Open(pathToOldSolution);
+                Project selectedProj = solution.FindProjectInSolution(selectedFolderName);
+                if (selectedProj != null)
+                {
+                    SolutionFolder selectedFolder = (SolutionFolder)(selectedProj.Object);
+                    foreach (string projPath in projectsToAdd)
+                    {
+                        selectedFolder.AddFromFile(projPath);
+                    }
+                }
             }
         }
 

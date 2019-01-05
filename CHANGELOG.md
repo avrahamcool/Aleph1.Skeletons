@@ -1,3 +1,8 @@
+# 2.3.0
+The convention in names is automatically applied when creating a layer - fixes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/9
+
+ Layer is now created in the selected folder - fixes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/10
+
 # 2.2.0
  Backup before publish - https://github.com/avrahamcool/Aleph1.Skeletons/issues/11
 

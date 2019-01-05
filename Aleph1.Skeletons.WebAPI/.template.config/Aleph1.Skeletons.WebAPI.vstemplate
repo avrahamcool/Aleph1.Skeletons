@@ -29,7 +29,7 @@
   <!-- BeforeWizard -->
   <WizardExtension>
     <Assembly>Aleph1.Skeletons.CustomWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Assembly>
-    <FullClassName>Aleph1.Skeletons.CustomWizard.BeforeWizard</FullClassName>
+    <FullClassName>Aleph1.Skeletons.CustomWizard.BeforeWizardWebAPI</FullClassName>
   </WizardExtension>
   <!-- Default Wizard -->
   <WizardExtension>
