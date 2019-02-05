@@ -1,15 +1,20 @@
+# 2.4.0
+Updated all underlying Nugets
+
+Seperated AboutModel into it's own file - closes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/16
+
 # 2.3.0
 The convention in names is automatically applied when creating a layer - fixes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/9
 
- Layer is now created in the selected folder - fixes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/10
+Layer is now created in the selected folder - fixes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/10
 
 # 2.2.0
- Backup before publish - https://github.com/avrahamcool/Aleph1.Skeletons/issues/11
+Backup before publish - https://github.com/avrahamcool/Aleph1.Skeletons/issues/11
 
- Moved all setting from user files to csproj - https://github.com/avrahamcool/Aleph1.Skeletons/issues/12
+Moved all setting from user files to csproj - https://github.com/avrahamcool/Aleph1.Skeletons/issues/12
 
 # 2.1.1:
- CorrelationID is now fixed even afte async/await: fixes https://github.com/avrahamcool/Aleph1.Skeletons/issues/7
+CorrelationID is now fixed even after async/await: fixes https://github.com/avrahamcool/Aleph1.Skeletons/issues/7
 
 # 2.1.0:
 using ActivityID as default CorrelationID (shared between all function in the same request lifcycle)
