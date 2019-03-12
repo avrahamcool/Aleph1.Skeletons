@@ -1,3 +1,6 @@
+# 2.4.1
+removed proxy project from `template.json` - fixes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/18
+
 # 2.4.0
 Updated all underlying Nugets
 
