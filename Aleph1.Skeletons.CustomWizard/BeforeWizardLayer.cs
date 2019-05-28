@@ -7,13 +7,8 @@ namespace Aleph1.Skeletons.CustomWizard
 {
     public class BeforeWizardLayer : IWizard
     {
-        private DTE dte;
-        private Dictionary<string, string> replacementsDictionary;
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
-            dte = (DTE)automationObject;
-            this.replacementsDictionary = replacementsDictionary;
-
             // Delete old directory(in my case VS creating it) and change destination
             string oldDestinationDirectory = replacementsDictionary["$destinationdirectory$"];
             if (Directory.Exists(oldDestinationDirectory))
@@ -24,8 +19,6 @@ namespace Aleph1.Skeletons.CustomWizard
             string newDestinationDirectory = Path.Combine($"{oldDestinationDirectory}", @"..\");
             replacementsDictionary["$destinationdirectory$"] = Path.GetFullPath(newDestinationDirectory);
 
-            string projName = replacementsDictionary["$projectname$"];
-            string safeProjName = replacementsDictionary["$safeprojectname$"];
             string solutionName = Path.GetFileName(Path.GetDirectoryName(replacementsDictionary["$solutiondirectory$"]));
             if (!replacementsDictionary["$safeprojectname$"].StartsWith(solutionName))
             {
