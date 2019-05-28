@@ -13,6 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <OutputPath>bin\$(Configuration)\</OutputPath>
 	<DocumentationFile>..\Output\$(Configuration)\Documentation\Aleph1.Skeletons.WebAPI.DAL.Contracts.xml</DocumentationFile>
+	<LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Dev|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

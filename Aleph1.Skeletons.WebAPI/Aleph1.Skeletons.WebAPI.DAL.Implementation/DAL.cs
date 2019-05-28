@@ -8,7 +8,7 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Implementation
 {
     internal class DAL : IDAL
     {
-        private List<Person> persons = new List<Person>();
+        private readonly List<Person> persons = new List<Person>();
 
         [Logged(LogParameters = false)]
         public DAL()

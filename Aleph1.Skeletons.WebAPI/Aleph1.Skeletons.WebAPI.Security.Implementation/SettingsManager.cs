@@ -18,7 +18,7 @@ namespace Aleph1.Skeletons.WebAPI.Security.Implementation
         {
             get
             {
-                if (_ticketDurationMin == default(int?))
+                if (_ticketDurationMin == default)
                 {
                     _ticketDurationMin = int.Parse(ConfigurationManager.AppSettings["TicketDurationMin"]);
                     if (_ticketDurationMin.Value != 0)

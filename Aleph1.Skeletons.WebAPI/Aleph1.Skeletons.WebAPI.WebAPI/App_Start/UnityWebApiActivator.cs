@@ -1,9 +1,7 @@
 using Aleph1.DI.Contracts;
 using Aleph1.DI.UnityImplementation;
-using Aleph1.Skeletons.WebAPI.Security.Contracts;
 using Aleph1.Skeletons.WebAPI.WebAPI;
 using Aleph1.Skeletons.WebAPI.WebAPI.Classes;
-using Aleph1.Skeletons.WebAPI.WebAPI.Security;
 using FluentValidation;
 using FluentValidation.WebApi;
 using System;
@@ -12,13 +10,13 @@ using System.Web.Http;
 using Unity;
 using Unity.AspNet.WebApi;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(UnityConfig), nameof(UnityConfig.Start))]
-[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(UnityConfig), nameof(UnityConfig.Shutdown))]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(UnityWebApiActivator), nameof(UnityWebApiActivator.Start))]
+[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(UnityWebApiActivator), nameof(UnityWebApiActivator.Shutdown))]
 
 namespace Aleph1.Skeletons.WebAPI.WebAPI
 {
     /// <summary>Provides the bootstrapping for integrating Unity with WebApi when it is hosted in ASP.NET.</summary>
-    internal static class UnityConfig
+    internal static class UnityWebApiActivator
     {
         static IUnityContainer DIContainer { get; set; }
 
@@ -40,9 +38,6 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI
 
             // point the WebAPI to use the container
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(DIContainer);
-
-            //explicite injection of the SecurityService to the AuthenticatedAttribute [we cant use regular DI within attribute]
-            AuthenticatedAttribute._securityService = DIContainer.Resolve(typeof(ISecurity)) as ISecurity;
         }
 
         /// <summary>Disposes the Unity container when the application is shut down.</summary>

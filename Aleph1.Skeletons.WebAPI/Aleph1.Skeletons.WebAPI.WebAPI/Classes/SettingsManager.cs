@@ -13,7 +13,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Classes
         {
             get
             {
-                if (_environment == default(string))
+                if (_environment == default)
                 {
                     _environment = ConfigurationManager.AppSettings["Environment"];
                 }
@@ -46,7 +46,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Classes
         {
             get
             {
-                if (_documentationDirPath == default(string))
+                if (_documentationDirPath == default)
                 {
                     _documentationDirPath = new Uri(new Uri(AppDomain.CurrentDomain.BaseDirectory), ConfigurationManager.AppSettings["DocumentationDirPath"]).LocalPath;
                 }
@@ -59,7 +59,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Classes
         {
             get
             {
-                if (_authenticationHeaderKey == default(string))
+                if (_authenticationHeaderKey == default)
                 {
                     _authenticationHeaderKey = ConfigurationManager.AppSettings["AuthenticationHeaderKey"];
                 }
@@ -72,11 +72,77 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Classes
         {
             get
             {
-                if (_EnableSwagger == default(bool))
+                if (_EnableSwagger == default)
                 {
                     bool.TryParse(ConfigurationManager.AppSettings["EnableSwagger"], out _EnableSwagger);
                 }
                 return _EnableSwagger;
+            }
+        }
+
+        private static bool _EnableCORS;
+        public static bool EnableCORS
+        {
+            get
+            {
+                if (_EnableCORS == default)
+                {
+                    bool.TryParse(ConfigurationManager.AppSettings["EnableCORS"], out _EnableCORS);
+                }
+                return _EnableCORS;
+            }
+        }
+
+        private static string _origins;
+        public static string Origins
+        {
+            get
+            {
+                if (_origins == default)
+                {
+                    _origins = ConfigurationManager.AppSettings["Origins"];
+                }
+                return _origins;
+            }
+        }
+
+        private static string _headers;
+        public static string Headers
+        {
+            get
+            {
+                if (_headers == default)
+                {
+                    _headers = ConfigurationManager.AppSettings["Headers"];
+                }
+                return _headers;
+            }
+        }
+
+
+        private static string _methods;
+        public static string Methods
+        {
+            get
+            {
+                if (_methods == default)
+                {
+                    _methods = ConfigurationManager.AppSettings["Methods"];
+                }
+                return _methods;
+            }
+        }
+
+        private static string _exposedHeaders;
+        public static string ExposedHeaders
+        {
+            get
+            {
+                if (_exposedHeaders == default)
+                {
+                    _exposedHeaders = ConfigurationManager.AppSettings["ExposedHeaders"];
+                }
+                return _exposedHeaders;
             }
         }
     }

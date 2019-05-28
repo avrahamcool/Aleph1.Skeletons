@@ -7,7 +7,7 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Moq
 {
     internal class DALMoq : IDAL
     {
-        private List<Person> persons = new List<Person>();
+        private readonly List<Person> persons = new List<Person>();
         
         public DALMoq()
         {
