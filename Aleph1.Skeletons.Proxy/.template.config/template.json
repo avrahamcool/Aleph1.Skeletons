@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Avraham Essoudry",
+  "classifications": [ "WebAPI", "Proxy" ],
+  "description": "Proxy skeleton including Api",
+  "name": "Aleph1.Proxy",
+  "defaultName": "Aleph1.Proxy",
+  "identity": "Aleph1.Skeletons.Proxy",
+  "groupIdentity": "Aleph1.Skeletons.Proxy",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "shortName": "api",
+  "sourceName": "Aleph1.Skeletons.Proxy",
+  "guids": [
+    "{45DDD773-6F76-4256-8071-9C6586EBA491}", //WebAPI
+    "{C171FE63-5703-4FAB-8C23-272B11851D28}", //Models
+    "{73C0B117-488E-4A38-87FA-9A2943F444BC}", //Proxy.Contracts
+    "{E3936829-7BCD-4E05-A38F-95BE9BF28763}", //Proxy.Implementation
+    "{6564AE7C-6D6A-4E5D-B2F9-A5645EF9FE81}"  //Proxy.Moq
+  ],
+  "primaryOutputs": [
+    {
+      "path": "Aleph1.Skeletons.Proxy.WebAPI\\Aleph1.Skeletons.Proxy.WebAPI.csproj"
+    },
+    {
+      "path": "Aleph1.Skeletons.Proxy.Models\\Aleph1.Skeletons.Proxy.Models.csproj"
+    },
+    {
+      "path": "Aleph1.Skeletons.Proxy.Proxy.Contracts\\Aleph1.Skeletons.Proxy.Proxy.Contracts.csproj"
+    },
+    {
+      "path": "Aleph1.Skeletons.Proxy.Proxy.Implementation\\Aleph1.Skeletons.Proxy.Proxy.Implementation.csproj"
+    },
+    {
+      "path": "Aleph1.Skeletons.Proxy.Proxy.Moq\\Aleph1.Skeletons.Proxy.Proxy.Moq.csproj"
+    }
+  ],
+
+  "sources": [
+    {
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+		"**/Logs/**",
+		"**/*.user",
+		"Output/**",
+		"packages/**",
+        ".template.config/**/*",
+        "**/*.filelist",
+        "**/*.lock.json"
+      ]
+    }
+  ]
+}

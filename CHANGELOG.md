@@ -1,3 +1,10 @@
+# 2.6.0
+enabling cors for DEV - closes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/8
+no longer backup Logs - fixes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/19
+better injection of security service - closes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/20
+
+added proxy template
+
 # 2.5.0
 compatible with VisualStudio 2019
 
