@@ -1,9 +1,9 @@
 ﻿using Aleph1.Logging;
 using Aleph1.Skeletons.WebAPI.Models.Security;
 using Aleph1.Skeletons.WebAPI.Security.Contracts;
+using Aleph1.Skeletons.WebAPI.WebAPI.Models;
 using Aleph1.Skeletons.WebAPI.WebAPI.Security;
 using Aleph1.WebAPI.ExceptionHandler;
-using System.Web;
 using System.Web.Http;
 
 namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
@@ -17,18 +17,16 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
         [Logged(LogParameters = false)]
         public LoginController(ISecurity securityService)
         {
-            this.SecurityService = securityService;
+            SecurityService = securityService;
         }
 
-        /// <summary>Logins to the app (specify if as manager).</summary>
-        /// <param name="isManager">if set to <c>true</c> [is manager].</param>
-        [Authenticated(AllowAnonymous = true), Logged, HttpPost, Route("api/Login"), FriendlyMessage("התרחשה שגיאה בעת ההתחברות")]
-        public string Login([FromBody] bool isManager)
+        /// <summary>Logins to the app (use same user and password for successfull login. use admin for manager).</summary>
+        /// <param name="loginModel">Credentials for login</param>
+        [Authenticated(AllowAnonymous = true), Logged(LogParameters = false), HttpPost, Route("api/Login"), FriendlyMessage("התרחשה שגיאה בעת ההתחברות")]
+        public string Login(LoginModel loginModel)
         {
-            return Request.Headers.AddAuthenticationInfo(SecurityService, new AuthenticationInfo()
-            {
-                IsManager = isManager
-            });
+            AuthenticationInfo auth = SecurityService.Login(loginModel.Username, loginModel.Password);
+            return Request.Headers.AddAuthenticationInfo(SecurityService, auth);
         }
     }
 }

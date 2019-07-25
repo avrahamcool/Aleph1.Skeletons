@@ -2,6 +2,7 @@
 using Aleph1.Security.Contracts;
 using Aleph1.Skeletons.WebAPI.Models.Security;
 using Aleph1.Skeletons.WebAPI.Security.Contracts;
+using System;
 
 namespace Aleph1.Skeletons.WebAPI.Security.Implementation
 {
@@ -30,6 +31,16 @@ namespace Aleph1.Skeletons.WebAPI.Security.Implementation
         public AuthenticationInfo ReadTicket(string ticketValue, string userUniqueID)
         {
             return this.CipherService.Decrypt<AuthenticationInfo>(SettingsManager.AppPrefix, userUniqueID, ticketValue);
+        }
+
+        [Logged(LogParameters = false, LogReturnValue = true)]
+        public AuthenticationInfo Login(string username, string password)
+        {
+            // put your real implementation here
+            if (!username.Equals(password, StringComparison.OrdinalIgnoreCase))
+                throw new UnauthorizedAccessException();
+
+            return new AuthenticationInfo() { IsManager = username.Equals("admin", StringComparison.OrdinalIgnoreCase) };
         }
 
         [Logged(LogParameters = false, LogReturnValue = true)]

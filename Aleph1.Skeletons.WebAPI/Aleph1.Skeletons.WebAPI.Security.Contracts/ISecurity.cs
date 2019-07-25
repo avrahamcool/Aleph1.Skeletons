@@ -25,6 +25,12 @@ namespace Aleph1.Skeletons.WebAPI.Security.Contracts
         AuthenticationInfo ReadTicket(string ticketValue, string userUniqueID);
         #endregion GeneralAuth
 
+        /// <summary>Generate a AuthenticationInfo based on the given credentials</summary>
+        /// <param name="username"> the username</param>
+        /// <param name="password">the password</param>
+        /// <returns>an AuthenticationInfo representing the credentials of the user</returns>
+        AuthenticationInfo Login(string username, string password);
+
         /// <summary>return true if the current user is allowed for content marked as regular</summary>
         /// <param name="authenticationInfo">the user authentication info</param>
         /// <returns>true if allowed, false otherwise</returns>

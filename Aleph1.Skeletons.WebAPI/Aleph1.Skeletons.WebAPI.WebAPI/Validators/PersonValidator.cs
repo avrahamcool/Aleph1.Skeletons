@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Aleph1.Skeletons.WebAPI.WebAPI.Validators
 {
-    /// <summary></summary>
+    /// <summary>Validates the Person input</summary>
     public class PersonValidator : AbstractValidator<Person>
     {
         /// <summary>Initializes a new instance of the <see cref="PersonValidator"/> class.</summary>

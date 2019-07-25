@@ -19,6 +19,11 @@ namespace Aleph1.Skeletons.WebAPI.Security.Moq
         {
             return null;
         }
+        
+        public AuthenticationInfo Login(string username, string password)
+        {
+            return null;
+        }
 
         public bool IsAllowedForRegularContent(AuthenticationInfo authenticationInfo)
         {
