@@ -21,6 +21,8 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Classes
             }
         }
 
+        public static bool IsProd => Environment.Equals("Prod", StringComparison.OrdinalIgnoreCase);
+
         private static string[] _modulesPath;
         public static string[] ModulesPath
         {

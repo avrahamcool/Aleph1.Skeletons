@@ -16,7 +16,6 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
         [Logged, HttpGet, Route("api/About"), FriendlyMessage("התרחשה שגיאה בעת שליפת נתוני מערכת")]
         public AboutModel About()
         {
-
             //Client logon Name (when using Windows Authentication)
             //string userUniqueID = HttpContext.Current.User.Identity.Name;
             return new AboutModel()
@@ -25,7 +24,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
                 ClientUserName = HttpContext.Current?.User?.Identity?.Name,
                 Environment = SettingsManager.Environment,
                 APIVersion = Assembly.GetExecutingAssembly()?.GetName()?.Version?.ToString(),
-                Server = Environment.MachineName
+                Server = SettingsManager.IsProd ? "N/A in Prod" : Environment.MachineName
             };
         }
     }
