@@ -19,7 +19,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI
         /// <summary>Strip Server Headers</summary>
         protected void Application_PreSendRequestHeaders()
         {
-            //Those headers are not removed when set in config
+            //Those headers are not removed even when set in Config - so we need to remove them here.
             Response.Headers.Remove("Server");
             Response.Headers.Remove("X-AspNet-Version");
         }
@@ -27,6 +27,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI
         /// <summary>Manage CorrelationID for the logger to use</summary>
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
+            //Set a CorrelationID that is unique and consistent across the request.
             HttpContext.Current.Items["CorrelationID"] = Guid.NewGuid();
         }
     }

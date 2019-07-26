@@ -4,7 +4,7 @@ using System.Linq;
 namespace Aleph1.Skeletons.WebAPI.BL.Contracts
 {
     /// <summary>
-    /// Handles buisness logic
+    /// Handles business logic
     /// </summary>
     public interface IBL
     {

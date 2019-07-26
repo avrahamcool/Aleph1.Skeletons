@@ -28,7 +28,7 @@ namespace Aleph1.Skeletons.CustomWizard
             pathToNewSolution = Path.Combine(destinationDirectory, solutionName + ".sln");
             pathToOldSolution = Directory.EnumerateFiles(destinationDirectory, "*.sln").FirstOrDefault(path => path != pathToNewSolution);
 
-            //if a foder is seclected - we will add the project to that folder
+            //if a folder is selected - we will add the project to that folder
             selectedFolderName = ((Array)dte.ActiveSolutionProjects).Cast<Project>().Select(p => p.Name).FirstOrDefault();
             if (selectedFolderName != null)
             {

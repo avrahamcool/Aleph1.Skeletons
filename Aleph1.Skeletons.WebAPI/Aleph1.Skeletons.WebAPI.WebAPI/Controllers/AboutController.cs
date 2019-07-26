@@ -16,7 +16,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
         [Logged, HttpGet, Route("api/About"), FriendlyMessage("התרחשה שגיאה בעת שליפת נתוני מערכת")]
         public AboutModel About()
         {
-            //Client logon Name (when using Windows Authentication)
+            //Client login Name (when using Windows Authentication)
             //string userUniqueID = HttpContext.Current.User.Identity.Name;
             return new AboutModel()
             {

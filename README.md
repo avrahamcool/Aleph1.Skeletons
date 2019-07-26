@@ -7,15 +7,15 @@ and a new layer trio projects template.
       
       
 ### Project Template Features
-* N-Tier project using DI (includes DAL-BL-API with moqs).
-* WebAPI Auth using Tokens, with custom security project (includes moq).
+* N-Tier project using DI (includes DAL-BL-API with mocks).
+* WebAPI Auth using Tokens, with custom security project (includes mock).
 * WebAPI Throttling on all controllers.
 * Enables and configure Swagger automatically (with Documentation).
 * Auto Logging (function tracing) using PostSharp and NLOG (configuration set to local file).
-* Friendly exception handling on the webapi controllers.
-* ModelValidation on the webapi controllers (hebrew locale by default).
+* Friendly exception handling on the WebApi controllers.
+* ModelValidation on the WebApi controllers (Hebrew locale by default).
 * Build & Config & Publish for 3 Environment (Dev - Test - Prod)
-* Security measurments (removing extra server headers & adding security headers)
+* Security measurements (removing extra server headers & adding security headers)
 * Models are exported as Nuget packages
 
 # CHANGELOG

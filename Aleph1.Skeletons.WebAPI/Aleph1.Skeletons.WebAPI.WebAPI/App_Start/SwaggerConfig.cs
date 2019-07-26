@@ -41,35 +41,35 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI
                     //
                     c.SingleApiVersion("v1", "Aleph1.Skeletons.WebAPI.WebAPI");
 
-                    // If you want the output Swagger docs to be indented properly, enable the "PrettyPrint" option.
-                    //
-                    //c.PrettyPrint();
+                        // If you want the output Swagger docs to be indented properly, enable the "PrettyPrint" option.
+                        //
+                        //c.PrettyPrint();
 
-                    // If your API has multiple versions, use "MultipleApiVersions" instead of "SingleApiVersion".
-                    // In this case, you must provide a lambda that tells Swashbuckle which actions should be
-                    // included in the docs for a given API version. Like "SingleApiVersion", each call to "Version"
-                    // returns an "Info" builder so you can provide additional metadata per API version.
-                    //
-                    //c.MultipleApiVersions(
-                    //    (apiDesc, targetApiVersion) => ResolveVersionSupportByRouteConstraint(apiDesc, targetApiVersion),
-                    //    (vc) =>
-                    //    {
-                    //        vc.Version("v2", "Swashbuckle Dummy API V2");
-                    //        vc.Version("v1", "Swashbuckle Dummy API V1");
-                    //    });
+                        // If your API has multiple versions, use "MultipleApiVersions" instead of "SingleApiVersion".
+                        // In this case, you must provide a lambda that tells Swashbuckle which actions should be
+                        // included in the docs for a given API version. Like "SingleApiVersion", each call to "Version"
+                        // returns an "Info" builder so you can provide additional metadata per API version.
+                        //
+                        //c.MultipleApiVersions(
+                        //    (apiDesc, targetApiVersion) => ResolveVersionSupportByRouteConstraint(apiDesc, targetApiVersion),
+                        //    (verInfo) =>
+                        //    {
+                        //        verInfo.Version("v2", "Swashbuckle Dummy API V2");
+                        //        verInfo.Version("v1", "Swashbuckle Dummy API V1");
+                        //    });
 
-                    // You can use "BasicAuth", "ApiKey" or "OAuth2" options to describe security schemes for the API.
-                    // See https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md for more details.
-                    // NOTE: These only define the schemes and need to be coupled with a corresponding "security" property
-                    // at the document or operation level to indicate which schemes are required for an operation. To do this,
-                    // you'll need to implement a custom IDocumentFilter and/or IOperationFilter to set these properties
-                    // according to your specific authorization implementation
-                    //
-                    //c.BasicAuth("basic")
-                    //    .Description("Basic HTTP Authentication");
-                    //
-                    // NOTE: You must also configure 'EnableApiKeySupport' below in the SwaggerUI section
-                    c.ApiKey(SettingsManager.AuthenticationHeaderKey)
+                        // You can use "BasicAuth", "ApiKey" or "OAuth2" options to describe security schemes for the API.
+                        // See https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md for more details.
+                        // NOTE: These only define the schemes and need to be coupled with a corresponding "security" property
+                        // at the document or operation level to indicate which schemes are required for an operation. To do this,
+                        // you'll need to implement a custom IDocumentFilter and/or IOperationFilter to set these properties
+                        // according to your specific authorization implementation
+                        //
+                        //c.BasicAuth("basic")
+                        //    .Description("Basic HTTP Authentication");
+                        //
+                        // NOTE: You must also configure 'EnableApiKeySupport' below in the SwaggerUI section
+                        c.ApiKey(SettingsManager.AuthenticationHeaderKey)
                             .Description("AuthenticationHeader key")
                             .Name(SettingsManager.AuthenticationHeaderKey)
                             .In("header");
@@ -224,7 +224,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI
                     //
                     //c.DocExpansion(DocExpansion.List);
 
-                    // Specify which HTTP operations will have the 'Try it out!' option. An empty paramter list disables
+                    // Specify which HTTP operations will have the 'Try it out!' option. An empty parameter list disables
                     // it for all operations.
                     //
                     //c.SupportedSubmitMethods("GET", "HEAD");

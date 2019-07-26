@@ -9,7 +9,7 @@ using WebApiThrottle;
 
 namespace Aleph1.Skeletons.WebAPI.WebAPI
 {
-    /// <summary>web api congigurations</summary>
+    /// <summary>web api configurations</summary>
     internal static class WebApiConfig
     {
         /// <summary>Registers web api configurations</summary>

@@ -20,7 +20,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
             SecurityService = securityService;
         }
 
-        /// <summary>Logins to the app (use same user and password for successfull login. use admin for manager).</summary>
+        /// <summary>Login to the APP (use same user and password for successful login. use admin for manager).</summary>
         /// <param name="loginModel">Credentials for login</param>
         [Authenticated(AllowAnonymous = true), Logged(LogParameters = false), HttpPost, Route("api/Login"), FriendlyMessage("התרחשה שגיאה בעת ההתחברות")]
         public string Login(LoginModel loginModel)

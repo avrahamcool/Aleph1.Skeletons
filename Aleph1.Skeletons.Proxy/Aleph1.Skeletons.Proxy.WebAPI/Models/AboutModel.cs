@@ -3,10 +3,10 @@
     /// <summary>Some data about the current api and user</summary>
     public class AboutModel
     {
-        /// <summary>client ip.</summary>
+        /// <summary>client IP.</summary>
         public string ClientIP { get; set; }
 
-        /// <summary>logon name of the client user.</summary>
+        /// <summary>login name of the client user.</summary>
         public string ClientUserName { get; set; }
 
         /// <summary>API version. </summary>

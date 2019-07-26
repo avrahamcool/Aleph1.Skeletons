@@ -8,7 +8,7 @@ namespace Aleph1.Skeletons.WebAPI.Security.Implementation
     {
         public static string AppPrefix
         {
-            // randomly generated guid for each project - you can change this to whatever you want
+            // randomly generated GUID for each project - you can change this to whatever you want
             get => "{5BEE28FC-635A-4BB3-A82F-611BB51900F9}";
         }
 
