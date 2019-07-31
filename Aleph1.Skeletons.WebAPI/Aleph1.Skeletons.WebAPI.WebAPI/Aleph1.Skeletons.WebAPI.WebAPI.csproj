@@ -277,7 +277,6 @@
       <Using Namespace="System.Linq" />
       <Code Type="Fragment" Language="cs">
         <![CDATA[
-            Console.WriteLine("Hello");
             const int MAX_ALLOWED_BACKUP = 3;
 
             if (!Directory.Exists(PublishUrl))
@@ -298,24 +297,25 @@
                 return true;
             }
 
-            string backupName = lastUpdatedFileDate.Value.ToString(@"yyyy-MM-dd HH.mm.ss.\zip");
-            string backupPath = Path.Combine(BackupTargetDir, backupName);
-            string backupPathAbsoluteUri = new Uri(backupPath).AbsoluteUri;
+            Uri backupTargetDirUri = new Uri(Path.Combine(Directory.GetCurrentDirectory(), PublishUrl, BackupTargetDir));
 
-            if(File.Exists(backupPath))
+            if (!Directory.Exists(backupTargetDirUri.LocalPath))
             {
-                LogMessage = "Backup " +  backupPathAbsoluteUri + " already exists - Skipping Backup.";
+                Directory.CreateDirectory(backupTargetDirUri.LocalPath);
+            }
+
+            string backupName = lastUpdatedFileDate.Value.ToString(@"yyyy-MM-dd HH.mm.ss.\zip");
+            Uri backupPathUri = new Uri(Path.Combine(backupTargetDirUri.LocalPath, backupName));
+
+            if (File.Exists(backupPathUri.LocalPath))
+            {
+                LogMessage = "Backup " + backupPathUri.AbsoluteUri + " already exists - Skipping Backup.";
                 return true;
             }
 
-            if(!Directory.Exists(BackupTargetDir))
-            {
-                Directory.CreateDirectory(BackupTargetDir);
-            }
+            ZipFile.CreateFromDirectory(PublishUrl, backupPathUri.LocalPath);
 
-            ZipFile.CreateFromDirectory(PublishUrl, backupPath);
-
-            FileInfo[] oldBackups = new DirectoryInfo(BackupTargetDir)
+            FileInfo[] oldBackups = new DirectoryInfo(backupTargetDirUri.LocalPath)
                 .GetFiles("*.zip");
 
             foreach (FileInfo oldBackup in oldBackups
@@ -324,8 +324,9 @@
             {
                 oldBackup.Delete();
             }
-            
-            LogMessage = "Backup created at " + backupPathAbsoluteUri + ".";
+
+            LogMessage = "Backup created at " + backupPathUri.AbsoluteUri + ".";
+            return true;
 	      ]]>
       </Code>
     </Task>
@@ -333,7 +334,7 @@
   
   <!-- Backup the old published files - if any -->
   <Target Name="BackupBeforePublish" BeforeTargets="GatherAllFilesToPublish">
-    <BackupBeforePublishTask PublishUrl="$(PublishUrl)" BackupTargetDir="C:\Apps\Aleph1.Skeletons.WebAPI\Backup">
+    <BackupBeforePublishTask PublishUrl="$(PublishUrl)" BackupTargetDir="..\Backups\Aleph1.Skeletons.WebAPI">
       <Output PropertyName="LogMessage" TaskParameter="LogMessage" />
     </BackupBeforePublishTask>
     <Message Text="$(LogMessage)" Importance="high" />
