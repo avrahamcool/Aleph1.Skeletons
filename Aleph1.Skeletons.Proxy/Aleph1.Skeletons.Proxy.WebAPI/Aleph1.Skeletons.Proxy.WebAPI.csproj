@@ -319,7 +319,7 @@
 
   <!-- Backup the old published files - if any -->
   <Target Name="BackupBeforePublish" BeforeTargets="GatherAllFilesToPublish">
-    <BackupBeforePublishTask PublishUrl="$(PublishUrl)" BackupTargetDir="..\Backups\Aleph1.Skeletons.WebAPI">
+    <BackupBeforePublishTask PublishUrl="$(PublishUrl)" BackupTargetDir="..\Backups\Aleph1.Skeletons.Proxy">
       <Output PropertyName="LogMessage" TaskParameter="LogMessage" />
     </BackupBeforePublishTask>
     <Message Text="$(LogMessage)" Importance="high" />
