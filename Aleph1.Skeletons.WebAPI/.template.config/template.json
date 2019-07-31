@@ -21,10 +21,10 @@
     "{6564AE7C-6D6A-4E5D-B2F9-A5645EF9FE81}", //DAL.Moq
     "{2C46A29D-53DF-4908-A3B0-765DEC8E9F61}", //BL.Contracts
     "{3019CA45-A22F-4C17-98F5-480763CFB5C0}", //BL.Implementation
-	"{5C88D276-6708-40E7-B3D0-AFAD5189B497}", //Security.Contracts
+    "{5C88D276-6708-40E7-B3D0-AFAD5189B497}", //Security.Contracts
     "{E6DBED51-DACC-4493-B6B0-5F6BF63EE105}", //Security.Implementation
     "{58C18708-6523-4AFC-A7A2-DBD8715FF6D2}", //Security.Moq
-	"{5BEE28FC-635A-4BB3-A82F-611BB51900F9}"	//Secret for AppPrefix
+    "{5BEE28FC-635A-4BB3-A82F-611BB51900F9}" //Secret for AppPrefix
   ],
   "primaryOutputs": [
     {
@@ -64,10 +64,12 @@
       "exclude": [
         "**/[Bb]in/**",
         "**/[Oo]bj/**",
-		"**/Logs/**",
-		"**/*.user",
-		"Output/**",
-		"packages/**",
+        "**/*.user",
+        "Publish*/**",
+        "Output/**",
+        "Logs/**",
+        "Backups/**",
+        "packages/**",
         ".template.config/**/*",
         "**/*.filelist",
         "**/*.lock.json"
