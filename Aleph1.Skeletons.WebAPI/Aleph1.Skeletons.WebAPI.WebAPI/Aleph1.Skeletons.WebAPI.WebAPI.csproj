@@ -263,43 +263,80 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <!-- Given a list of dates (ModifiedTime), find the Max and return as formated string. if the list is empty return empty string. -->
-  <UsingTask TaskName="GenerateBackupDate" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+  <UsingTask TaskName="BackupBeforePublishTask" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
     <ParameterGroup>
-      <FileDates ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
-      <BackupDate Output="true" />
+      <PublishUrl ParameterType="System.String" Required="true" />
+      <BackupTargetDir ParameterType="System.String" Required="true" />
+      <LogMessage ParameterType="System.String" Output="true" />
     </ParameterGroup>
     <Task>
+      <Reference Include="System.IO.Compression.FileSystem"/>
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.IO.Compression" />
       <Using Namespace="System.Linq" />
       <Code Type="Fragment" Language="cs">
-        BackupDate = FileDates.Length &gt; 0 ? FileDates.Select(t =&gt; t.ToString()).Select(d =&gt; DateTime.Parse(d)).Max().ToString("yyyy-MM-dd HH.mm.ss") : "";
+        <![CDATA[
+            Console.WriteLine("Hello");
+            const int MAX_ALLOWED_BACKUP = 3;
+
+            if (!Directory.Exists(PublishUrl))
+            {
+                LogMessage = "Directory " + PublishUrl + " not found - Skipping Backup.";
+                return true;
+            }
+
+            DateTime? lastUpdatedFileDate = new DirectoryInfo(PublishUrl)
+                .EnumerateFileSystemInfos("*", SearchOption.AllDirectories)
+                .Select<FileSystemInfo, DateTime?>(file => file.LastWriteTime)
+                .DefaultIfEmpty()
+                .Max();
+
+            if (!lastUpdatedFileDate.HasValue)
+            {
+                LogMessage = "Directory " + PublishUrl + " was empty - Skipping Backup.";
+                return true;
+            }
+
+            string backupName = lastUpdatedFileDate.Value.ToString(@"yyyy-MM-dd HH.mm.ss.\zip");
+            string backupPath = Path.Combine(BackupTargetDir, backupName);
+            string backupPathAbsoluteUri = new Uri(backupPath).AbsoluteUri;
+
+            if(File.Exists(backupPath))
+            {
+                LogMessage = "Backup " +  backupPathAbsoluteUri + " already exists - Skipping Backup.";
+                return true;
+            }
+
+            if(!Directory.Exists(BackupTargetDir))
+            {
+                Directory.CreateDirectory(BackupTargetDir);
+            }
+
+            ZipFile.CreateFromDirectory(PublishUrl, backupPath);
+
+            FileInfo[] oldBackups = new DirectoryInfo(BackupTargetDir)
+                .GetFiles("*.zip");
+
+            foreach (FileInfo oldBackup in oldBackups
+                    .OrderBy(file => file.CreationTime)
+                    .Take(oldBackups.Length - MAX_ALLOWED_BACKUP))
+            {
+                oldBackup.Delete();
+            }
+            
+            LogMessage = "Backup created at " + backupPathAbsoluteUri + ".";
+	      ]]>
       </Code>
     </Task>
   </UsingTask>
+  
   <!-- Backup the old published files - if any -->
-  <Target Name="BackupOldProject" BeforeTargets="GatherAllFilesToPublish">
-    <PropertyGroup>
-      <BackupDir>$(PublishUrl)\Backup</BackupDir>
-      <LogDir>$(PublishUrl)\Logs</LogDir>
-    </PropertyGroup>
-    <ItemGroup>
-      <OldFiles Include="$(PublishUrl)\**\*" Exclude="$(BackupDir)\**\*;$(LogDir)\**\*" />
-      <OldFolders Include="$([System.IO.Directory]::GetDirectories(&quot;$(PublishUrl)&quot;))" Exclude="$(BackupDir);$(LogDir)" />
-    </ItemGroup>
-    <!-- Find the last Modified Item - this will be the Backup name -->
-    <GenerateBackupDate FileDates="@(OldFiles->'%(ModifiedTime)')">
-      <Output PropertyName="BackupDate" TaskParameter="BackupDate" />
-    </GenerateBackupDate>
-    <PropertyGroup Condition="$(BackupDate) != ''">
-      <CurrentBackupDir>$(BackupDir)\$(BackupDate)</CurrentBackupDir>
-      <CurrentBackupZip>$(CurrentBackupDir).zip</CurrentBackupZip>
-    </PropertyGroup>
-    <Message Condition="$(BackupDate) != ''" Text="Copying @(OldFiles-&gt;Count()) files to Backup Directory" Importance="high" />
-    <Copy Condition="$(BackupDate) != ''" SourceFiles="@(OldFiles)" DestinationFiles="@(OldFiles->'$(CurrentBackupDir)\%(RecursiveDir)%(Filename)%(Extension)')" Retries="1" RetryDelayMilliseconds="1000" />
-    <ZipDirectory Condition="$(BackupDate) != ''" SourceDirectory="$(CurrentBackupDir)" DestinationFile="$(CurrentBackupZip)" Overwrite="true" />
-    <RemoveDir Directories="$(CurrentBackupDir)" />
-    <Delete Condition="$(BackupDate) != ''" Files="@(OldFiles)" />
-    <RemoveDir Condition="$(BackupDate) != ''" Directories="$(OldFolders)" />
+  <Target Name="BackupBeforePublish" BeforeTargets="GatherAllFilesToPublish">
+    <BackupBeforePublishTask PublishUrl="$(PublishUrl)" BackupTargetDir="C:\Apps\Aleph1.Skeletons.WebAPI\Backup">
+      <Output PropertyName="LogMessage" TaskParameter="LogMessage" />
+    </BackupBeforePublishTask>
+    <Message Text="$(LogMessage)" Importance="high" />
   </Target>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
