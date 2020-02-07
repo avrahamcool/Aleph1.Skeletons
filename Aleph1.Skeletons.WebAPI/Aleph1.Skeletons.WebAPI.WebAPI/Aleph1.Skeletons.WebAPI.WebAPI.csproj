@@ -25,6 +25,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <OutputPath>bin\</OutputPath>
+	<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <DocumentationFile>..\Output\$(Configuration)\Documentation\Aleph1.Skeletons.WebAPI.WebAPI.xml</DocumentationFile>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
