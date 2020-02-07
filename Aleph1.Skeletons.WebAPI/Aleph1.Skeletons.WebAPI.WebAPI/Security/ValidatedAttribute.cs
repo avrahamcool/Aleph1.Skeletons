@@ -7,7 +7,7 @@ using System.Web.Http.Filters;
 namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-    internal class ValidatedAttribute : ActionFilterAttribute
+    internal sealed class ValidatedAttribute : ActionFilterAttribute
     {
         /// <summary>check model validity before the action method is invoked.</summary>
         /// <param name="actionContext">The action context.</param>

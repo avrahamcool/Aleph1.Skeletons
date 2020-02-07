@@ -28,16 +28,14 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Classes
         {
             get
             {
-                if (_modulesPath == default(string[]))
+                if (_modulesPath == default)
                 {
-                    try
-                    {
-                        _modulesPath = (ConfigurationManager.GetSection("Aleph1.DI") as ModulesSection).Modules.OfType<ModuleElement>().Select(m => m.Path?.Trim()).Where(p => !String.IsNullOrWhiteSpace(p)).ToArray();
-                    }
-                    catch
-                    {
-                        _modulesPath = new string[0];
-                    }
+                    _modulesPath = (ConfigurationManager.GetSection("Aleph1.DI") as ModulesSection)
+                        .Modules
+                        .OfType<ModuleElement>()
+                        .Select(m => m.Path?.Trim())
+                        .Where(p => !String.IsNullOrWhiteSpace(p))
+                        .ToArray();
                 }
                 return _modulesPath;
             }

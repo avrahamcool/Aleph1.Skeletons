@@ -11,7 +11,7 @@ using WebActivatorEx;
 namespace Aleph1.Skeletons.WebAPI.WebAPI
 {
     /// <summary>Configure swagger</summary>
-    public class SwaggerConfig
+    public static class SwaggerConfig
     {
         /// <summary>Registers swagger configurations</summary>
         public static void Register()
