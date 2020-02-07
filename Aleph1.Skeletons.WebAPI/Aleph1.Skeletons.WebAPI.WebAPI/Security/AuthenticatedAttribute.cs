@@ -38,7 +38,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
                         securityService.IsAllowedForRegularContent(authInfo);
 
                     if (!canAccess)
-                        throw new UnauthorizedAccessException();
+                        throw new UnauthorizedAccessException("Your ticket does not have sufficient permissions for this action.");
 
                     //Regenerating a ticket with the same data - to reset the ticket life span
                     actionContext.Request.Headers.RefreshAuthenticationInfo(securityService, authInfo);
@@ -47,7 +47,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
             catch (Exception ex)
             {
                 LogManager.GetCurrentClassLogger().LogAleph1(LogLevel.Warn, actionContext.Request.RequestUri.ToString(), ex);
-                actionContext.Response = actionContext.Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "");
+                actionContext.Response = actionContext.Request.CreateErrorResponse(HttpStatusCode.Unauthorized, ex);
             }
         }
 

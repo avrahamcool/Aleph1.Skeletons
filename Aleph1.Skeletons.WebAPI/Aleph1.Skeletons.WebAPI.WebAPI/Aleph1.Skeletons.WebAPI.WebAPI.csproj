@@ -203,6 +203,9 @@
     <Compile Include="Validators\PersonValidator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Aleph1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
