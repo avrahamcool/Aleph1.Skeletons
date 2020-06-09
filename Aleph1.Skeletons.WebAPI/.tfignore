@@ -41,8 +41,7 @@
 ################################################################################
 
 \.vs
-\Logs
-\Backups
 \Output
 \packages
 \Publish*
+\Aleph1.Skeletons.WebAPI.WebAPI\Logs
