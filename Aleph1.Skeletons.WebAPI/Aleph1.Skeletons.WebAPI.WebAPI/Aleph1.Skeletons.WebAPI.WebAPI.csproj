@@ -266,7 +266,6 @@
   <UsingTask TaskName="BackupBeforePublishTask" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
     <ParameterGroup>
       <PublishUrl ParameterType="System.String" Required="true" />
-      <BackupTargetDir ParameterType="System.String" Required="true" />
       <LogMessage ParameterType="System.String" Output="true" />
     </ParameterGroup>
     <Task>
@@ -276,17 +275,28 @@
       <Using Namespace="System.IO.Compression" />
       <Using Namespace="System.Linq" />
       <Code Type="Fragment" Language="cs"><![CDATA[
-            const int MAX_ALLOWED_BACKUP = 3;
-
-            if (!Directory.Exists(PublishUrl))
+            
+			PublishUrl = new Uri(Path.Combine(Directory.GetCurrentDirectory(), PublishUrl)).LocalPath;
+			
+			if (!Directory.Exists(PublishUrl))
             {
                 LogMessage = "Directory " + PublishUrl + " not found - Skipping Backup.";
                 return true;
             }
+			
+            const int MAX_BACKUPS = 3;
+            string backupFolder = new Uri(Path.Combine(PublishUrl, "./Backup")).LocalPath;
+            string LogsFolder = new Uri(Path.Combine(PublishUrl, "./Logs")).LocalPath;
 
-            DateTime? lastUpdatedFileDate = new DirectoryInfo(PublishUrl)
-                .EnumerateFileSystemInfos("*", SearchOption.AllDirectories)
-                .Select<FileSystemInfo, DateTime?>(file => file.LastWriteTime)
+
+            string[] pathsToExclude = new[] { backupFolder, LogsFolder };
+
+            IEnumerable<FileInfo> filesToBackup = new DirectoryInfo(PublishUrl)
+                .EnumerateFiles("*", SearchOption.AllDirectories)
+                .Where(file => pathsToExclude.All(toExclude => !file.FullName.StartsWith(toExclude)));
+
+            DateTime? lastUpdatedFileDate = filesToBackup
+                .Select<FileInfo, DateTime?>(file => file.LastWriteTime)
                 .DefaultIfEmpty()
                 .Max();
 
@@ -296,42 +306,46 @@
                 return true;
             }
 
-            Uri backupTargetDirUri = new Uri(Path.Combine(Directory.GetCurrentDirectory(), PublishUrl, BackupTargetDir));
+            Directory.CreateDirectory(backupFolder);
 
-            if (!Directory.Exists(backupTargetDirUri.LocalPath))
+            string backupName = lastUpdatedFileDate.Value.ToString(@"yyyy-MM-dd HH.mm.ss");
+
+            Uri backupZipPathUri = new Uri(Path.Combine(backupFolder, backupName + ".zip"));
+            if (File.Exists(backupZipPathUri.LocalPath))
             {
-                Directory.CreateDirectory(backupTargetDirUri.LocalPath);
-            }
-
-            string backupName = lastUpdatedFileDate.Value.ToString(@"yyyy-MM-dd HH.mm.ss.\zip");
-            Uri backupPathUri = new Uri(Path.Combine(backupTargetDirUri.LocalPath, backupName));
-
-            if (File.Exists(backupPathUri.LocalPath))
-            {
-                LogMessage = "Backup " + backupPathUri.AbsoluteUri + " already exists - Skipping Backup.";
+                LogMessage = "Backup " + backupZipPathUri.AbsoluteUri + " already exists - Skipping Backup.";
                 return true;
             }
 
-            ZipFile.CreateFromDirectory(PublishUrl, backupPathUri.LocalPath);
+            string backupPath = Path.Combine(backupFolder, backupName);
+            Directory.CreateDirectory(backupPath);
+            foreach (FileInfo item in filesToBackup)
+            {
+                string newPath = item.FullName.Replace(PublishUrl, backupPath);
+                Directory.CreateDirectory(Directory.GetParent(newPath).FullName);
+                item.CopyTo(item.FullName.Replace(PublishUrl, backupPath));
+            }
+            ZipFile.CreateFromDirectory(backupPath, backupZipPathUri.LocalPath);
+            Directory.Delete(backupPath, true);
 
-            FileInfo[] oldBackups = new DirectoryInfo(backupTargetDirUri.LocalPath)
+            FileInfo[] oldBackups = new DirectoryInfo(backupFolder)
                 .GetFiles("*.zip");
 
             foreach (FileInfo oldBackup in oldBackups
                     .OrderBy(file => file.CreationTime)
-                    .Take(oldBackups.Length - MAX_ALLOWED_BACKUP))
+                    .Take(oldBackups.Length - MAX_BACKUPS))
             {
                 oldBackup.Delete();
             }
 
-            LogMessage = "Backup created at " + backupPathUri.AbsoluteUri + ".";
+            LogMessage = "Backup created at " + backupZipPathUri.AbsoluteUri;
             return true;
 	      ]]></Code>
     </Task>
   </UsingTask>
   <!-- Backup the old published files - if any -->
   <Target Name="BackupBeforePublish" BeforeTargets="GatherAllFilesToPublish">
-    <BackupBeforePublishTask PublishUrl="$(PublishUrl)" BackupTargetDir="..\Backups\Aleph1.Skeletons.WebAPI">
+    <BackupBeforePublishTask PublishUrl="$(PublishUrl)" >
       <Output PropertyName="LogMessage" TaskParameter="LogMessage" />
     </BackupBeforePublishTask>
     <Message Text="$(LogMessage)" Importance="high" />
