@@ -25,7 +25,8 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <OutputPath>bin\</OutputPath>
-    <DocumentationFile>..\Output\$(Configuration)\Documentation\Aleph1.Skeletons.WebAPI.WebAPI.xml</DocumentationFile>
+	<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <DocumentationFile>..\Output\$(Configuration)\Documentation\$(MSBuildProjectName).xml</DocumentationFile>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -191,6 +192,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Models\AboutModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -202,6 +204,12 @@
     <Compile Include="Validators\PersonValidator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Aleph1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\Dev.pubxml" />
     <None Include="Properties\PublishProfiles\Prod.pubxml" />

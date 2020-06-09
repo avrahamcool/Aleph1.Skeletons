@@ -14,7 +14,7 @@ using System.Web.Http.Filters;
 namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-    internal class AuthenticatedAttribute : ActionFilterAttribute
+    internal sealed class AuthenticatedAttribute : ActionFilterAttribute
     {
         public bool AllowAnonymous { get; set; }
         public bool RequireAdminAccess { get; set; }
@@ -46,7 +46,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
             catch (Exception ex)
             {
                 LogManager.GetCurrentClassLogger().LogAleph1(LogLevel.Warn, actionContext.Request.RequestUri.ToString(), ex);
-                actionContext.Response = actionContext.Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "");
+                actionContext.Response = actionContext.Request.CreateErrorResponse(HttpStatusCode.Unauthorized, ex);
             }
         }
 
