@@ -7,30 +7,25 @@ namespace Aleph1.Skeletons.WebAPI.Security.Moq
     {
         public string GenerateTicket(AuthenticationInfo authenticationInfo, string userUniqueID)
         {
-            return null;
+            return "MoqTicket";
         }
 
         public string ReGenerateTicket(AuthenticationInfo authenticationInfo, string userUniqueID)
         {
-            return null;
+            return "MoqTicket";
         }
 
         public AuthenticationInfo ReadTicket(string ticketValue, string userUniqueID)
         {
-            return null;
+            return new AuthenticationInfo() { IsAdmin = true };
         }
-        
+
         public AuthenticationInfo Login(string username, string password)
         {
-            return null;
+            return new AuthenticationInfo() { IsAdmin = true };
         }
 
-        public bool IsAllowedForRegularContent(AuthenticationInfo authenticationInfo)
-        {
-            return true;
-        }
-
-        public bool IsAllowedForManagementContent(AuthenticationInfo authenticationInfo)
+        public bool IsAllowedForContent(AuthenticationInfo authenticationInfo, bool RequireAdminAccess)
         {
             return true;
         }

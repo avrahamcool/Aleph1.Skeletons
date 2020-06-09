@@ -1,4 +1,5 @@
 ﻿using Aleph1.Skeletons.WebAPI.WebAPI.Models;
+
 using FluentValidation;
 
 namespace Aleph1.Skeletons.WebAPI.WebAPI.Validators
@@ -9,15 +10,16 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Validators
         /// <summary>Initializes a new instance of the <see cref="LoginValidator"/> class.</summary>
         public LoginValidator()
         {
+            //TODO: put your real logic here
+
             RuleFor(x => x.Username)
                 .NotEmpty()
                 .MinimumLength(2)
-                .MaximumLength(10);
+                .MaximumLength(30);
 
             RuleFor(x => x.Password)
                 .NotEmpty()
-                .MinimumLength(2)
-                .MaximumLength(10);
+                .MinimumLength(2);
         }
     }
 }

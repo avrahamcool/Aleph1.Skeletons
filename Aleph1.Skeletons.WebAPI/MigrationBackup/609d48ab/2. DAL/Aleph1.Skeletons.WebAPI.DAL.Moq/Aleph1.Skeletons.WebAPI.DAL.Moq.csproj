@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Dev</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{73C0B117-488E-4A38-87FA-9A2943F444BC}</ProjectGuid>
+    <ProjectGuid>{6564AE7C-6D6A-4E5D-B2F9-A5645EF9FE81}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Aleph1.Skeletons.WebAPI.DAL.Contracts</RootNamespace>
-    <AssemblyName>Aleph1.Skeletons.WebAPI.DAL.Contracts</AssemblyName>
+    <RootNamespace>Aleph1.Skeletons.WebAPI.DAL.Moq</RootNamespace>
+    <AssemblyName>Aleph1.Skeletons.WebAPI.DAL.Moq</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
-    <DocumentationFile>..\Output\$(Configuration)\Documentation\Aleph1.Skeletons.WebAPI.DAL.Contracts.xml</DocumentationFile>
+    <OutputPath>..\Output\$(Configuration)\Modules\</OutputPath>
     <LangVersion>latest</LangVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -40,7 +39,11 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Aleph1.DI.Contracts, Version=3.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aleph1.DI.Contracts.3.3.2\lib\net471\Aleph1.DI.Contracts.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -50,14 +53,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IDAL.cs" />
+    <Compile Include="DALMoq.cs" />
+    <Compile Include="ModuleInit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Aleph1.Skeletons.WebAPI.DAL.Contracts\Aleph1.Skeletons.WebAPI.DAL.Contracts.csproj">
+      <Project>{73c0b117-488e-4a38-87fa-9a2943f444bc}</Project>
+      <Name>Aleph1.Skeletons.WebAPI.DAL.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Aleph1.Skeletons.WebAPI.Models\Aleph1.Skeletons.WebAPI.Models.csproj">
       <Project>{c171fe63-5703-4fab-8c23-272b11851d28}</Project>
       <Name>Aleph1.Skeletons.WebAPI.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

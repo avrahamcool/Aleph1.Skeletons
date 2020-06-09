@@ -3,7 +3,9 @@
     /// <summary>The information that the server needs for determining if a user is allowed for a resource</summary>
     public class AuthenticationInfo
     {
-        /// <summary>indicating whether this user has manager access.</summary>
-        public bool IsManager { get; set; }
+        // TODO: put your real implementation here
+
+        /// <summary>indicating whether this user has admin access.</summary>
+        public bool IsAdmin { get; set; }
     }
 }

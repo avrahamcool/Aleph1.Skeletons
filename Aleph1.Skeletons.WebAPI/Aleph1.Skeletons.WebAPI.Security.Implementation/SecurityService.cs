@@ -2,6 +2,7 @@
 using Aleph1.Security.Contracts;
 using Aleph1.Skeletons.WebAPI.Models.Security;
 using Aleph1.Skeletons.WebAPI.Security.Contracts;
+
 using System;
 
 namespace Aleph1.Skeletons.WebAPI.Security.Implementation
@@ -10,49 +11,41 @@ namespace Aleph1.Skeletons.WebAPI.Security.Implementation
     {
         private readonly ICipher CipherService = null;
 
-        [Logged(LogParameters = false)]
         public SecurityService(ICipher cipherService)
         {
-            this.CipherService = cipherService;
+            CipherService = cipherService;
         }
 
-        [Logged(LogParameters = false, LogReturnValue = true)]
         public string GenerateTicket(AuthenticationInfo authenticationInfo, string userUniqueID)
         {
-            return this.CipherService.Encrypt(SettingsManager.AppPrefix, userUniqueID, authenticationInfo, SettingsManager.TicketDurationTimeSpan);
+            return CipherService.Encrypt(SettingsManager.AppPrefix, userUniqueID, authenticationInfo, SettingsManager.TicketDurationTimeSpan);
         }
-
-        [Logged(LogParameters = false, LogReturnValue = true)]
         public string ReGenerateTicket(AuthenticationInfo authenticationInfo, string userUniqueID)
         {
-            return this.CipherService.Encrypt(SettingsManager.AppPrefix, userUniqueID, authenticationInfo, SettingsManager.TicketDurationTimeSpan);
+            return CipherService.Encrypt(SettingsManager.AppPrefix, userUniqueID, authenticationInfo, SettingsManager.TicketDurationTimeSpan);
         }
-
         public AuthenticationInfo ReadTicket(string ticketValue, string userUniqueID)
         {
-            return this.CipherService.Decrypt<AuthenticationInfo>(SettingsManager.AppPrefix, userUniqueID, ticketValue);
+            return CipherService.Decrypt<AuthenticationInfo>(SettingsManager.AppPrefix, userUniqueID, ticketValue);
         }
+
 
         [Logged(LogParameters = false, LogReturnValue = true)]
         public AuthenticationInfo Login(string username, string password)
         {
-            // put your real implementation here
+            // TODO: put your real implementation here
             if (!username.Equals(password, StringComparison.OrdinalIgnoreCase))
+            {
                 throw new UnauthorizedAccessException();
+            }
 
-            return new AuthenticationInfo() { IsManager = username.Equals("admin", StringComparison.OrdinalIgnoreCase) };
+            return new AuthenticationInfo() { IsAdmin = username.Equals("admin", StringComparison.OrdinalIgnoreCase) };
         }
 
         [Logged(LogParameters = false, LogReturnValue = true)]
-        public bool IsAllowedForManagementContent(AuthenticationInfo authenticationInfo)
+        public bool IsAllowedForContent(AuthenticationInfo authenticationInfo, bool RequireAdminAccess)
         {
-            return authenticationInfo != default(AuthenticationInfo) && authenticationInfo.IsManager;
-        }
-
-        [Logged(LogParameters = false, LogReturnValue = true)]
-        public bool IsAllowedForRegularContent(AuthenticationInfo authInfo)
-        {
-            return authInfo != default(AuthenticationInfo);
+            return authenticationInfo != default && (!RequireAdminAccess || authenticationInfo.IsAdmin);
         }
     }
 }

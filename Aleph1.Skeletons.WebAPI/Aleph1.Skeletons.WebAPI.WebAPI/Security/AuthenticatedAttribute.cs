@@ -1,7 +1,9 @@
 ﻿using Aleph1.Logging;
 using Aleph1.Skeletons.WebAPI.Models.Security;
 using Aleph1.Skeletons.WebAPI.Security.Contracts;
+
 using NLog;
+
 using System;
 using System.Net;
 using System.Net.Http;
@@ -15,7 +17,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
     internal class AuthenticatedAttribute : ActionFilterAttribute
     {
         public bool AllowAnonymous { get; set; }
-        public bool RequireManagerAccess { get; set; }
+        public bool RequireAdminAccess { get; set; }
 
         /// <summary>Authenticates the request.</summary>
         /// <param name="actionContext">The action context.</param>
@@ -32,13 +34,10 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
                     //read the ticket
                     AuthenticationInfo authInfo = actionContext.Request.Headers.GetAuthenticationInfo(securityService);
 
-                    //TODO: Check WTE you want using the SecurityService
-                    bool canAccess = RequireManagerAccess ?
-                        securityService.IsAllowedForManagementContent(authInfo) :
-                        securityService.IsAllowedForRegularContent(authInfo);
-
-                    if (!canAccess)
+                    if (!securityService.IsAllowedForContent(authInfo, RequireAdminAccess))
+                    {
                         throw new UnauthorizedAccessException();
+                    }
 
                     //Regenerating a ticket with the same data - to reset the ticket life span
                     actionContext.Request.Headers.RefreshAuthenticationInfo(securityService, authInfo);

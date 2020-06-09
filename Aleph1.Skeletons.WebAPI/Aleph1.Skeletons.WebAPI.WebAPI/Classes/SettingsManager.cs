@@ -1,4 +1,5 @@
 ﻿using Aleph1.DI.CustomConfigurationSection;
+
 using System;
 using System.Configuration;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Classes
                 {
                     try
                     {
-                        _modulesPath = (ConfigurationManager.GetSection("Aleph1.DI") as ModulesSection).Modules.OfType<ModuleElement>().Select(m => m.Path?.Trim()).Where(p => !String.IsNullOrWhiteSpace(p)).ToArray();
+                        _modulesPath = (ConfigurationManager.GetSection("Aleph1.DI") as ModulesSection).Modules.OfType<ModuleElement>().Select(m => m.Path?.Trim()).Where(p => !string.IsNullOrWhiteSpace(p)).ToArray();
                     }
                     catch
                     {

@@ -1,5 +1,6 @@
 using Aleph1.DI.Contracts;
 using Aleph1.Skeletons.WebAPI.DAL.Contracts;
+
 using System.ComponentModel.Composition;
 
 namespace Aleph1.Skeletons.WebAPI.DAL.Implementation
@@ -8,11 +9,11 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Implementation
     [Export(typeof(IModule))]
     public class ModuleInit : IModule
     {
-		/// <summary>Used to register concrete implementations to the DI container</summary>
-		/// <param name="registrar">add implementation to the DI container using this registrar</param>
+        /// <summary>Used to register concrete implementations to the DI container</summary>
+        /// <param name="registrar">add implementation to the DI container using this registrar</param>
         public void Initialize(IModuleRegistrar registrar)
         {
-            registrar.RegisterTypeAsSingelton<IDAL, DAL>();
+            registrar.RegisterType<IDAL, DAL>();
         }
     }
 }

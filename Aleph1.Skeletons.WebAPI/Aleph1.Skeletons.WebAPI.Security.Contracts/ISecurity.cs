@@ -31,14 +31,10 @@ namespace Aleph1.Skeletons.WebAPI.Security.Contracts
         /// <returns>an AuthenticationInfo representing the credentials of the user</returns>
         AuthenticationInfo Login(string username, string password);
 
-        /// <summary>return true if the current user is allowed for content marked as regular</summary>
+        /// <summary>return wether the current user is allowed for content</summary>
         /// <param name="authenticationInfo">the user authentication info</param>
+        /// <param name="RequireAdminAccess">indicate if the current asset require admin aceess</param>
         /// <returns>true if allowed, false otherwise</returns>
-        bool IsAllowedForRegularContent(AuthenticationInfo authenticationInfo);
-
-        /// <summary>return true if the current user is allowed for content marked as management</summary>
-        /// <param name="authenticationInfo">the user authentication info</param>
-        /// <returns>true if allowed, false otherwise</returns>
-        bool IsAllowedForManagementContent(AuthenticationInfo authenticationInfo);
+        bool IsAllowedForContent(AuthenticationInfo authenticationInfo, bool RequireAdminAccess);
     }
 }
