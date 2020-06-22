@@ -87,7 +87,7 @@
       <Version>4.7.2</Version>
     </PackageReference>
     <PackageReference Include="PostSharp">
-      <Version>6.6.8</Version>
+      <Version>6.6.9</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
