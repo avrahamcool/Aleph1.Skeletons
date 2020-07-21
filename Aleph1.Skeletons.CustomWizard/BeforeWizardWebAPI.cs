@@ -1,5 +1,7 @@
 ﻿using EnvDTE;
+
 using Microsoft.VisualStudio.TemplateWizard;
+
 using System.Collections.Generic;
 using System.IO;
 

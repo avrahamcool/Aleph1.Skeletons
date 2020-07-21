@@ -1,3 +1,22 @@
+# 3.0.0
+*  - **BREAKING CHANGES** - all project are created with .net 4.8 (instead of 4.7.1)
+*  - **BREAKING CHANGES** - improved ticket handling (using http only cookie instead of headers)
+*  - **BREAKING CHANGES** - changed Moq to Mock [finally :)]
+* all project use package reference instead of package.config (except the one that can't)
+* improved many security aspects
+* improved login flow
+* improved injecting of currentUser
+* included entity framework in DAL - with full demo . (enabling tracking of entities)
+* improved proxy error handling
+* fixed typos
+* improved validators - fixes : https://github.com/avrahamcool/Aleph1.Skeletons/issues/22
+* remove server data in PROD env - fixes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/23
+* added missing CORS - fixes : https://github.com/avrahamcool/Aleph1.Skeletons/issues/24
+* added .tfignore and .gitignore - fixes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/25
+* better handle backups - fixes : https://github.com/avrahamcool/Aleph1.Skeletons/issues/41
+* block TS execution in webapi project - fixes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/54
+* better handling of documentation creation - fixes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/75
+
 # 2.6.0
 * enabling CORS for DEV - closes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/8
 * no longer backup Logs - fixes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/19

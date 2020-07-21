@@ -1,5 +1,7 @@
 ﻿using EnvDTE;
+
 using EnvDTE80;
+
 using System;
 
 namespace Aleph1.Skeletons.CustomWizard

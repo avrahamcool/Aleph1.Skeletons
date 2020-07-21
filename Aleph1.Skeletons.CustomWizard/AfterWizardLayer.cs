@@ -1,6 +1,9 @@
 ﻿using EnvDTE;
+
 using EnvDTE80;
+
 using Microsoft.VisualStudio.TemplateWizard;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -40,7 +43,7 @@ namespace Aleph1.Skeletons.CustomWizard
                 {
                     Path.Combine(destinationDirectory, solutionName + ".Contracts", solutionName + ".Contracts.csproj"),
                     Path.Combine(destinationDirectory, solutionName + ".Implementation", solutionName + ".Implementation.csproj"),
-                    Path.Combine(destinationDirectory, solutionName + ".Moq", solutionName + ".Moq.csproj")
+                    Path.Combine(destinationDirectory, solutionName + ".Mock", solutionName + ".Mock.csproj")
                 };
             }
         }
