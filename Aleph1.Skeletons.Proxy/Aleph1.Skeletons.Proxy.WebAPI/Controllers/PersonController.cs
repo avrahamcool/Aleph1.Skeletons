@@ -2,6 +2,7 @@
 using Aleph1.Skeletons.Proxy.Models;
 using Aleph1.Skeletons.Proxy.Proxy.Contracts;
 using Aleph1.WebAPI.ExceptionHandler;
+
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -16,7 +17,6 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
 
         /// <summary>Initializes a new instance of the <see cref="PersonController"/> class.</summary>
         /// <param name="proxy">The BL</param>
-        [Logged(LogParameters = false)]
         public PersonController(IProxy proxy)
         {
             this.proxy = proxy;
@@ -29,7 +29,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
         {
             return await proxy.GetPersons();
         }
-        
+
         /// <summary>Insert a new person</summary>
         /// <param name="person">the person</param>
         /// <returns>the person</returns>

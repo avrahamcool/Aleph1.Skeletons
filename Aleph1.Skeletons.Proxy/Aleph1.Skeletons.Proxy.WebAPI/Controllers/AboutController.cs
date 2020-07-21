@@ -2,9 +2,9 @@
 using Aleph1.Skeletons.Proxy.WebAPI.Classes;
 using Aleph1.Skeletons.Proxy.WebAPI.Models;
 using Aleph1.WebAPI.ExceptionHandler;
+
 using System;
 using System.Reflection;
-using System.Web;
 using System.Web.Http;
 
 namespace Aleph1.Skeletons.Proxy.WebAPI.Controllers
@@ -21,8 +21,6 @@ namespace Aleph1.Skeletons.Proxy.WebAPI.Controllers
             //string userUniqueID = HttpContext.Current.User.Identity.Name;
             return new AboutModel()
             {
-                ClientIP = HttpContext.Current?.Request?.UserHostAddress,
-                ClientUserName = HttpContext.Current?.User?.Identity?.Name,
                 Environment = SettingsManager.Environment,
                 APIVersion = Assembly.GetExecutingAssembly()?.GetName()?.Version?.ToString(),
                 Server = Environment.MachineName
