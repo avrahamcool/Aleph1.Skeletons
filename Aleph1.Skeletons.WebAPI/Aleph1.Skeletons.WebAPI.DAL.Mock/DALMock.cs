@@ -4,13 +4,13 @@ using Aleph1.Skeletons.WebAPI.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Aleph1.Skeletons.WebAPI.DAL.Moq
+namespace Aleph1.Skeletons.WebAPI.DAL.Mock
 {
-    internal class DALMoq : IDAL
+    internal class DALMock : IDAL
     {
         private int uniqueID = 0;
         private readonly List<Person> persons = new List<Person>();
-        public DALMoq()
+        public DALMock()
         {
             InsertPerson(new Person() { FirstName = "אברהם", LastName = "אסודרי" });
             InsertPerson(new Person() { FirstName = "Avraham", LastName = "Essoudry" });

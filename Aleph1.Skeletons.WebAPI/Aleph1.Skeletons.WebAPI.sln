@@ -18,7 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aleph1.Skeletons.WebAPI.DAL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aleph1.Skeletons.WebAPI.DAL.Implementation", "Aleph1.Skeletons.WebAPI.DAL.Implementation\Aleph1.Skeletons.WebAPI.DAL.Implementation.csproj", "{E3936829-7BCD-4E05-A38F-95BE9BF28763}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aleph1.Skeletons.WebAPI.DAL.Moq", "Aleph1.Skeletons.WebAPI.DAL.Moq\Aleph1.Skeletons.WebAPI.DAL.Moq.csproj", "{6564AE7C-6D6A-4E5D-B2F9-A5645EF9FE81}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aleph1.Skeletons.WebAPI.DAL.Mock", "Aleph1.Skeletons.WebAPI.DAL.Mock\Aleph1.Skeletons.WebAPI.DAL.Mock.csproj", "{6564AE7C-6D6A-4E5D-B2F9-A5645EF9FE81}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. BL", "3. BL", "{7BAF0826-9030-442E-AD1D-2D930D220D89}"
 EndProject
@@ -32,7 +32,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aleph1.Skeletons.WebAPI.Sec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aleph1.Skeletons.WebAPI.Security.Implementation", "Aleph1.Skeletons.WebAPI.Security.Implementation\Aleph1.Skeletons.WebAPI.Security.Implementation.csproj", "{E6DBED51-DACC-4493-B6B0-5F6BF63EE105}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aleph1.Skeletons.WebAPI.Security.Moq", "Aleph1.Skeletons.WebAPI.Security.Moq\Aleph1.Skeletons.WebAPI.Security.Moq.csproj", "{58C18708-6523-4AFC-A7A2-DBD8715FF6D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aleph1.Skeletons.WebAPI.Security.Mock", "Aleph1.Skeletons.WebAPI.Security.Mock\Aleph1.Skeletons.WebAPI.Security.Mock.csproj", "{58C18708-6523-4AFC-A7A2-DBD8715FF6D2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Web", "5. Web", "{8C94EB85-66DE-4729-B44C-A3FB538D55F4}"
 EndProject

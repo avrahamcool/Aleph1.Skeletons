@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Aleph1.Skeletons.WebAPI.Security.Moq")]
+[assembly: AssemblyTitle("Aleph1.Skeletons.WebAPI.Security.Mock")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Aleph1.Skeletons.WebAPI.Security.Moq")]
+[assembly: AssemblyProduct("Aleph1.Skeletons.WebAPI.Security.Mock")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

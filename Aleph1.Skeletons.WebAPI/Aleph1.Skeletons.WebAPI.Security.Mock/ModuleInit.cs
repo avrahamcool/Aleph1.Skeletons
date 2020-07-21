@@ -3,7 +3,7 @@ using Aleph1.Skeletons.WebAPI.Security.Contracts;
 
 using System.ComponentModel.Composition;
 
-namespace Aleph1.Skeletons.WebAPI.Security.Moq
+namespace Aleph1.Skeletons.WebAPI.Security.Mock
 {
     /// <summary>Used to register concrete implementations to the DI container</summary>
     [Export(typeof(IModule))]
@@ -13,7 +13,7 @@ namespace Aleph1.Skeletons.WebAPI.Security.Moq
         /// <param name="registrar">add implementation to the DI container using this registrar</param>
         public void Initialize(IModuleRegistrar registrar)
         {
-            registrar.RegisterTypeAsSingelton<ISecurity, SecurityMoq>();
+            registrar.RegisterTypeAsSingelton<ISecurity, SecurityMock>();
         }
     }
 }
