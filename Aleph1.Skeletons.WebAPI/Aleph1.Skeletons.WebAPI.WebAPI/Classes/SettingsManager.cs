@@ -68,6 +68,24 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Classes
             }
         }
 
+        private static int? _ticketDurationMin;
+        private static TimeSpan? _ticketDurationTimeSpan;
+        public static TimeSpan? TicketDurationTimeSpan
+        {
+            get
+            {
+                if (_ticketDurationMin == default)
+                {
+                    _ticketDurationMin = int.Parse(ConfigurationManager.AppSettings["TicketDurationMin"]);
+                    if (_ticketDurationMin.Value != 0)
+                    {
+                        _ticketDurationTimeSpan = TimeSpan.FromMinutes(_ticketDurationMin.Value);
+                    }
+                }
+                return _ticketDurationTimeSpan;
+            }
+        }
+
         private static bool _EnableSwagger;
         public static bool EnableSwagger
         {

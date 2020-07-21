@@ -10,19 +10,14 @@ namespace Aleph1.Skeletons.WebAPI.Security.Moq
             return "MoqTicket";
         }
 
-        public string ReGenerateTicket(AuthenticationInfo authenticationInfo, string userUniqueID)
-        {
-            return "MoqTicket";
-        }
-
         public AuthenticationInfo ReadTicket(string ticketValue, string userUniqueID)
         {
-            return new AuthenticationInfo() { IsAdmin = true };
+            return new AuthenticationInfo() { IsAdmin = true, Username = "Moq" };
         }
 
         public AuthenticationInfo Login(string username, string password)
         {
-            return new AuthenticationInfo() { IsAdmin = true };
+            return new AuthenticationInfo() { IsAdmin = true, Username = "Moq" };
         }
 
         public bool IsAllowedForContent(AuthenticationInfo authenticationInfo, bool RequireAdminAccess)

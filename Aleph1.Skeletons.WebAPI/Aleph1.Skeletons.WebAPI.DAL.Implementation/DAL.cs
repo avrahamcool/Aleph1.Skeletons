@@ -14,9 +14,9 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Implementation
             Context = context;
         }
 
-        public void SaveChanges()
+        public void SaveChanges(string username)
         {
-            Context.SaveChanges();
+            Context.SaveChanges(username);
         }
         public void Dispose()
         {

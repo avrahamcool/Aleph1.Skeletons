@@ -12,12 +12,6 @@ namespace Aleph1.Skeletons.WebAPI.Security.Contracts
         /// <returns>encrypted ticket</returns>
         string GenerateTicket(AuthenticationInfo authenticationInfo, string userUniqueID);
 
-        /// <summary>extend the duration of a ticket</summary>
-        /// <param name="authenticationInfo">the data to encrypt</param>
-        /// <param name="userUniqueID">ticket will be open-able for this user only</param>
-        /// <returns></returns>
-        string ReGenerateTicket(AuthenticationInfo authenticationInfo, string userUniqueID);
-
         /// <summary>decrypt a ticket</summary>
         /// <param name="ticketValue">the encrypted ticket</param>
         /// <param name="userUniqueID">the user that this ticket was encrypted to</param>

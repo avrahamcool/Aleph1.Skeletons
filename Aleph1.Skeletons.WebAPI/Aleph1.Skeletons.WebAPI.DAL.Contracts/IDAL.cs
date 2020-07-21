@@ -9,7 +9,8 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Contracts
     public interface IDAL : IDisposable
     {
         /// <summary>apply all the changes on to the DB</summary>
-        void SaveChanges();
+        /// <param name="username">the username - this will be saved in the logs</param>
+        void SaveChanges(string username);
 
 
         /// <summary>get a list of all persons</summary>

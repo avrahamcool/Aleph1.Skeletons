@@ -16,7 +16,7 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Moq
             InsertPerson(new Person() { FirstName = "Avraham", LastName = "Essoudry" });
         }
 
-        public void SaveChanges() { }
+        public void SaveChanges(string username) { }
         public void Dispose() { }
 
 

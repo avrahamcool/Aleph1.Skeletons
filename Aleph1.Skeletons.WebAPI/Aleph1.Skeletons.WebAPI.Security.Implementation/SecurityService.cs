@@ -9,7 +9,7 @@ namespace Aleph1.Skeletons.WebAPI.Security.Implementation
 {
     internal class SecurityService : ISecurity
     {
-        private readonly ICipher CipherService = null;
+        private readonly ICipher CipherService;
 
         public SecurityService(ICipher cipherService)
         {
@@ -20,13 +20,9 @@ namespace Aleph1.Skeletons.WebAPI.Security.Implementation
         {
             return CipherService.Encrypt(SettingsManager.AppPrefix, userUniqueID, authenticationInfo, SettingsManager.TicketDurationTimeSpan);
         }
-        public string ReGenerateTicket(AuthenticationInfo authenticationInfo, string userUniqueID)
-        {
-            return CipherService.Encrypt(SettingsManager.AppPrefix, userUniqueID, authenticationInfo, SettingsManager.TicketDurationTimeSpan);
-        }
         public AuthenticationInfo ReadTicket(string ticketValue, string userUniqueID)
         {
-            return CipherService.Decrypt<AuthenticationInfo>(SettingsManager.AppPrefix, userUniqueID, ticketValue);
+            return ticketValue == default ? null : CipherService.Decrypt<AuthenticationInfo>(SettingsManager.AppPrefix, userUniqueID, ticketValue);
         }
 
 
@@ -39,7 +35,7 @@ namespace Aleph1.Skeletons.WebAPI.Security.Implementation
                 throw new UnauthorizedAccessException();
             }
 
-            return new AuthenticationInfo() { IsAdmin = username.Equals("admin", StringComparison.OrdinalIgnoreCase) };
+            return new AuthenticationInfo() { IsAdmin = username.Equals("admin", StringComparison.OrdinalIgnoreCase), Username = username };
         }
 
         [Logged(LogParameters = false, LogReturnValue = true)]

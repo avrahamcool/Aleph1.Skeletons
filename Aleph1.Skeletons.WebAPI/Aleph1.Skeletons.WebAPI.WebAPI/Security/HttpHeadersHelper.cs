@@ -5,52 +5,72 @@ using Aleph1.Skeletons.WebAPI.WebAPI.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Web;
 using System.Web.Http.Controllers;
+using System.Web.Http.Filters;
+
+using WebApiThrottle.Net;
 
 namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
 {
     internal static class HttpHeadersHelper
     {
         /// <summary>Implement a logic to identify user uniquely</summary>
-        private static string GetUserUniqueID(this HttpRequest httpRequest)
+        private static string GetUserUniqueID(this HttpRequestMessage request)
         {
-            return httpRequest.UserHostAddress;
+            return request.GetClientIpAddress();
         }
 
-        public static string GetAuthenticationInfoValue(this HttpRequestHeaders headers)
+        internal static AuthenticationInfo GetAuthenticationInfoFromCookie(this HttpRequest request, ISecurity securityService)
         {
-            return headers.FirstOrDefault(h => h.Key.Equals(SettingsManager.AuthenticationHeaderKey, StringComparison.OrdinalIgnoreCase)).Value?.FirstOrDefault();
+            string ticket = HttpUtility.UrlDecode(request.Cookies.Get(SettingsManager.AuthenticationHeaderKey)?.Value);
+            return securityService.ReadTicket(ticket, request.UserHostAddress);
         }
-        public static string AddAuthenticationInfoValue(this HttpHeaders headers, string value)
+        internal static AuthenticationInfo GetAuthenticationInfoFromCookie(this HttpActionContext requestAction, ISecurity securityService)
         {
-            if (headers.Contains(SettingsManager.AuthenticationHeaderKey))
+            string ticket = requestAction.Request.Headers.GetCookies(SettingsManager.AuthenticationHeaderKey).FirstOrDefault()?[SettingsManager.AuthenticationHeaderKey]?.Value;
+            return securityService.ReadTicket(ticket, requestAction.Request.GetUserUniqueID());
+        }
+        internal static void AddAuthenticationInfoValueToCookie(this HttpActionExecutedContext responseAction, string value)
+        {
+            if (responseAction?.Response == default)
             {
-                headers.Remove(SettingsManager.AuthenticationHeaderKey);
+                return;
             }
 
-            if (!string.IsNullOrWhiteSpace(value))
+            CookieHeaderValue cookie = new CookieHeaderValue(SettingsManager.AuthenticationHeaderKey, value)
             {
-                headers.Add(SettingsManager.AuthenticationHeaderKey, value);
-            }
-
-            return value;
+                HttpOnly = true,
+                Secure = true,
+                Path = "/",
+                MaxAge = SettingsManager.TicketDurationTimeSpan
+            };
+            responseAction.Response.Headers.AddCookies(new CookieHeaderValue[] { cookie });
         }
 
+        internal static void RemoveAuthenticationInfoValueFromCookie(this HttpResponseMessage response)
+        {
+            CookieHeaderValue cookie = new CookieHeaderValue(SettingsManager.AuthenticationHeaderKey, "")
+            {
+                HttpOnly = true,
+                Secure = true,
+                Path = "/",
+                MaxAge = TimeSpan.FromSeconds(-1)
+            };
+            response.Headers.AddCookies(new CookieHeaderValue[] { cookie });
+        }
 
-        internal static AuthenticationInfo GetAuthenticationInfo(this HttpRequestHeaders headers, ISecurity securityService)
+        internal static void AddAuthenticationInfo(this HttpRequestMessage request, ISecurity securityService, AuthenticationInfo authInfo)
         {
-            return securityService.ReadTicket(headers.GetAuthenticationInfoValue(), HttpContext.Current.Request.GetUserUniqueID());
+            string ticket = securityService.GenerateTicket(authInfo, request.GetUserUniqueID());
+            request.Properties[SettingsManager.AuthenticationHeaderKey] = ticket;
         }
-        internal static string AddAuthenticationInfo(this HttpHeaders headers, ISecurity securityService, AuthenticationInfo authInfo)
+        internal static string GetAuthenticationInfo(this HttpRequestMessage request)
         {
-            return headers.AddAuthenticationInfoValue(securityService.GenerateTicket(authInfo, HttpContext.Current.Request.GetUserUniqueID()));
-        }
-        internal static string RefreshAuthenticationInfo(this HttpRequestHeaders headers, ISecurity securityService, AuthenticationInfo authInfo)
-        {
-            return headers.AddAuthenticationInfoValue(securityService.ReGenerateTicket(authInfo, HttpContext.Current.Request.GetUserUniqueID()));
+            return request.Properties.ContainsKey(SettingsManager.AuthenticationHeaderKey) ? request.Properties[SettingsManager.AuthenticationHeaderKey] as string : null;
         }
 
         internal static T GetHttpParameter<T>(this HttpActionContext context, params string[] parameterNames)
@@ -84,7 +104,6 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
 
             throw new ArgumentNullException(string.Join(",", parameterNames));
         }
-
         private static object GetPropValue(this object obj, IEnumerable<string> nestedProperties)
         {
             foreach (string part in nestedProperties)

@@ -2,6 +2,7 @@
 using Aleph1.Skeletons.WebAPI.BL.Contracts;
 using Aleph1.Skeletons.WebAPI.DAL.Contracts;
 using Aleph1.Skeletons.WebAPI.Models;
+using Aleph1.Skeletons.WebAPI.Models.Security;
 
 using System;
 using System.Linq;
@@ -11,10 +12,12 @@ namespace Aleph1.Skeletons.WebAPI.BL.Implementation
     internal class BL : IBL
     {
         private readonly IDAL DAL;
+        private readonly AuthenticationInfo CurrentUser;
 
-        public BL(IDAL DAL)
+        public BL(IDAL DAL, AuthenticationInfo currentUser)
         {
             this.DAL = DAL;
+            CurrentUser = currentUser;
         }
 
         public void Dispose()
@@ -57,7 +60,7 @@ namespace Aleph1.Skeletons.WebAPI.BL.Implementation
         public Person InsertPerson(Person person)
         {
             Person added = DAL.InsertPerson(person);
-            DAL.SaveChanges();
+            DAL.SaveChanges(CurrentUser?.Username);
             return added;
         }
 
@@ -70,7 +73,7 @@ namespace Aleph1.Skeletons.WebAPI.BL.Implementation
                 target.FirstName = personToUpdate.FirstName;
                 target.LastName = personToUpdate.LastName;
 
-                DAL.SaveChanges();
+                DAL.SaveChanges(CurrentUser?.Username);
             }
 
             return target;
@@ -80,7 +83,7 @@ namespace Aleph1.Skeletons.WebAPI.BL.Implementation
         public Person DeletePerson(int ID)
         {
             Person deleted = DAL.DeletePerson(ID);
-            DAL.SaveChanges();
+            DAL.SaveChanges(CurrentUser?.Username);
             return deleted;
         }
     }

@@ -25,23 +25,20 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
         {
             try
             {
-                if (!AllowAnonymous)
+                // Get the DI container for the request scope
+                IDependencyScope DI = actionContext.Request.GetDependencyScope();
+                ISecurity securityService = DI.GetService(typeof(ISecurity)) as ISecurity;
+
+                //read the ticket
+                AuthenticationInfo authInfo = actionContext.GetAuthenticationInfoFromCookie(securityService);
+
+                if (!AllowAnonymous && !securityService.IsAllowedForContent(authInfo, RequireAdminAccess))
                 {
-                    // Get the DI container for the request scope
-                    IDependencyScope DI = actionContext.Request.GetDependencyScope();
-                    ISecurity securityService = DI.GetService(typeof(ISecurity)) as ISecurity;
-
-                    //read the ticket
-                    AuthenticationInfo authInfo = actionContext.Request.Headers.GetAuthenticationInfo(securityService);
-
-                    if (!securityService.IsAllowedForContent(authInfo, RequireAdminAccess))
-                    {
-                        throw new UnauthorizedAccessException();
-                    }
-
-                    //Regenerating a ticket with the same data - to reset the ticket life span
-                    actionContext.Request.Headers.RefreshAuthenticationInfo(securityService, authInfo);
+                    throw new UnauthorizedAccessException();
                 }
+
+                //Regenerating a ticket with the same data - to reset the ticket life span
+                actionContext.Request.AddAuthenticationInfo(securityService, authInfo);
             }
             catch (Exception ex)
             {
@@ -54,11 +51,8 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
         /// <param name="actionExecutedContext">action context</param>
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
-            string authValue = actionExecutedContext.Request.Headers.GetAuthenticationInfoValue();
-            if (actionExecutedContext.Response != null)
-            {
-                actionExecutedContext.Response.Headers.AddAuthenticationInfoValue(authValue);
-            }
+            string authValue = actionExecutedContext.Request.GetAuthenticationInfo();
+            actionExecutedContext.AddAuthenticationInfoValueToCookie(authValue);
         }
     }
 }

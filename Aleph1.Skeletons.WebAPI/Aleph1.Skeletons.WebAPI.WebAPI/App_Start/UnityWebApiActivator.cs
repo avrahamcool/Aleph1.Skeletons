@@ -1,13 +1,17 @@
 using Aleph1.DI.Contracts;
 using Aleph1.DI.UnityImplementation;
+using Aleph1.Skeletons.WebAPI.Models.Security;
+using Aleph1.Skeletons.WebAPI.Security.Contracts;
 using Aleph1.Skeletons.WebAPI.WebAPI;
 using Aleph1.Skeletons.WebAPI.WebAPI.Classes;
+using Aleph1.Skeletons.WebAPI.WebAPI.Security;
 
 using FluentValidation;
 using FluentValidation.WebApi;
 
 using System;
 using System.Reflection;
+using System.Web;
 using System.Web.Http;
 
 using Unity;
@@ -38,6 +42,12 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI
             //Register all public Validators from this assembly
             AssemblyScanner.FindValidatorsInAssembly(Assembly.GetExecutingAssembly())
                 .ForEach(validator => DIContainer.RegisterType(validator.InterfaceType, validator.ValidatorType));
+
+            DIContainer.RegisterFactory<AuthenticationInfo>(container =>
+            {
+                ISecurity security = container.Resolve<ISecurity>();
+                return HttpContext.Current.Request.GetAuthenticationInfoFromCookie(security);
+            });
 
             // point the WebAPI to use the container
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(DIContainer);

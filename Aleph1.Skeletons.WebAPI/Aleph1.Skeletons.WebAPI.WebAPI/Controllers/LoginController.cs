@@ -5,6 +5,8 @@ using Aleph1.Skeletons.WebAPI.WebAPI.Models;
 using Aleph1.Skeletons.WebAPI.WebAPI.Security;
 using Aleph1.WebAPI.ExceptionHandler;
 
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
@@ -25,9 +27,20 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
         [Authenticated(AllowAnonymous = true), Logged(LogParameters = false), HttpPost, Route("api/Login"), FriendlyMessage("התרחשה שגיאה בעת ההתחברות")]
         public AuthenticationInfo Login(LoginModel loginModel)
         {
-            AuthenticationInfo auth = SecurityService.Login(loginModel.Username, loginModel.Password);
-            Request.Headers.AddAuthenticationInfo(SecurityService, auth);
-            return auth;
+            AuthenticationInfo authenticationInfo = SecurityService.Login(loginModel.Username, loginModel.Password);
+            Request.AddAuthenticationInfo(SecurityService, authenticationInfo);
+
+            return authenticationInfo;
+        }
+
+        /// <summary>Logout from the application</summary>
+        [Logged, HttpPost, Route("api/Logout"), FriendlyMessage("התרחשה שגיאה בעת ההתנתקות")]
+        public HttpResponseMessage Logout()
+        {
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.NoContent);
+            response.RemoveAuthenticationInfoValueFromCookie();
+
+            return response;
         }
     }
 }
