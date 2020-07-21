@@ -1,4 +1,5 @@
 ﻿using Aleph1.Logging;
+
 using System;
 using System.Web;
 using System.Web.Http;
@@ -14,14 +15,6 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
-        }
-
-        /// <summary>Strip Server Headers</summary>
-        protected void Application_PreSendRequestHeaders()
-        {
-            //Those headers are not removed even when set in Config - so we need to remove them here.
-            Response.Headers.Remove("Server");
-            Response.Headers.Remove("X-AspNet-Version");
         }
 
         /// <summary>Manage CorrelationID for the logger to use</summary>
