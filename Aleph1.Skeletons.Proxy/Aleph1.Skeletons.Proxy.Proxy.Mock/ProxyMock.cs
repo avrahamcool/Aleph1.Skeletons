@@ -1,18 +1,20 @@
 ﻿using Aleph1.Skeletons.Proxy.Models;
 using Aleph1.Skeletons.Proxy.Proxy.Contracts;
+
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Aleph1.Skeletons.Proxy.Proxy.Moq
+namespace Aleph1.Skeletons.Proxy.Proxy.Mock
 {
-    internal class ProxyMoq : IProxy
+    internal class ProxyMock : IProxy
     {
+        private int uniqueID = 0;
         private readonly List<Person> persons = new List<Person>();
 
-        public ProxyMoq()
+        public ProxyMock()
         {
-            persons.Add(new Person() { ID = 1, FirstName = "אברהם", LastName = "אסודרי" });
-            persons.Add(new Person() { ID = 2, FirstName = "Avraham", LastName = "Essoudry" });
+            InsertPerson(new Person() { FirstName = "אברהם", LastName = "אסודרי" }).Wait();
+            InsertPerson(new Person() { FirstName = "Avraham", LastName = "Essoudry" }).Wait();
         }
 
         public Task<List<Person>> GetPersons()
@@ -22,6 +24,7 @@ namespace Aleph1.Skeletons.Proxy.Proxy.Moq
 
         public Task<Person> InsertPerson(Person person)
         {
+            person.ID = ++uniqueID;
             persons.Add(person);
             return Task.FromResult(person);
         }

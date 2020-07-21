@@ -1,10 +1,10 @@
 ﻿using Aleph1.Logging;
 using Aleph1.Skeletons.Proxy.Models;
 using Aleph1.Skeletons.Proxy.Proxy.Contracts;
-using Newtonsoft.Json;
+
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Aleph1.Skeletons.Proxy.Proxy.Implementation
@@ -13,10 +13,9 @@ namespace Aleph1.Skeletons.Proxy.Proxy.Implementation
     {
         private readonly HttpClient httpClient;
 
-        [Logged(LogParameters = false)]
         public Proxy()
         {
-            //for Windows Auth use:
+            //for Windows Authentication use:
             //httpClient = new HttpClient(new HttpClientHandler() { UseDefaultCredentials = true })
 
             httpClient = new HttpClient()
@@ -29,20 +28,23 @@ namespace Aleph1.Skeletons.Proxy.Proxy.Implementation
         public async Task<List<Person>> GetPersons()
         {
             HttpResponseMessage response = await httpClient.GetAsync("api/Person");
-
-            response.EnsureSuccessStatusCode();
-
+            if (!response.IsSuccessStatusCode)
+            {
+                string error = await response.Content.ReadAsStringAsync();
+                throw new Exception(error);
+            }
             return await response.Content.ReadAsAsync<List<Person>>();
         }
 
         [Logged]
         public async Task<Person> InsertPerson(Person person)
         {
-            StringContent dataAsJSON = new StringContent(JsonConvert.SerializeObject(person), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await httpClient.PostAsync("api/Person", dataAsJSON);
-
-            response.EnsureSuccessStatusCode();
-
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync("api/Person", person);
+            if (!response.IsSuccessStatusCode)
+            {
+                string error = await response.Content.ReadAsStringAsync();
+                throw new Exception(error);
+            }
             return await response.Content.ReadAsAsync<Person>();
         }
     }

@@ -1,10 +1,12 @@
 ﻿using FluentValidation;
+
 using System;
+
 using Unity;
 
 namespace Aleph1.Skeletons.Proxy.WebAPI.Classes
 {
-    class UnityValidatorFactory : ValidatorFactoryBase
+    internal class UnityValidatorFactory : ValidatorFactoryBase
     {
         private readonly IUnityContainer container;
 
@@ -16,7 +18,10 @@ namespace Aleph1.Skeletons.Proxy.WebAPI.Classes
         public override IValidator CreateInstance(Type validatorType)
         {
             if (container.IsRegistered(validatorType))
+            {
                 return container.Resolve(validatorType) as IValidator;
+            }
+
             return null;
         }
     }

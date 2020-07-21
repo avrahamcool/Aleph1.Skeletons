@@ -7,9 +7,9 @@
     <ProjectGuid>{6564AE7C-6D6A-4E5D-B2F9-A5645EF9FE81}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Aleph1.Skeletons.Proxy.Proxy.Moq</RootNamespace>
-    <AssemblyName>Aleph1.Skeletons.Proxy.Proxy.Moq</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <RootNamespace>Aleph1.Skeletons.Proxy.Proxy.Mock</RootNamespace>
+    <AssemblyName>Aleph1.Skeletons.Proxy.Proxy.Mock</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <OutputPath>..\Output\$(Configuration)\Modules\</OutputPath>
     <LangVersion>latest</LangVersion>
@@ -38,9 +38,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Aleph1.DI.Contracts, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Aleph1.DI.Contracts.3.3.0\lib\net471\Aleph1.DI.Contracts.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -54,7 +51,7 @@
   <ItemGroup>
     <Compile Include="ModuleInit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProxyMoq.cs" />
+    <Compile Include="ProxyMock.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aleph1.Skeletons.Proxy.Proxy.Contracts\Aleph1.Skeletons.Proxy.Proxy.Contracts.csproj">
@@ -67,7 +64,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <PackageReference Include="Aleph1.DI.Contracts">
+      <Version>3.3.2</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

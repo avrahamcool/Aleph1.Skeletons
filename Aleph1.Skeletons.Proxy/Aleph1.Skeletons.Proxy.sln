@@ -18,7 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aleph1.Skeletons.Proxy.Prox
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aleph1.Skeletons.Proxy.Proxy.Implementation", "Aleph1.Skeletons.Proxy.Proxy.Implementation\Aleph1.Skeletons.Proxy.Proxy.Implementation.csproj", "{E3936829-7BCD-4E05-A38F-95BE9BF28763}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aleph1.Skeletons.Proxy.Proxy.Moq", "Aleph1.Skeletons.Proxy.Proxy.Moq\Aleph1.Skeletons.Proxy.Proxy.Moq.csproj", "{6564AE7C-6D6A-4E5D-B2F9-A5645EF9FE81}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aleph1.Skeletons.Proxy.Proxy.Mock", "Aleph1.Skeletons.Proxy.Proxy.Mock\Aleph1.Skeletons.Proxy.Proxy.Mock.csproj", "{6564AE7C-6D6A-4E5D-B2F9-A5645EF9FE81}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Web", "3. Web", "{8C94EB85-66DE-4729-B44C-A3FB538D55F4}"
 EndProject
