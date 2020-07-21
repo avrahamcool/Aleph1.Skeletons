@@ -31,9 +31,9 @@ namespace Aleph1.Skeletons.WebAPI.Security.Contracts
         /// <returns>an AuthenticationInfo representing the credentials of the user</returns>
         AuthenticationInfo Login(string username, string password);
 
-        /// <summary>return wether the current user is allowed for content</summary>
+        /// <summary>return whether the current user is allowed for content</summary>
         /// <param name="authenticationInfo">the user authentication info</param>
-        /// <param name="RequireAdminAccess">indicate if the current asset require admin aceess</param>
+        /// <param name="RequireAdminAccess">indicate if the current asset require admin access</param>
         /// <returns>true if allowed, false otherwise</returns>
         bool IsAllowedForContent(AuthenticationInfo authenticationInfo, bool RequireAdminAccess);
     }

@@ -1,6 +1,6 @@
 ﻿namespace Aleph1.Skeletons.WebAPI.WebAPI.Models
 {
-    /// <summary>Some data about the current api and user</summary>
+    /// <summary>Some data about the current API and user</summary>
     public class AboutModel
     {
         /// <summary>client IP.</summary>

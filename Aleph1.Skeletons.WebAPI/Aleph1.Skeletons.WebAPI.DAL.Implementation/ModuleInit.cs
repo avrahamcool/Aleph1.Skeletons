@@ -14,6 +14,7 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Implementation
         public void Initialize(IModuleRegistrar registrar)
         {
             registrar.RegisterType<IDAL, DAL>();
+            registrar.RegisterType<PersonContext, PersonContext>();
         }
     }
 }

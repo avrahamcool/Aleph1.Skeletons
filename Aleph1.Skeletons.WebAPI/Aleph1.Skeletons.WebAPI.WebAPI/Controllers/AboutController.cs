@@ -2,6 +2,7 @@
 using Aleph1.Skeletons.WebAPI.WebAPI.Classes;
 using Aleph1.Skeletons.WebAPI.WebAPI.Models;
 using Aleph1.WebAPI.ExceptionHandler;
+
 using System;
 using System.Reflection;
 using System.Web;
@@ -12,7 +13,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
     /// <summary>some data about the current service</summary>
     public class AboutController : ApiController
     {
-        /// <summary>Get data about the current api and user</summary>
+        /// <summary>Get data about the current API and user</summary>
         [Logged, HttpGet, Route("api/About"), FriendlyMessage("התרחשה שגיאה בעת שליפת נתוני מערכת")]
         public AboutModel About()
         {

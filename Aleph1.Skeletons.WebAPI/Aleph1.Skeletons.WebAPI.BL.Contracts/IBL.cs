@@ -21,7 +21,7 @@ namespace Aleph1.Skeletons.WebAPI.BL.Contracts
         /// <returns>the person</returns>
         Person GetPersonByID(int ID);
 
-        /// <summary>get a list of persons with a name inclusding the search term</summary>
+        /// <summary>get a list of persons with a name including the search term</summary>
         /// <param name="searchTerm">a string to query against the persons full name</param>
         /// <returns>the persons that include the given query in their name</returns>
         IQueryable<Person> SearchByName(string searchTerm);
@@ -38,7 +38,7 @@ namespace Aleph1.Skeletons.WebAPI.BL.Contracts
         Person UpdatePerson(int ID, Person personToUpdate);
 
         /// <summary>delete a person by ID</summary>
-        /// <param ID="personToDelete">the ID of the peron to delete</param>
+        /// <param ID="personToDelete">the ID of the person to delete</param>
         /// <returns>the deleted person</returns>
         Person DeletePerson(int ID);
     }

@@ -7,5 +7,8 @@
 
         /// <summary>indicating whether this user has admin access.</summary>
         public bool IsAdmin { get; set; }
+
+        /// <summary>the username</summary>
+        public string Username { get; set; }
     }
 }

@@ -35,7 +35,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Classes
                         .Modules
                         .OfType<ModuleElement>()
                         .Select(m => m.Path?.Trim())
-                        .Where(p => !String.IsNullOrWhiteSpace(p))
+                        .Where(p => !string.IsNullOrWhiteSpace(p))
                         .ToArray();
                 }
                 return _modulesPath;
@@ -119,7 +119,6 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Classes
                 return _headers;
             }
         }
-
 
         private static string _methods;
         public static string Methods

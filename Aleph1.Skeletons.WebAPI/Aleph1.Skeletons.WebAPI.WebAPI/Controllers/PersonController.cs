@@ -52,7 +52,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
             return BL.GetPersonByID(ID);
         }
 
-        /// <summary>get a list of persons with a name inclusding the search term</summary>
+        /// <summary>get a list of persons with a name including the search term</summary>
         /// <param name="searchTerm">a string to query against the persons full name</param>
         /// <returns>the persons that include the given query in their name</returns>
         [Authenticated, Logged, HttpGet, Route("api/Person/SearchByName"), FriendlyMessage("התרחשה שגיאה בחיפוש")]
@@ -81,9 +81,9 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
         }
 
         /// <summary>delete a person by ID</summary>
-        /// <param ID="personToDelete">the ID of the peron to delete</param>
+        /// <param ID="personToDelete">the ID of the person to delete</param>
         /// <returns>the deleted person</returns>
-        [Authenticated(RequireAdminAccess = true), Logged, HttpDelete, Route("api/Person/{ID}"), FriendlyMessage("התרחשה שגיאה במחקית האדם המבוקש")]
+        [Authenticated(RequireAdminAccess = true), Logged, HttpDelete, Route("api/Person/{ID}"), FriendlyMessage("התרחשה שגיאה במחיקת האדם המבוקש")]
         public Person DeletePerson(int ID)
         {
             return BL.DeletePerson(ID);

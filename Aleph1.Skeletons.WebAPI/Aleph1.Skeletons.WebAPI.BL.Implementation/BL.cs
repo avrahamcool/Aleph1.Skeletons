@@ -64,7 +64,6 @@ namespace Aleph1.Skeletons.WebAPI.BL.Implementation
         [Logged]
         public Person UpdatePerson(int ID, Person personToUpdate)
         {
-
             Person target = DAL.GetPersonByID(ID);
             if (target != default)
             {
@@ -86,4 +85,3 @@ namespace Aleph1.Skeletons.WebAPI.BL.Implementation
         }
     }
 }
-

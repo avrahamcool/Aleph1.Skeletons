@@ -1,6 +1,7 @@
 ﻿using Aleph1.Skeletons.WebAPI.Models.Security;
 using Aleph1.Skeletons.WebAPI.Security.Contracts;
 using Aleph1.Skeletons.WebAPI.WebAPI.Classes;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,10 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
     internal static class HttpHeadersHelper
     {
         /// <summary>Implement a logic to identify user uniquely</summary>
-        private static string GetUserUniqueID(this HttpRequest httpRequest) => httpRequest.UserHostAddress;
+        private static string GetUserUniqueID(this HttpRequest httpRequest)
+        {
+            return httpRequest.UserHostAddress;
+        }
 
         public static string GetAuthenticationInfoValue(this HttpRequestHeaders headers)
         {
@@ -23,10 +27,14 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
         public static string AddAuthenticationInfoValue(this HttpHeaders headers, string value)
         {
             if (headers.Contains(SettingsManager.AuthenticationHeaderKey))
+            {
                 headers.Remove(SettingsManager.AuthenticationHeaderKey);
+            }
 
-            if (!String.IsNullOrWhiteSpace(value))
+            if (!string.IsNullOrWhiteSpace(value))
+            {
                 headers.Add(SettingsManager.AuthenticationHeaderKey, value);
+            }
 
             return value;
         }
@@ -54,7 +62,9 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
                 {
                     string[] parameterParts = parameterName.Split('.');
                     if (!context.ActionArguments.ContainsKey(parameterParts[0]))
+                    {
                         continue;
+                    }
 
                     object curentObject = context.ActionArguments[parameterParts[0]];
                     IEnumerable<string> nestedProperties = parameterParts.Skip(1);
@@ -68,14 +78,16 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
             }
 
             if (possibleValue != null)
+            {
                 return (T)possibleValue;
+            }
 
-            throw new ArgumentNullException(String.Join(",", parameterNames));
+            throw new ArgumentNullException(string.Join(",", parameterNames));
         }
 
-        private static Object GetPropValue(this Object obj, IEnumerable<string> nestedProperties)
+        private static object GetPropValue(this object obj, IEnumerable<string> nestedProperties)
         {
-            foreach (String part in nestedProperties)
+            foreach (string part in nestedProperties)
             {
                 if (obj == null) { return null; }
 

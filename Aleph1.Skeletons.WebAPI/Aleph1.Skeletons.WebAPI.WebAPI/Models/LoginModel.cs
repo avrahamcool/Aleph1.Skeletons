@@ -3,7 +3,7 @@
     /// <summary>Credentials for login</summary>
     public class LoginModel
     {
-        /// <summary>The username (length must be 2-10)</summary>
+        /// <summary>The user name (length must be 2-10)</summary>
         public string Username { get; set; }
 
         /// <summary>The password (length must be 2-10)</summary>

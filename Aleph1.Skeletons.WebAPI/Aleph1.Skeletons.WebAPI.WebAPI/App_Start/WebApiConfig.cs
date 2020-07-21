@@ -1,10 +1,12 @@
 ﻿using Aleph1.Logging;
 using Aleph1.Skeletons.WebAPI.WebAPI.Classes;
-using Aleph1.Skeletons.WebAPI.WebAPI.Security;
+
 using FluentValidation;
+
 using System.Globalization;
 using System.Web.Http;
 using System.Web.Http.Cors;
+
 using WebApiThrottle;
 
 namespace Aleph1.Skeletons.WebAPI.WebAPI

@@ -47,6 +47,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
@@ -60,7 +61,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL.cs" />
+    <Compile Include="Migrations\202006121249558_Initial.cs" />
+    <Compile Include="Migrations\202006121249558_Initial.designer.cs">
+      <DependentUpon>202006121249558_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModuleInit.cs" />
+    <Compile Include="PersonContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -83,12 +90,23 @@
     <PackageReference Include="Aleph1.Utilities">
       <Version>3.3.1</Version>
     </PackageReference>
+    <PackageReference Include="EntityFramework">
+      <Version>6.4.4</Version>
+    </PackageReference>
     <PackageReference Include="NLog">
       <Version>4.7.2</Version>
     </PackageReference>
     <PackageReference Include="PostSharp">
       <Version>6.6.8</Version>
     </PackageReference>
+    <PackageReference Include="TrackerEnabledDbContext">
+      <Version>3.8.3</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202006121249558_Initial.resx">
+      <DependentUpon>202006121249558_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
