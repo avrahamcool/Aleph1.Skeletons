@@ -1,8 +1,8 @@
 using Aleph1.DI.Contracts;
-using Aleph1.Skeletons.Layer.Contracts;
+
 using System.ComponentModel.Composition;
 
-namespace Aleph1.Skeletons.Layer.Moq
+namespace Aleph1.Skeletons.Layer.Mock
 {
     /// <summary>Used to register concrete implementations to the DI container</summary>
     [Export(typeof(IModule))]
@@ -14,7 +14,7 @@ namespace Aleph1.Skeletons.Layer.Moq
         {
             //You can register as many types as you want into the Container
 
-            registrar.RegisterType<ILayer, LayerMoq>();
+            //registrar.RegisterType<ITest, Test>();
             //registrar.RegisterTypeAsSingelton<ITest, Test>();
         }
     }

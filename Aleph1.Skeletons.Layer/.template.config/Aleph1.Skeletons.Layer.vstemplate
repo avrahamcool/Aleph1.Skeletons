@@ -2,7 +2,7 @@
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="ProjectGroup">
   <TemplateData>
     <Name>Aleph1.Layer</Name>
-    <Description>Create an Aleph1 Layer including Contract, Implementation and Moq.</Description>
+    <Description>Create an Aleph1 Layer including Contract, Implementation and Mock.</Description>
     <TemplateID>Aleph1.Skeletons.Layer</TemplateID>
     <DefaultName>Aleph1.Layer</DefaultName>
     

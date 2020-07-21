@@ -1,5 +1,5 @@
 using Aleph1.DI.Contracts;
-using Aleph1.Skeletons.Layer.Contracts;
+
 using System.ComponentModel.Composition;
 
 namespace Aleph1.Skeletons.Layer.Implementation
@@ -13,8 +13,7 @@ namespace Aleph1.Skeletons.Layer.Implementation
         public void Initialize(IModuleRegistrar registrar)
         {
             //You can register as many types as you want into the Container
-
-            registrar.RegisterType<ILayer, Layer>();
+            //registrar.RegisterType<ITest, Test>();
             //registrar.RegisterTypeAsSingelton<ITest, Test>();
         }
     }
