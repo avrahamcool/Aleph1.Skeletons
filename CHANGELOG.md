@@ -1,3 +1,8 @@
+# 3.0.1
+* added static code analyzers to all projects (FxCop analyzers) - fixes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/21
+* fixed security flow regarding AllowAnonymous
+
+
 # 3.0.0
 *  - **BREAKING CHANGES** - all project are created with .net 4.8 (instead of 4.7.1)
 *  - **BREAKING CHANGES** - improved ticket handling (using http only cookie instead of headers)
