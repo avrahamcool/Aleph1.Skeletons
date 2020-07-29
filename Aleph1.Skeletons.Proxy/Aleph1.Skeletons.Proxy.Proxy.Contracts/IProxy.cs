@@ -1,5 +1,6 @@
 ﻿using Aleph1.Skeletons.Proxy.Models;
 
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@ namespace Aleph1.Skeletons.Proxy.Proxy.Contracts
     /// <summary>
     /// Handles data access
     /// </summary>
-    public interface IProxy
+    public interface IProxy : IDisposable
     {
         /// <summary>get a list of all persons</summary>
         /// <returns>all persons</returns>

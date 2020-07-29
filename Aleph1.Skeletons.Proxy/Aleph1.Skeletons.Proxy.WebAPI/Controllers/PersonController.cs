@@ -27,7 +27,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
         [Logged, HttpGet, Route("api/Person"), FriendlyMessage("התרחשה שגיאה בשליפת האנשים")]
         public async Task<List<Person>> GetPersons()
         {
-            return await proxy.GetPersons();
+            return await proxy.GetPersons().ConfigureAwait(false);
         }
 
         /// <summary>Insert a new person</summary>
@@ -36,7 +36,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
         [Logged, HttpPost, Route("api/Person"), FriendlyMessage("התרחשה שגיאה ביצירת האדם המבוקש")]
         public async Task<Person> InsertPerson(Person person)
         {
-            return await proxy.InsertPerson(person);
+            return await proxy.InsertPerson(person).ConfigureAwait(false);
         }
     }
 }

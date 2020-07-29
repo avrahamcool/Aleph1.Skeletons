@@ -27,16 +27,14 @@ namespace Aleph1.Skeletons.Proxy.WebAPI.Classes
         {
             get
             {
-                if (_modulesPath == default(string[]))
+                if (_modulesPath == default)
                 {
-                    try
-                    {
-                        _modulesPath = (ConfigurationManager.GetSection("Aleph1.DI") as ModulesSection).Modules.OfType<ModuleElement>().Select(m => m.Path?.Trim()).Where(p => !string.IsNullOrWhiteSpace(p)).ToArray();
-                    }
-                    catch
-                    {
-                        _modulesPath = new string[0];
-                    }
+                    _modulesPath = (ConfigurationManager.GetSection("Aleph1.DI") as ModulesSection)
+                        .Modules
+                        .OfType<ModuleElement>()
+                        .Select(m => m.Path?.Trim())
+                        .Where(p => !string.IsNullOrWhiteSpace(p))
+                        .ToArray();
                 }
                 return _modulesPath;
             }
@@ -55,16 +53,16 @@ namespace Aleph1.Skeletons.Proxy.WebAPI.Classes
             }
         }
 
-        private static bool _EnableSwagger;
+        private static bool? _EnableSwagger;
         public static bool EnableSwagger
         {
             get
             {
                 if (_EnableSwagger == default)
                 {
-                    bool.TryParse(ConfigurationManager.AppSettings["EnableSwagger"], out _EnableSwagger);
+                    _EnableSwagger = bool.Parse(ConfigurationManager.AppSettings["EnableSwagger"]);
                 }
-                return _EnableSwagger;
+                return _EnableSwagger.Value;
             }
         }
     }

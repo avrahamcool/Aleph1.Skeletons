@@ -24,28 +24,33 @@ namespace Aleph1.Skeletons.Proxy.Proxy.Implementation
             };
         }
 
+        public void Dispose()
+        {
+            httpClient.Dispose();
+        }
+
         [Logged]
         public async Task<List<Person>> GetPersons()
         {
-            HttpResponseMessage response = await httpClient.GetAsync("api/Person");
+            HttpResponseMessage response = await httpClient.GetAsync(new Uri("api/Person", UriKind.Relative)).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
             {
-                string error = await response.Content.ReadAsStringAsync();
+                string error = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 throw new Exception(error);
             }
-            return await response.Content.ReadAsAsync<List<Person>>();
+            return await response.Content.ReadAsAsync<List<Person>>().ConfigureAwait(false);
         }
 
         [Logged]
         public async Task<Person> InsertPerson(Person person)
         {
-            HttpResponseMessage response = await httpClient.PostAsJsonAsync("api/Person", person);
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync(new Uri("api/Person", UriKind.Relative), person).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
             {
-                string error = await response.Content.ReadAsStringAsync();
+                string error = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 throw new Exception(error);
             }
-            return await response.Content.ReadAsAsync<Person>();
+            return await response.Content.ReadAsAsync<Person>().ConfigureAwait(false);
         }
     }
 }

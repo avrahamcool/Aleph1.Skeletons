@@ -14,7 +14,7 @@ using WebActivatorEx;
 namespace Aleph1.Skeletons.Proxy.WebAPI
 {
     /// <summary>Configure swagger</summary>
-    public class SwaggerConfig
+    public static class SwaggerConfig
     {
         /// <summary>Registers swagger configurations</summary>
         public static void Register()
@@ -197,7 +197,7 @@ namespace Aleph1.Skeletons.Proxy.WebAPI
                         //
                         c.DocumentTitle("Aleph1.Skeletons.Proxy.WebAPI Swagger");
 
-                        // Use the "InjectStylesheet" option to enrich the UI with one or more additional CSS stylesheets.
+                        // Use the "InjectStylesheet" option to enrich the UI with one or more additional CSS style-sheets.
                         // The file must be included in your project as an "Embedded Resource", and then the resource's
                         // "Logical Name" is passed to the method as shown below.
                         //

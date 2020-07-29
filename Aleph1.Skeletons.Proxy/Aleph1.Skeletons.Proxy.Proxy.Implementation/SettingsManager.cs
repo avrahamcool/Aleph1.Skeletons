@@ -18,7 +18,7 @@ namespace Aleph1.Skeletons.Proxy.Proxy.Implementation
                         throw new ArgumentNullException("ServiceBaseUrl");
                     }
 
-                    if (!baseUrlString.EndsWith("/"))
+                    if (!baseUrlString.EndsWith("/", StringComparison.InvariantCulture))
                     {
                         baseUrlString += '/';
                     }

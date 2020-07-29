@@ -28,5 +28,7 @@ namespace Aleph1.Skeletons.Proxy.Proxy.Mock
             persons.Add(person);
             return Task.FromResult(person);
         }
+
+        public void Dispose() { }
     }
 }
