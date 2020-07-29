@@ -5,6 +5,7 @@ using Aleph1.Skeletons.WebAPI.WebAPI.Models;
 using Aleph1.Skeletons.WebAPI.WebAPI.Security;
 using Aleph1.WebAPI.ExceptionHandler;
 
+using System.Diagnostics.Contracts;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -27,6 +28,8 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
         [Authenticated(AllowAnonymous = true), Logged(LogParameters = false), HttpPost, Route("api/Login"), FriendlyMessage("התרחשה שגיאה בעת ההתחברות")]
         public AuthenticationInfo Login(LoginModel loginModel)
         {
+            Contract.Requires(loginModel != null);
+
             AuthenticationInfo authenticationInfo = SecurityService.Login(loginModel.Username, loginModel.Password);
             Request.AddAuthenticationInfo(SecurityService, authenticationInfo);
 

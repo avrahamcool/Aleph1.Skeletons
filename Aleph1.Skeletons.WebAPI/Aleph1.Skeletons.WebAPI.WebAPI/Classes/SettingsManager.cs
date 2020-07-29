@@ -2,6 +2,7 @@
 
 using System;
 using System.Configuration;
+using System.Globalization;
 using System.Linq;
 
 namespace Aleph1.Skeletons.WebAPI.WebAPI.Classes
@@ -76,7 +77,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Classes
             {
                 if (_ticketDurationMin == default)
                 {
-                    _ticketDurationMin = int.Parse(ConfigurationManager.AppSettings["TicketDurationMin"]);
+                    _ticketDurationMin = int.Parse(ConfigurationManager.AppSettings["TicketDurationMin"], CultureInfo.InvariantCulture);
                     if (_ticketDurationMin.Value != 0)
                     {
                         _ticketDurationTimeSpan = TimeSpan.FromMinutes(_ticketDurationMin.Value);
@@ -86,29 +87,29 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Classes
             }
         }
 
-        private static bool _EnableSwagger;
+        private static bool? _EnableSwagger;
         public static bool EnableSwagger
         {
             get
             {
                 if (_EnableSwagger == default)
                 {
-                    bool.TryParse(ConfigurationManager.AppSettings["EnableSwagger"], out _EnableSwagger);
+                    _EnableSwagger = bool.Parse(ConfigurationManager.AppSettings["EnableSwagger"]);
                 }
-                return _EnableSwagger;
+                return _EnableSwagger.Value;
             }
         }
 
-        private static bool _EnableCORS;
+        private static bool? _EnableCORS;
         public static bool EnableCORS
         {
             get
             {
                 if (_EnableCORS == default)
                 {
-                    bool.TryParse(ConfigurationManager.AppSettings["EnableCORS"], out _EnableCORS);
+                    _EnableCORS = bool.Parse(ConfigurationManager.AppSettings["EnableCORS"]);
                 }
-                return _EnableCORS;
+                return _EnableCORS.Value;
             }
         }
 

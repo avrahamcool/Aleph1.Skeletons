@@ -2,6 +2,7 @@ using Aleph1.DI.Contracts;
 using Aleph1.Skeletons.WebAPI.Security.Contracts;
 
 using System.ComponentModel.Composition;
+using System.Diagnostics.Contracts;
 
 namespace Aleph1.Skeletons.WebAPI.Security.Mock
 {
@@ -13,6 +14,8 @@ namespace Aleph1.Skeletons.WebAPI.Security.Mock
         /// <param name="registrar">add implementation to the DI container using this registrar</param>
         public void Initialize(IModuleRegistrar registrar)
         {
+            Contract.Requires(registrar != null);
+
             registrar.RegisterTypeAsSingelton<ISecurity, SecurityMock>();
         }
     }

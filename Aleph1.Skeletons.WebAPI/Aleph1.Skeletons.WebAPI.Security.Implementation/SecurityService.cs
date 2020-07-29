@@ -22,7 +22,14 @@ namespace Aleph1.Skeletons.WebAPI.Security.Implementation
         }
         public AuthenticationInfo ReadTicket(string ticketValue, string userUniqueID)
         {
-            return ticketValue == default ? null : CipherService.Decrypt<AuthenticationInfo>(SettingsManager.AppPrefix, userUniqueID, ticketValue);
+            try
+            {
+                return CipherService.Decrypt<AuthenticationInfo>(SettingsManager.AppPrefix, userUniqueID, ticketValue);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
 

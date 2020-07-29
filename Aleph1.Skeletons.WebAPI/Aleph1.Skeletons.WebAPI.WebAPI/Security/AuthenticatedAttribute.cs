@@ -34,7 +34,9 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
 
                 if (!AllowAnonymous && !securityService.IsAllowedForContent(authInfo, RequireAdminAccess))
                 {
-                    throw new UnauthorizedAccessException();
+                    LogManager.GetCurrentClassLogger().LogAleph1(LogLevel.Warn, $"{authInfo?.Username ?? "UNKNOWN"} tried to access {actionContext.Request.RequestUri}");
+                    actionContext.Response = actionContext.Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "");
+                    return;
                 }
 
                 //Regenerating a ticket with the same data - to reset the ticket life span
@@ -42,8 +44,11 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
             }
             catch (Exception ex)
             {
-                LogManager.GetCurrentClassLogger().LogAleph1(LogLevel.Warn, actionContext.Request.RequestUri.ToString(), ex);
-                actionContext.Response = actionContext.Request.CreateErrorResponse(HttpStatusCode.Unauthorized, ex);
+                if (!AllowAnonymous)
+                {
+                    LogManager.GetCurrentClassLogger().LogAleph1(LogLevel.Warn, actionContext.Request.RequestUri.ToString(), ex);
+                    actionContext.Response = actionContext.Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "");
+                }
             }
         }
 

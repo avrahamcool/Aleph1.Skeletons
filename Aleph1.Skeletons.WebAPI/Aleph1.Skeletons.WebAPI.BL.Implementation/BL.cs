@@ -48,10 +48,10 @@ namespace Aleph1.Skeletons.WebAPI.BL.Implementation
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
             {
-                throw new ArgumentNullException("searchTerm");
+                throw new ArgumentNullException(nameof(searchTerm));
             };
 
-            string searchTermSanitized = searchTerm.ToLower();
+            string searchTermSanitized = searchTerm.ToUpperInvariant();
             return DAL.GetPersons()
                 .Where(p => p.FirstName.Contains(searchTermSanitized) || p.LastName.Contains(searchTermSanitized));
         }

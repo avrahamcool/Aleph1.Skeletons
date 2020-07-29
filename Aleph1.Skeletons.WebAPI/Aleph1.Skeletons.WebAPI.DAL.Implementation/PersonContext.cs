@@ -2,6 +2,7 @@ using Aleph1.Skeletons.WebAPI.Models;
 
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
+using System.Diagnostics.Contracts;
 
 using TrackerEnabledDbContext;
 using TrackerEnabledDbContext.Common.Configuration;
@@ -29,6 +30,8 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Implementation
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            Contract.Requires(modelBuilder != null);
+
             // setting default length of all strings instead of VarChar(max) - each property can be overwritten later
             modelBuilder.Properties<string>().Configure(s => s.IsUnicode(false).HasMaxLength(256));
 

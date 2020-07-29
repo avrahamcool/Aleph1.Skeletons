@@ -1,9 +1,9 @@
-﻿namespace Aleph1.Skeletons.WebAPI.DAL.Implementation.Migrations
+﻿using Aleph1.Skeletons.WebAPI.Models;
+
+using System.Data.Entity.Migrations;
+
+namespace Aleph1.Skeletons.WebAPI.DAL.Implementation.Migrations
 {
-    using Aleph1.Skeletons.WebAPI.Models;
-
-    using System.Data.Entity.Migrations;
-
     internal sealed class Configuration : DbMigrationsConfiguration<PersonContext>
     {
         public Configuration()

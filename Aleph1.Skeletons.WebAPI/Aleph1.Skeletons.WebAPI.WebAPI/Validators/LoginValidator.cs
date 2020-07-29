@@ -5,10 +5,10 @@ using FluentValidation;
 namespace Aleph1.Skeletons.WebAPI.WebAPI.Validators
 {
     /// <summary>Validate the LoginModel input</summary>
-    public class LoginValidator : AbstractValidator<LoginModel>
+    public class LoginValidatonCollection : AbstractValidator<LoginModel>
     {
-        /// <summary>Initializes a new instance of the <see cref="LoginValidator"/> class.</summary>
-        public LoginValidator()
+        /// <summary>Initializes a new instance of the <see cref="LoginValidatonCollection"/> class.</summary>
+        public LoginValidatonCollection()
         {
             //TODO: put your real logic here
 
