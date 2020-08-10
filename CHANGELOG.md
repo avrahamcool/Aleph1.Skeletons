@@ -1,3 +1,8 @@
+# 3.0.3
+* [WebAPI] add camelCase contract resolver closes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/144
+* [Layer] re-add the default Layer files closes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/145
+* update nuget packages
+
 # 3.0.2
 * removed Authenticated attribute from About
 
@@ -8,9 +13,9 @@
 
 
 # 3.0.0
-*  - **BREAKING CHANGES** - all project are created with .net 4.8 (instead of 4.7.1)
-*  - **BREAKING CHANGES** - improved ticket handling (using http only cookie instead of headers)
-*  - **BREAKING CHANGES** - changed Moq to Mock [finally :)]
+*  **BREAKING CHANGES** all project are created with .net 4.8 (instead of 4.7.1)
+*  **BREAKING CHANGES** improved ticket handling (using http only cookie instead of headers)
+*  **BREAKING CHANGES** changed Moq to Mock [finally :)]
 * all project use package reference instead of package.config (except the one that can't)
 * improved many security aspects
 * improved login flow
