@@ -1,3 +1,7 @@
+# 3.0.2
+* removed Authenticated attribute from About
+
+
 # 3.0.1
 * added static code analyzers to all projects (FxCop analyzers) - fixes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/21
 * fixed security flow regarding AllowAnonymous
