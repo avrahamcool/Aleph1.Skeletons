@@ -1,4 +1,5 @@
 using Aleph1.DI.Contracts;
+using Aleph1.Skeletons.Layer.Contracts;
 
 using System.ComponentModel.Composition;
 using System.Diagnostics.Contracts;
@@ -19,6 +20,8 @@ namespace Aleph1.Skeletons.Layer.Implementation
 
             //registrar.RegisterType<ITest, Test>();
             //registrar.RegisterTypeAsSingelton<ITest, Test>();
+
+            registrar.RegisterType<ILayer, Layer>();
         }
     }
 }
