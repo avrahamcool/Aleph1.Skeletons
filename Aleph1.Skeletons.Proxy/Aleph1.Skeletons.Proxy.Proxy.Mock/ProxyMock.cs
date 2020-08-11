@@ -8,7 +8,7 @@ namespace Aleph1.Skeletons.Proxy.Proxy.Mock
 {
     internal class ProxyMock : IProxy
     {
-        private int uniqueID = 0;
+        private int uniqueID;
         private readonly List<Person> persons = new List<Person>();
 
         public ProxyMock()

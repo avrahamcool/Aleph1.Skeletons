@@ -8,7 +8,7 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Mock
 {
     internal class DALMock : IDAL
     {
-        private int uniqueID = 0;
+        private int uniqueID;
         private readonly List<Person> persons = new List<Person>();
         public DALMock()
         {
