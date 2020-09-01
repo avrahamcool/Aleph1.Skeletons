@@ -1,6 +1,6 @@
 # 3.0.4
 * [WebAPI] changed default DAL connection from SqlExpress to LocalDB
-* [WebAPI] Update nugets
+* [All] Update nugets + fix FluentValidation restriction
 
 # 3.0.3
 * [WebAPI] add camelCase contract resolver closes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/144
