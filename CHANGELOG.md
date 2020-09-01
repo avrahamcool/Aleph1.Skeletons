@@ -1,3 +1,7 @@
+# 3.0.4
+* [WebAPI] changed default DAL connection from SqlExpress to LocalDB
+* [WebAPI] Update nugets
+
 # 3.0.3
 * [WebAPI] add camelCase contract resolver closes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/144
 * [Layer] re-add the default Layer files closes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/145
@@ -28,7 +32,7 @@
 * added missing CORS - fixes : https://github.com/avrahamcool/Aleph1.Skeletons/issues/24
 * added .tfignore and .gitignore - fixes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/25
 * better handle backups - fixes : https://github.com/avrahamcool/Aleph1.Skeletons/issues/41
-* block TS execution in webapi project - fixes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/54
+* block TS execution in WebAPI project - fixes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/54
 * better handling of documentation creation - fixes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/75
 
 # 2.6.0
