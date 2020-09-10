@@ -1,0 +1,71 @@
+{
+	"name": "pages",
+	"description": "Aleph1.Skeletons.WebAPI.Pages",
+	"version": "0.1.0",
+	"repository": {
+		"type": "???",
+		"url": "???"
+	},
+	"license": "MIT",
+	"dependencies": {
+		"aleph1-layout": "^1.0.3",
+		"aurelia-animator-css": "^1.0.4",
+		"aurelia-bootstrapper": "^2.3.3",
+		"aurelia-dialog": "^2.0.0",
+		"aurelia-fetch-client": "^1.8.2",
+		"idle-session-timeout": "^1.0.1"
+	},
+	"devDependencies": {
+		"@types/node": "^14.6.0",
+		"@types/webpack": "^4.41.21",
+		"@typescript-eslint/eslint-plugin": "^3.9.1",
+		"@typescript-eslint/parser": "^3.9.1",
+		"app-settings-loader": "^1.0.6",
+		"aurelia-cli": "^2.0.0",
+		"aurelia-testing": "^1.0.0",
+		"aurelia-webpack-plugin": "^4.0.0",
+		"autoprefixer": "^9.8.6",
+		"babel-eslint": "^10.1.0",
+		"clean-webpack-plugin": "^3.0.0",
+		"copy-webpack-plugin": "^6.0.3",
+		"css-loader": "^4.2.1",
+		"cssnano": "^4.1.10",
+		"duplicate-package-checker-webpack-plugin": "^3.0.0",
+		"eslint": "^7.7.0",
+		"expose-loader": "^1.0.0",
+		"file-loader": "^6.0.0",
+		"gulp": "^4.0.2",
+		"gulp-eslint": "^6.0.0",
+		"html-loader": "^1.1.0",
+		"html-webpack-plugin": "^4.3.0",
+		"istanbul-instrumenter-loader": "^3.0.1",
+		"json-loader": "^0.5.7",
+		"mini-css-extract-plugin": "^0.10.0",
+		"minimatch": "^3.0.4",
+		"postcss-loader": "^3.0.0",
+		"promise-polyfill": "^8.1.3",
+		"sass": "^1.26.10",
+		"sass-loader": "^9.0.3",
+		"style-loader": "^1.2.1",
+		"tree-kill": "^1.2.2",
+		"ts-loader": "^8.0.2",
+		"typescript": "^3.9.7",
+		"url-loader": "^4.1.0",
+		"webpack": "^4.44.1",
+		"webpack-bundle-analyzer": "^3.8.0",
+		"webpack-cli": "^3.3.12",
+		"webpack-dev-server": "^3.11.0"
+	},
+	"browserslist": [
+		"defaults"
+	],
+	"scripts": {
+		"build": "webpack --env.production --extractCss",
+		"start": "webpack-dev-server --extractCss",
+		"build:dev": "webpack --extractCss",
+		"analyze": "webpack --env.production --analyze"
+	},
+	"engines": {
+		"node": ">=10.12.0"
+	}
+}

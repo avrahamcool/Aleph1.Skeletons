@@ -1,0 +1,21 @@
+<template class="app-header a1-row a1-padding a1-spaced-items a1-justify-items a1-center-items-v">
+	<require from="./app-header.scss"></require>
+
+	<div class="a1-row a1-center-items-v a1-spaced-items">
+		<img class="app-logo-img" src="./app-logo.png" />
+		<span>My Demo App</span>
+	</div>
+	<template if.bind="userService.isLoggedIn">
+		<nav class="a1-row a1-spaced-items">
+			<a repeat.for="route of router.navigation" href.bind="route.href"
+				class="${route.isActive ? 'app-active' : ''}">
+				${route.title}
+			</a>
+		</nav>
+		<div class="a1-row a1-spaced-items">
+			<span>hello ${userService.authenticationInfo.username}</span>
+			<a href="#" click.delegate="loginService.logout()">logout</a>
+		</div>
+
+	</template>
+</template>

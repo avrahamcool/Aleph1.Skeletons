@@ -1,0 +1,23 @@
+@import "aleph1-layout/src/scss/main";
+
+:root{
+	--primary-color-dark:	#303F9F;
+	--primary-color:		#3F51B5;
+	--primary-color-light:  #C5CAE9;
+	--primary-color-text:   #FFFFFF;
+	--accent-color:         #FF5722;
+	--primary-text-color:   #212121;
+	--secondary-text-color: #757575;
+	--divider-color:        #BDBDBD;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+	font-family: 'Assistant', sans-serif;
+}

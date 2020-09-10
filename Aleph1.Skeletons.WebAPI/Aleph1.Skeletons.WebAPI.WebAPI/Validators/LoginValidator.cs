@@ -13,13 +13,10 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Validators
             //TODO: put your real logic here
 
             RuleFor(x => x.Username)
-                .NotEmpty()
-                .MinimumLength(2)
-                .MaximumLength(30);
+                .NotEmpty();
 
             RuleFor(x => x.Password)
-                .NotEmpty()
-                .MinimumLength(2);
+                .NotEmpty();
         }
     }
 }

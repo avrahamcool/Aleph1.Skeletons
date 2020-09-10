@@ -28,7 +28,10 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI
             // configure CORS from config
             if (SettingsManager.EnableCORS)
             {
-                config.EnableCors(new EnableCorsAttribute(SettingsManager.Origins, SettingsManager.Headers, SettingsManager.Methods, SettingsManager.ExposedHeaders));
+                config.EnableCors(new EnableCorsAttribute(SettingsManager.Origins, SettingsManager.Headers, SettingsManager.Methods, SettingsManager.ExposedHeaders)
+                {
+                    SupportsCredentials = true
+                });
             }
 
             // configure JSON settings so that output will be camelCase, input parameters can be camelCase or PascalCase

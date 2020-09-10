@@ -1,0 +1,12 @@
+<template>
+	<ux-dialog>
+		<ux-dialog-body>
+			You are Idle. auto logout in ${secondsTillLogout} sec.
+		</ux-dialog-body>
+
+		<ux-dialog-footer>
+			<button click.delegate="close(true)">Continue</button>
+			<button click.delegate="close(false)">Logout</button>
+		</ux-dialog-footer>
+	</ux-dialog>
+</template>

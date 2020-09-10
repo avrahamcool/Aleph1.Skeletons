@@ -1,0 +1,13 @@
+{
+	"recommendations": [
+		"AureliaEffect.aurelia",
+		"EditorConfig.EditorConfig",
+		"behzad88.Aurelia",
+		"christian-kohler.path-intellisense",
+		"coenraads.bracket-pair-colorizer-2",
+		"dbaeumer.vscode-eslint",
+		"oderwat.indent-rainbow",
+		"ritwickdey.liveserver",
+		"steoates.autoimport",
+	]
+}
