@@ -1,14 +1,18 @@
-import { Router } from "aurelia-router";
+import { UserService } from "resources";
 import { autoinject } from "aurelia-framework";
 import { HttpClient } from "aurelia-fetch-client";
 import { getLogger, Logger } from "aurelia-logging";
 import * as environment from "../../../config/environment.json";
 
+const SECOND = 1000;
+const MINUTE = 60 * SECOND;
+
 @autoinject
 export class AuthHttpClient extends HttpClient
 {
+	private idleHandler: number;
 	public logger: Logger;
-	constructor(router: Router)
+	constructor(private userService: UserService)
 	{
 		super();
 		this.logger = getLogger("AuthHttpClient");
@@ -18,15 +22,13 @@ export class AuthHttpClient extends HttpClient
 				.withDefaults({ credentials: "include" })
 				.withBaseUrl(environment.apiBaseUrl)
 				.withInterceptor({
+					response: response =>
+					{
+						this.setIdleTimeout();
+						return response;
+					},
 					responseError: (errorResponse: Response) =>
 					{
-						if (errorResponse.status === 401)
-						{
-							router.navigateToRoute("login");
-							this.displayError("שהית מחוץ למערכת זמן רב מידי, עליך להתחבר שוב", null);
-							throw errorResponse;
-						}
-
 						// Network Error
 						if (errorResponse instanceof TypeError)
 						{
@@ -70,9 +72,22 @@ export class AuthHttpClient extends HttpClient
 					}
 				});
 		});
+		this.setIdleTimeout();
+		this.refreshToken();	//start with a refresh token so all idle timeouts in sync
 	}
 
-
+	private setIdleTimeout()
+	{
+		clearTimeout(this.idleHandler);
+		this.idleHandler = window.setTimeout(() => this.refreshToken(), MINUTE * environment.idleDurationUntilWarningMin);
+	}
+	private refreshToken()
+	{
+		if (this.userService.isLoggedIn)
+		{
+			this.fetch("/api/RefreshToken");
+		}
+	}
 
 	private displayError(messageForUser: string, error: any): void
 	{
@@ -82,8 +97,6 @@ export class AuthHttpClient extends HttpClient
 		this.logger.error(messageForUser, error);
 		//this.notyf.error(messageForUser);
 	}
-
-
 
 	public queryString(baseUrl: string, parameters: { [key: string]: string | number | boolean | Date }): string
 	{

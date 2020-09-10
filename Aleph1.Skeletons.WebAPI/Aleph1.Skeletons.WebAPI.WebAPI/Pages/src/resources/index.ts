@@ -7,5 +7,5 @@ export function configure(config: FrameworkConfiguration): void
 
 export * from "./models/authentication-info";
 
-export * from "./services/auth-http-client";
 export * from "./services/user-service";
+export * from "./services/auth-http-client";

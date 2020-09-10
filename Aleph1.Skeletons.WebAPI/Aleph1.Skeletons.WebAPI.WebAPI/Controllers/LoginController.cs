@@ -36,6 +36,10 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
             return authenticationInfo;
         }
 
+        /// <summary>refresh access token.</summary>
+        [Authenticated(AllowAnonymous = true), Logged, HttpGet, Route("api/RefreshToken")]
+        public void RefreshToken() { }
+
         /// <summary>Logout from the application</summary>
         [Logged, HttpPost, Route("api/Logout"), FriendlyMessage("התרחשה שגיאה בעת ההתנתקות")]
         public HttpResponseMessage Logout()

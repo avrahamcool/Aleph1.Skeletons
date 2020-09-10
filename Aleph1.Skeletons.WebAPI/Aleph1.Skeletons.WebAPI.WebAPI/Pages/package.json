@@ -13,6 +13,7 @@
 		"aurelia-bootstrapper": "^2.3.3",
 		"aurelia-dialog": "^2.0.0",
 		"aurelia-fetch-client": "^1.8.2",
+		"expired-storage": "^1.0.2",
 		"idle-session-timeout": "^1.0.1"
 	},
 	"devDependencies": {

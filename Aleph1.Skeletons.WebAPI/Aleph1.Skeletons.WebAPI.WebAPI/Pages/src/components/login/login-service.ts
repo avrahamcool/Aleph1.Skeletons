@@ -33,6 +33,10 @@ export class LoginService
 					}
 				});
 		}
+		if (this.userService.isLoggedIn)
+		{
+			this.idleTimeout.start();
+		}
 	}
 	public login(credentials: LoginModel): Promise<void>
 	{

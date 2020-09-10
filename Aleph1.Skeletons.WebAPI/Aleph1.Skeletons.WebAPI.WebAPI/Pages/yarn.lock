@@ -3284,6 +3284,11 @@ expand-tilde@^2.0.0, expand-tilde@^2.0.2:
   dependencies:
     homedir-polyfill "^1.0.1"
 
+expired-storage@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/expired-storage/-/expired-storage-1.0.2.tgz#0c494185ca58149dc949b846ad8eb7c97fc52933"
+  integrity sha1-DElBhcpYFJ3JSbhGrY63yX/FKTM=
+
 expose-loader@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/expose-loader/-/expose-loader-1.0.0.tgz#1676dde8fce6662584e17f8531e24d2afe8dae11"
