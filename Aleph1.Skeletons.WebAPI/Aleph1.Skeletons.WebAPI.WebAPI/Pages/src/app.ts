@@ -2,6 +2,7 @@ import { autoinject } from "aurelia-framework";
 import { UserService } from "resources";
 import { PLATFORM } from "aurelia-pal";
 import { RouterConfiguration, NavigationInstruction, Next, Redirect } from "aurelia-router";
+import { Roles } from "resources";
 
 @autoinject
 export class App
@@ -24,29 +25,31 @@ export class App
 				title: "persons",
 				nav: true,
 				settings: {
-					auth: true
+					auth: Roles.User
 				}
 			},
 			{
-				route: "test",
-				name: "test",
-				moduleId: PLATFORM.moduleName("./components/test/test.html"),
-				title: "test",
+				route: "admin",
+				name: "admin",
+				moduleId: PLATFORM.moduleName("./components/admin/admin"),
+				title: "admin",
 				nav: true,
 				settings: {
-					auth: true
+					auth: Roles.Admin
 				}
 			}
 		]);
 		config.addAuthorizeStep({
 			run: (instruction: NavigationInstruction, next: Next) =>
 			{
-				if (instruction.getAllInstructions().some(i => i.config.settings.auth))
+				const requiredRoles = instruction
+					.getAllInstructions()
+					.map(i => i.config.settings?.auth as Roles || Roles.Anonymous);
+
+				if (!requiredRoles.every(r => this.userService.isAllowedForRole(r)))
 				{
-					if (!this.userService.isLoggedIn)
-					{
-						return next.cancel(new Redirect("login"));
-					}
+					this.userService.redirectAfterLogin = instruction.fragment + (instruction.queryString ? `?${ instruction.queryString }` : "");
+					return next.cancel(new Redirect("login"));
 				}
 
 				return next();

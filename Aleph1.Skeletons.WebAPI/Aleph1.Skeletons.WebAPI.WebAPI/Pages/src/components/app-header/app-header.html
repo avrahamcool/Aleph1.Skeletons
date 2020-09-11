@@ -7,15 +7,15 @@
 	</div>
 	<template if.bind="userService.isLoggedIn">
 		<nav class="a1-row a1-spaced-items">
-			<a repeat.for="route of router.navigation" href.bind="route.href"
-				class="${route.isActive ? 'app-active' : ''}">
+			<a repeat.for="route of router.navigation | allowedRoutes:userService.authenticationInfo.roles"
+				href.bind="route.href" class="${route.isActive ? 'app-active' : ''}">
 				${route.title}
 			</a>
 		</nav>
 		<div class="a1-row a1-spaced-items">
-			<span>hello ${userService.authenticationInfo.username}</span>
+			<span>hello ${userService.authenticationInfo.username} -
+				${Roles[userService.authenticationInfo.roles]}</span>
 			<a href="#" click.delegate="loginService.logout()">logout</a>
 		</div>
-
 	</template>
 </template>

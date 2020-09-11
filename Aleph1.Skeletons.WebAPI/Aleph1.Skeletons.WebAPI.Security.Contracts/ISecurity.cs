@@ -27,8 +27,8 @@ namespace Aleph1.Skeletons.WebAPI.Security.Contracts
 
         /// <summary>return whether the current user is allowed for content</summary>
         /// <param name="authenticationInfo">the user authentication info</param>
-        /// <param name="RequireAdminAccess">indicate if the current asset require admin access</param>
+        /// <param name="allowedForRoles">indicate the roles that are permitted to the current asset</param>
         /// <returns>true if allowed, false otherwise</returns>
-        bool IsAllowedForContent(AuthenticationInfo authenticationInfo, bool RequireAdminAccess);
+        bool IsAllowedForContent(AuthenticationInfo authenticationInfo, Roles[] allowedForRoles);
     }
 }

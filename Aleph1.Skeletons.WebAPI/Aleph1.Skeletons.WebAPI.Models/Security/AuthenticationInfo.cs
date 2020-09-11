@@ -5,8 +5,8 @@
     {
         // TODO: put your real implementation here
 
-        /// <summary>indicating whether this user has admin access.</summary>
-        public bool IsAdmin { get; set; }
+        /// <summary>indicating authorization roles this user have.</summary>
+        public Roles Roles { get; set; }
 
         /// <summary>the username</summary>
         public string Username { get; set; }

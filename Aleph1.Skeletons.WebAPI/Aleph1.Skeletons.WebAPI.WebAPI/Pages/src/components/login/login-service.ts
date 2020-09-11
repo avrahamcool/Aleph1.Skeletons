@@ -43,7 +43,12 @@ export class LoginService
 		return this.httpClient.post("/api/Login", json(credentials))
 			.then(resp => resp.json())
 			.then((authInfo: AuthenticationInfo) => this.userService.authenticationInfo = authInfo)
-			.then(() => this.router.navigateToRoute("persons"))
+			.then(() =>
+			{
+				const url = this.userService.redirectAfterLogin || "persons";
+				this.userService.redirectAfterLogin = undefined;
+				this.router.navigate(url);
+			})
 			.then(() => this.idleTimeout.start());
 	}
 

@@ -2,6 +2,6 @@
 	"debug": true,
 	"testing": true,
 	"apiBaseUrl": "https://localhost:44331",
-	"idleDurationUntilWarningMin": 0.3,
-	"idleWarningDurationSec": 5
+	"idleDurationUntilWarningMin": 1,
+	"idleWarningDurationSec": 60
 }

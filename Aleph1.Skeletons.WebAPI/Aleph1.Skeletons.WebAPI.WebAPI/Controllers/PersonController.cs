@@ -1,6 +1,7 @@
 ﻿using Aleph1.Logging;
 using Aleph1.Skeletons.WebAPI.BL.Contracts;
 using Aleph1.Skeletons.WebAPI.Models;
+using Aleph1.Skeletons.WebAPI.Models.Security;
 using Aleph1.Skeletons.WebAPI.WebAPI.Security;
 using Aleph1.WebAPI.ExceptionHandler;
 
@@ -37,7 +38,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
 
         /// <summary>get the number of persons currently saved in our system</summary>
         /// <returns>the number of persons in our system</returns>
-        [Authenticated(AllowAnonymous = true), Logged, HttpGet, Route("api/Person/Count"), FriendlyMessage("התרחשה שגיאה בשליפת כמות האנשים")]
+        [Authenticated(Roles.Anonymous), Logged, HttpGet, Route("api/Person/Count"), FriendlyMessage("התרחשה שגיאה בשליפת כמות האנשים")]
         public int GetPersonsCount()
         {
             return BL.GetPersonsCount();
@@ -83,7 +84,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
         /// <summary>delete a person by ID</summary>
         /// <param ID="personToDelete">the ID of the person to delete</param>
         /// <returns>the deleted person</returns>
-        [Authenticated(RequireAdminAccess = true), Logged, HttpDelete, Route("api/Person/{ID}"), FriendlyMessage("התרחשה שגיאה במחיקת האדם המבוקש")]
+        [Authenticated(Roles.Admin), Logged, HttpDelete, Route("api/Person/{ID}"), FriendlyMessage("התרחשה שגיאה במחיקת האדם המבוקש")]
         public Person DeletePerson(int ID)
         {
             return BL.DeletePerson(ID);

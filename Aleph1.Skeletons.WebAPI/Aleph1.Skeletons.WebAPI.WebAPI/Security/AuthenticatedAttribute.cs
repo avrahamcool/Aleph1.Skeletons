@@ -5,6 +5,7 @@ using Aleph1.Skeletons.WebAPI.Security.Contracts;
 using NLog;
 
 using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http.Controllers;
@@ -16,8 +17,20 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     internal sealed class AuthenticatedAttribute : ActionFilterAttribute
     {
-        public bool AllowAnonymous { get; set; }
-        public bool RequireAdminAccess { get; set; }
+        private bool AllowAnonymous { get; set; }
+        private Roles[] AllowedRoles { get; set; }
+
+        /// <summary></summary>
+        /// <param name="AllowedRoles"></param>
+        public AuthenticatedAttribute(params Roles[] AllowedRoles)
+        {
+            // Set default usage to regular user
+            this.AllowedRoles = AllowedRoles.Length == 0
+                ? new[] { Roles.User }
+                : AllowedRoles;
+
+            AllowAnonymous = AllowedRoles.Contains(Roles.Anonymous);
+        }
 
         /// <summary>Authenticates the request.</summary>
         /// <param name="actionContext">The action context.</param>
@@ -32,7 +45,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
                 //read the ticket
                 AuthenticationInfo authInfo = actionContext.GetAuthenticationInfoFromCookie(securityService);
 
-                if (!AllowAnonymous && !securityService.IsAllowedForContent(authInfo, RequireAdminAccess))
+                if (!AllowAnonymous && !securityService.IsAllowedForContent(authInfo, AllowedRoles))
                 {
                     LogManager.GetCurrentClassLogger().LogAleph1(LogLevel.Warn, $"{authInfo?.Username ?? "UNKNOWN"} tried to access {actionContext.Request.RequestUri}");
                     actionContext.Response = actionContext.Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "");

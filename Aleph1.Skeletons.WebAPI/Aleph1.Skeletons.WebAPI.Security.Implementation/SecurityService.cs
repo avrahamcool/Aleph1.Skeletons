@@ -4,6 +4,7 @@ using Aleph1.Skeletons.WebAPI.Models.Security;
 using Aleph1.Skeletons.WebAPI.Security.Contracts;
 
 using System;
+using System.Linq;
 
 namespace Aleph1.Skeletons.WebAPI.Security.Implementation
 {
@@ -42,13 +43,17 @@ namespace Aleph1.Skeletons.WebAPI.Security.Implementation
                 throw new UnauthorizedAccessException();
             }
 
-            return new AuthenticationInfo() { IsAdmin = username.Equals("admin", StringComparison.OrdinalIgnoreCase), Username = username };
+            return new AuthenticationInfo()
+            {
+                Username = username,
+                Roles = username.Equals("admin", StringComparison.OrdinalIgnoreCase) ? Roles.Admin : Roles.User
+            };
         }
 
         [Logged(LogParameters = false, LogReturnValue = true)]
-        public bool IsAllowedForContent(AuthenticationInfo authenticationInfo, bool RequireAdminAccess)
+        public bool IsAllowedForContent(AuthenticationInfo authenticationInfo, Roles[] allowedForRoles)
         {
-            return authenticationInfo != default && (!RequireAdminAccess || authenticationInfo.IsAdmin);
+            return authenticationInfo != default && allowedForRoles.Any(r => authenticationInfo.Roles.HasFlag(r));
         }
     }
 }

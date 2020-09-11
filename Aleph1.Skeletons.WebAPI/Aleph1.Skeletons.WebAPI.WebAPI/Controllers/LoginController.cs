@@ -25,7 +25,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
 
         /// <summary>Login to the APP (use same user and password for successful login. use 'admin' 'admin' for manager).</summary>
         /// <param name="loginModel">Credentials for login</param>
-        [Authenticated(AllowAnonymous = true), Logged(LogParameters = false), HttpPost, Route("api/Login"), FriendlyMessage("התרחשה שגיאה בעת ההתחברות")]
+        [Authenticated(Roles.Anonymous), Logged(LogParameters = false), HttpPost, Route("api/Login"), FriendlyMessage("התרחשה שגיאה בעת ההתחברות")]
         public AuthenticationInfo Login(LoginModel loginModel)
         {
             Contract.Requires(loginModel != null);
@@ -37,7 +37,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
         }
 
         /// <summary>refresh access token.</summary>
-        [Authenticated(AllowAnonymous = true), Logged, HttpGet, Route("api/RefreshToken")]
+        [Authenticated(Roles.Anonymous), Logged, HttpGet, Route("api/RefreshToken")]
         public void RefreshToken() { }
 
         /// <summary>Logout from the application</summary>

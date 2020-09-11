@@ -1,5 +1,7 @@
+import { Roles } from "./roles";
+
 export interface AuthenticationInfo
 {
-	isAdmin: boolean;
+	roles: Roles;
 	username: string;
 }

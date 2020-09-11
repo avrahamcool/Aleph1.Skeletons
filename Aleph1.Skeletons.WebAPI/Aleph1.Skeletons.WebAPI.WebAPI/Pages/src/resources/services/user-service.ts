@@ -1,3 +1,4 @@
+import { Roles } from "./../models/roles";
 import { AuthenticationInfo } from "../models/authentication-info";
 import { computedFrom, autoinject } from "aurelia-framework";
 import * as ExpiredStorage from "expired-storage";
@@ -33,4 +34,20 @@ export class UserService
 	{
 		return !!this.authenticationInfo;
 	}
+
+
+	public isAllowedForRole(roles: Roles): boolean
+	{
+		if (roles === Roles.Anonymous)
+		{
+			return true;
+		}
+		if (!this.authenticationInfo?.roles)
+		{
+			return false;
+		}
+		return (this.authenticationInfo.roles & roles) === roles;
+	}
+
+	public redirectAfterLogin: string;
 }
