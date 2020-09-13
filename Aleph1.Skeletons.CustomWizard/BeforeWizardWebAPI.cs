@@ -1,5 +1,7 @@
 ﻿using EnvDTE;
 
+using EnvDTE80;
+
 using Microsoft.VisualStudio.TemplateWizard;
 
 using System.Collections.Generic;
@@ -9,10 +11,12 @@ namespace Aleph1.Skeletons.CustomWizard
 {
     public class BeforeWizardWebAPI : IWizard
     {
+        private Solution2 solution;
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
             // Close new solution
-            ((DTE)automationObject).Solution.Close();
+            solution = ((Solution2)((DTE)automationObject).Solution);
+            solution.Close();
 
             // Delete old directory(in my case VS creating it) and change destination
             string oldDestinationDirectory = replacementsDictionary["$destinationdirectory$"];
@@ -24,7 +28,10 @@ namespace Aleph1.Skeletons.CustomWizard
             string newDestinationDirectory = Path.Combine($"{oldDestinationDirectory}", @"..\");
             replacementsDictionary["$destinationdirectory$"] = Path.GetFullPath(newDestinationDirectory);
         }
-
+        public void RunFinished()
+        {
+            solution.Close();
+        }
 
         public void BeforeOpeningFile(ProjectItem projectItem)
         {
@@ -35,10 +42,6 @@ namespace Aleph1.Skeletons.CustomWizard
         }
 
         public void ProjectItemFinishedGenerating(ProjectItem projectItem)
-        {
-        }
-
-        public void RunFinished()
         {
         }
 

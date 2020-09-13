@@ -1,5 +1,7 @@
 ﻿using EnvDTE;
 
+using EnvDTE80;
+
 using Microsoft.VisualStudio.TemplateWizard;
 
 using System.Collections.Generic;
@@ -24,7 +26,13 @@ namespace Aleph1.Skeletons.CustomWizard
         {
             // Open "old" solution
             string pathToOldSolution = Path.Combine(destinationDirectory, solutionName + ".sln");
-            dte.Solution.Open(pathToOldSolution);
+
+            Solution2 solution = ((Solution2)dte.Solution);
+            solution.Open(pathToOldSolution);
+
+            solution.Properties.Item("StartupProject").Value = solutionName + ".WebAPI";
+            solution.SolutionBuild.Clean(true);
+            solution.SolutionBuild.Build();
         }
 
         public void BeforeOpeningFile(ProjectItem projectItem)
