@@ -21,8 +21,8 @@ namespace Aleph1.Skeletons.CustomWizard
             string newDestinationDirectory = Path.Combine($"{oldDestinationDirectory}", @"..\");
             replacementsDictionary["$destinationdirectory$"] = Path.GetFullPath(newDestinationDirectory);
 
-            string solutionName = Path.GetFileName(Path.GetDirectoryName(replacementsDictionary["$solutiondirectory$"]));
-            if (!replacementsDictionary["$safeprojectname$"].StartsWith(solutionName))
+            string solutionName = replacementsDictionary["$specifiedsolutionname$"];
+            if (!replacementsDictionary["$safeprojectname$"].StartsWith(solutionName + "."))
             {
                 replacementsDictionary["$projectname$"] = solutionName + "." + replacementsDictionary["$projectname$"];
                 replacementsDictionary["$safeprojectname$"] = solutionName + "." + replacementsDictionary["$safeprojectname$"];
