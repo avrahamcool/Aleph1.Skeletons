@@ -1,6 +1,6 @@
 <template>
 	<div class="a1-full-height a1-column a1-center-items-v a1-center-items-h">
-		<form submit.delegate="loginService.login(credentials)" class="app-card a1-padding a1-column a1-spaced-items">
+		<form submit.delegate="userService.login(credentials)" class="app-card a1-padding a1-column a1-spaced-items">
 			<label class="a1-row a1-spaced-items a1-justify-items">
 				<span>Username:</span>
 				<input autocomplete="username" value.bind="credentials.username" />

@@ -1,5 +1,5 @@
 import { autoinject } from "aurelia-framework";
-import { UserService } from "resources";
+import { UserService } from "resources/services";
 import { NavModel } from "aurelia-Router";
 
 @autoinject

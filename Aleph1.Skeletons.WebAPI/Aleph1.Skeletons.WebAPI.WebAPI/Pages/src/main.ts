@@ -1,7 +1,9 @@
+import { UserService } from "resources/services";
 import { Aurelia } from "aurelia-framework";
 import { PLATFORM } from "aurelia-pal";
-
 import * as environment from "../config/environment.json";
+
+import "./main.scss";
 
 export function configure(aurelia: Aurelia): void
 {
@@ -17,5 +19,17 @@ export function configure(aurelia: Aurelia): void
 		aurelia.use.plugin(PLATFORM.moduleName("aurelia-testing"));
 	}
 
-	aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName("app")));
+	aurelia.start().then(() =>
+	{
+		const userService = aurelia.container.get(UserService);
+		if (userService.isLoggedIn)
+		{
+			aurelia.setRoot(PLATFORM.moduleName("shells/app"))
+				.then(() => userService.startIdleTimeout());
+		}
+		else
+		{
+			aurelia.setRoot(PLATFORM.moduleName("shells/login"));
+		}
+	});
 }

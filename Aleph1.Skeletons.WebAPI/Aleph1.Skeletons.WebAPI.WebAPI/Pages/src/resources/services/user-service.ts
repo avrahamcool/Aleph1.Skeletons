@@ -1,17 +1,26 @@
-import { Roles } from "./../models/roles";
-import { AuthenticationInfo } from "../models/authentication-info";
-import { computedFrom, autoinject } from "aurelia-framework";
+import { Router } from "aurelia-router";
+import { PLATFORM } from "aurelia-pal";
+import { IdleModal } from "components/idle-modal/idle-modal";
+import { minute, secondsInMinute } from "./time";
+import { AuthHttpClient } from ".";
+import { Roles, AuthenticationInfo, LoginModel } from "../models";
+import { computedFrom, autoinject, Aurelia } from "aurelia-framework";
 import * as ExpiredStorage from "expired-storage";
 import * as environment from "../../../config/environment.json";
-
-const SECONDS_IN_MINUTE = 60;
+import { IdleSessionTimeout } from "idle-session-timeout";
+import { json } from "aurelia-fetch-client";
+import { DialogService } from "aurelia-dialog";
 
 @autoinject
 export class UserService
 {
-	constructor(private expiredStorage: ExpiredStorage) { }
-
 	private _authenticationInfo: AuthenticationInfo;
+	private idleGUITimeout: IdleSessionTimeout;
+
+	constructor(private au: Aurelia, private httpClient: AuthHttpClient,
+		private expiredStorage: ExpiredStorage, private dialogService: DialogService,
+		private router: Router)
+	{ }
 
 	@computedFrom("_authenticationInfo")
 	public get authenticationInfo(): AuthenticationInfo
@@ -22,19 +31,16 @@ export class UserService
 		}
 		return this._authenticationInfo;
 	}
-
 	public set authenticationInfo(value: AuthenticationInfo)
 	{
 		this._authenticationInfo = value;
-		this.expiredStorage.setJson("_authenticationInfo", value, SECONDS_IN_MINUTE * environment.idleDurationUntilWarningMin);
+		this.expiredStorage.setJson("_authenticationInfo", value, secondsInMinute * environment.idleDurationUntilWarningMin);
 	}
-
 	@computedFrom("authenticationInfo")
 	public get isLoggedIn(): boolean
 	{
 		return !!this.authenticationInfo;
 	}
-
 
 	public isAllowedForRole(roles: Roles): boolean
 	{
@@ -49,5 +55,51 @@ export class UserService
 		return (this.authenticationInfo.roles & roles) === roles;
 	}
 
-	public redirectAfterLogin: string;
+	public startIdleTimeout(): void
+	{
+		if (!this.idleGUITimeout)
+		{
+			this.idleGUITimeout = new IdleSessionTimeout(minute * environment.idleDurationUntilWarningMin);
+			this.idleGUITimeout.onTimeOut = () =>
+			{
+				this.dialogService.open({ viewModel: IdleModal })
+					.whenClosed(result =>
+					{
+						if (result.wasCancelled)
+						{
+							this.logout();
+						}
+						else
+						{
+							this.idleGUITimeout.start();
+						}
+					});
+			}
+		}
+
+		this.idleGUITimeout.start();
+		this.httpClient.startInactiveSessionTimeout();
+	}
+
+	public login(credentials: LoginModel): Promise<void>
+	{
+		return this.httpClient.post("/api/Login", json(credentials))
+			.then(resp => resp.json())
+			.then((authInfo: AuthenticationInfo) => this.authenticationInfo = authInfo)
+			.then(() => this.au.setRoot(PLATFORM.moduleName("shells/app")))
+			.then(() => this.startIdleTimeout());
+	}
+
+	public logout(): Promise<void>
+	{
+		return this.httpClient.post("/api/Logout")
+			.then(() => this.authenticationInfo = null)
+			.then(() => this.router.navigate("", { replace: true, trigger: false }))
+			.then(() => this.au.setRoot(PLATFORM.moduleName("shells/login")))
+			.then(() =>
+			{
+				this.httpClient.clearInactiveSessionTimeoutHandler();
+				this.idleGUITimeout.dispose();
+			});
+	}
 }
