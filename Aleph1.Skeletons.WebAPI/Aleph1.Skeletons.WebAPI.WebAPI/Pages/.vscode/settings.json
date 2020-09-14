@@ -18,5 +18,8 @@
 	"editor.fontFamily": "Fira Code Retina",
 	"editor.fontLigatures": true,
 	"eslint.packageManager": "yarn",
-	"editor.renameOnType": true
+	"editor.renameOnType": true,
+	"cSpell.words": [
+		"autoinject"
+	]
 }

@@ -1,11 +1,10 @@
 import { Roles } from "./../models/roles";
-
-import { ViewEngineHooks, View } from 'aurelia-framework';
+import { ViewEngineHooks, View } from "aurelia-framework";
 
 export class EnumsViewEngineHooks implements ViewEngineHooks
 {
-	beforeBind(view: View)
+	beforeBind(view: View): void
 	{
-		view.overrideContext['Roles'] = Roles;
+		view.overrideContext["Roles"] = Roles;
 	}
 }
