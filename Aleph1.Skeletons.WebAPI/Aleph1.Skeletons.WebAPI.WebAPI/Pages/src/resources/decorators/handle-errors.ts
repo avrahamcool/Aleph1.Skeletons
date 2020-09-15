@@ -4,7 +4,7 @@ import { Notyf } from "notyf";
 
 const logger = getLogger("handleErrors");
 
-const displayError = (friendlyError: string, realError: unknown) =>
+export function displayError(friendlyError: string, realError: unknown): void
 {
 	const notyfInstance = new Notyf({
 		duration: 5 * second,
@@ -36,7 +36,7 @@ const displayError = (friendlyError: string, realError: unknown) =>
 		notyfInstance.error(friendlyError);
 		logger.error(friendlyError, realError);
 	}
-};
+}
 
 export function handleErrors(friendlyError: string)
 {

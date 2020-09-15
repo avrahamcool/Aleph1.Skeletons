@@ -3,7 +3,6 @@ using Aleph1.Skeletons.WebAPI.Models.Security;
 using Aleph1.Skeletons.WebAPI.Security.Contracts;
 using Aleph1.Skeletons.WebAPI.WebAPI.Models;
 using Aleph1.Skeletons.WebAPI.WebAPI.Security;
-using Aleph1.WebAPI.ExceptionHandler;
 
 using System.Diagnostics.Contracts;
 using System.Net;
@@ -25,7 +24,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
 
         /// <summary>Login to the APP (use same user and password for successful login. use 'admin' 'admin' for manager).</summary>
         /// <param name="loginModel">Credentials for login</param>
-        [Authenticated(Roles.Anonymous), Logged(LogParameters = false), HttpPost, Route("api/Login"), FriendlyMessage("התרחשה שגיאה בעת ההתחברות")]
+        [Authenticated(Roles.Anonymous), Logged(LogParameters = false), HttpPost, Route("api/Login")]
         public AuthenticationInfo Login(LoginModel loginModel)
         {
             Contract.Requires(loginModel != null);
@@ -41,7 +40,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
         public void RefreshToken() { }
 
         /// <summary>Logout from the application</summary>
-        [Logged, HttpPost, Route("api/Logout"), FriendlyMessage("התרחשה שגיאה בעת ההתנתקות")]
+        [Logged, HttpPost, Route("api/Logout")]
         public HttpResponseMessage Logout()
         {
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.NoContent);

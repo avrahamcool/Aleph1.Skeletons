@@ -1,7 +1,7 @@
 ﻿using Aleph1.Skeletons.WebAPI.Models;
 
 using System;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace Aleph1.Skeletons.WebAPI.BL.Contracts
 {
@@ -14,7 +14,7 @@ namespace Aleph1.Skeletons.WebAPI.BL.Contracts
 
         /// <summary>get a list of all persons</summary>
         /// <returns>all persons</returns>
-        IQueryable<Person> GetPersons();
+        IEnumerable<Person> GetPersons();
 
         /// <summary>get person by ID</summary>
         /// <param name="ID">the ID of the person</param>
@@ -24,7 +24,7 @@ namespace Aleph1.Skeletons.WebAPI.BL.Contracts
         /// <summary>get a list of persons with a name including the search term</summary>
         /// <param name="searchTerm">a string to query against the persons full name</param>
         /// <returns>the persons that include the given query in their name</returns>
-        IQueryable<Person> SearchByName(string searchTerm);
+        IEnumerable<Person> SearchByName(string searchTerm);
 
         /// <summary>Insert a new person</summary>
         /// <param name="personToAdd">the person</param>

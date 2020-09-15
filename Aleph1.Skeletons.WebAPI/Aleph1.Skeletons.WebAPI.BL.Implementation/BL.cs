@@ -5,6 +5,7 @@ using Aleph1.Skeletons.WebAPI.Models;
 using Aleph1.Skeletons.WebAPI.Models.Security;
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Aleph1.Skeletons.WebAPI.BL.Implementation
@@ -26,7 +27,7 @@ namespace Aleph1.Skeletons.WebAPI.BL.Implementation
         }
 
         [Logged]
-        public IQueryable<Person> GetPersons()
+        public IEnumerable<Person> GetPersons()
         {
             return DAL.GetPersons();
         }
@@ -44,7 +45,7 @@ namespace Aleph1.Skeletons.WebAPI.BL.Implementation
         }
 
         [Logged]
-        public IQueryable<Person> SearchByName(string searchTerm)
+        public IEnumerable<Person> SearchByName(string searchTerm)
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
             {
