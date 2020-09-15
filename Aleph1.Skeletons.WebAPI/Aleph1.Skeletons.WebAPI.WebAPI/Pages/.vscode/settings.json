@@ -20,6 +20,7 @@
 	"eslint.packageManager": "yarn",
 	"editor.renameOnType": true,
 	"cSpell.words": [
+		"Notyf",
 		"autoinject"
 	]
 }
