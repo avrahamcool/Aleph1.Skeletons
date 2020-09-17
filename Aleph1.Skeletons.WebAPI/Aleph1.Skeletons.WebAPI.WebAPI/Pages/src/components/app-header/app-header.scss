@@ -1,16 +1,3 @@
-
-.app-header
-{
-	background-color: var(--primary-color-dark);
-	color: var(--primary-color-text);
-	a{
-		color: var(--primary-color-text);
-	}
-	a:not(.app-active)
-	{
-		text-decoration: none;
-	}
-}
 .app-logo-img
 {
 	max-width: 3rem;

@@ -1,24 +1,7 @@
 @import "notyf/notyf.min.css";
-@import "aleph1-layout/src/scss/main";
+@import "ag-grid-community/dist/styles/ag-grid.min.css";
+@import "ag-grid-community/dist/styles/ag-theme-balham.min.css";
 
-:root{
-	--primary-color-dark:	#303F9F;
-	--primary-color:		#3F51B5;
-	--primary-color-light:  #C5CAE9;
-	--primary-color-text:   #FFFFFF;
-	--accent-color:         #FF5722;
-	--primary-text-color:   #212121;
-	--secondary-text-color: #757575;
-	--divider-color:        #BDBDBD;
-}
-
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
-html, body {
-	height: 100%;
-	font-family: 'Assistant', sans-serif;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

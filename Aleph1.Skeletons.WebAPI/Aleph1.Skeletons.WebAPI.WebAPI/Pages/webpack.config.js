@@ -28,9 +28,10 @@ const cssRules = [
 	{
 		loader: "postcss-loader",
 		options: {
-			plugins: () => [
-				require("autoprefixer")(),
-				require("cssnano")()
+			plugins: [
+				require("tailwindcss"),
+				require("autoprefixer"),
+				require("cssnano")
 			]
 		}
 	}
