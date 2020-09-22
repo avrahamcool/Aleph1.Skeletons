@@ -1,15 +1,22 @@
-﻿namespace Aleph1.Skeletons.WebAPI.Models
+﻿using System;
+
+namespace Aleph1.Skeletons.WebAPI.Models
 {
-    /// <summary>נתוני אדם</summary>
+    /// <summary>person details</summary>
     public class Person
     {
-        /// <summary>מזהה</summary>
+        /// <summary>auto increment (1, 1)</summary>
         public int ID { get; set; }
 
-        /// <summary>שם פרטי</summary>
+        /// <summary>first name</summary>
+        /// <remarks>256 max length</remarks>
         public string FirstName { get; set; }
 
-        /// <summary>שם משפחה</summary>
+        /// <summary>last name</summary>
+        /// <remarks>256 max length</remarks>
         public string LastName { get; set; }
+
+        /// <summary>birth date</summary>
+        public DateTimeOffset BirthDate { get; set; }
     }
 }

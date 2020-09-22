@@ -1,6 +1,7 @@
 ﻿using Aleph1.Skeletons.WebAPI.DAL.Contracts;
 using Aleph1.Skeletons.WebAPI.Models;
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,8 +13,8 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Mock
         private readonly List<Person> persons = new List<Person>();
         public DALMock()
         {
-            InsertPerson(new Person() { FirstName = "אברהם", LastName = "אסודרי" });
-            InsertPerson(new Person() { FirstName = "Avraham", LastName = "Essoudry" });
+            InsertPerson(new Person() { FirstName = "אברהם", LastName = "אסודרי", BirthDate = DateTimeOffset.Now });
+            InsertPerson(new Person() { FirstName = "Avraham", LastName = "Essoudry", BirthDate = new DateTimeOffset(1989, 1, 1, 0, 0, 0, TimeSpan.Zero) });
         }
 
         public void SaveChanges(string username) { }

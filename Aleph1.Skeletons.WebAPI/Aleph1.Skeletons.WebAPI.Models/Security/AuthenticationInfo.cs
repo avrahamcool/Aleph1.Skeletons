@@ -8,7 +8,7 @@
         /// <summary>indicating authorization roles this user have.</summary>
         public Roles Roles { get; set; }
 
-        /// <summary>the username</summary>
+        /// <summary>the user-name</summary>
         public string Username { get; set; }
     }
 }

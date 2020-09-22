@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace Aleph1.Skeletons.WebAPI.Security.Implementation
 {
-    /// <summary>Handle settings from config</summary>
+    /// <summary>Handle settings from web.config</summary>
     internal static class SettingsManager
     {
         // randomly generated GUID for each project - you can change this to whatever you want

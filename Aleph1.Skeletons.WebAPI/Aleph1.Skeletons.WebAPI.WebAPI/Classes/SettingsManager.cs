@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Aleph1.Skeletons.WebAPI.WebAPI.Classes
 {
-    /// <summary>Handle settings from config</summary>
+    /// <summary>Handle settings from web.config</summary>
     internal static class SettingsManager
     {
         private static string _environment;

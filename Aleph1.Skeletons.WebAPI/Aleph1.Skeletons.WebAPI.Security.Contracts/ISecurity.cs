@@ -20,7 +20,7 @@ namespace Aleph1.Skeletons.WebAPI.Security.Contracts
         #endregion GeneralAuth
 
         /// <summary>Generate a AuthenticationInfo based on the given credentials</summary>
-        /// <param name="username">the username</param>
+        /// <param name="username">the user-name</param>
         /// <param name="password">the password</param>
         /// <returns>an AuthenticationInfo representing the credentials of the user</returns>
         AuthenticationInfo Login(string username, string password);

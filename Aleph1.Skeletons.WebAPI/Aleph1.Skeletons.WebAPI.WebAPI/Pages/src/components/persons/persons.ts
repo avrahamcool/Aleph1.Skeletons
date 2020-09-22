@@ -1,9 +1,22 @@
+import { autoinject } from "aurelia-framework";
+import { PersonService } from "./person-service";
 import { ComposeCellRenderer } from "resources/elements/compose-cell-renderer";
 import { ColDef, Grid, GridOptions } from "ag-grid-community";
 import { Cell } from "./cell";
+import { PersonModel } from "./person-model";
 
+@autoinject
 export class Persons
 {
+	constructor(private personService: PersonService)
+	{ }
+
+	persons: PersonModel[];
+	activate()
+	{
+		this.personService.getPersons()
+			.then(persons => this.persons = persons);
+	}
 	columnDefs: ColDef[] = [
 		{ headerName: "Make", field: "make" },
 		{ headerName: "Model", field: "model" },
