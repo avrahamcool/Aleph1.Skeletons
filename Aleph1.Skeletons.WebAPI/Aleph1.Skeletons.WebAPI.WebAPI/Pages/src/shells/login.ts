@@ -4,10 +4,15 @@ import { LoginModel } from "resources/models";
 import { handleErrors } from "resources/decorators/handle-errors";
 
 @autoinject
-export class LoginSell
+export class LoginShell
 {
 	credentials: LoginModel = new LoginModel();
 	constructor(public userService: UserService) { }
+
+	public activate(): void
+	{
+		this.credentials.password = "";
+	}
 
 	@computedFrom("credentials.username", "credentials.password")
 	public get loginDisabled(): boolean

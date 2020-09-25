@@ -6,7 +6,7 @@ import { Router, RouterConfiguration, NavigationInstruction, Next } from "aureli
 
 
 @autoinject
-export class App
+export class AppShell
 {
 	constructor(private au: Aurelia, private userService: UserService, private router: Router)
 	{ }

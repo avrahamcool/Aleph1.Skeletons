@@ -3,12 +3,13 @@
 		<form submit.delegate="login()" class="m-auto rounded shadow-lg p-4 flex flex-col gap-4">
 			<label class="flex gap-4 justify-between items-center">
 				<span>Username:</span>
-				<input autocomplete="username" value.bind="credentials.username"
+				<input focus.one-time="!credentials.username" autocomplete="username" value.bind="credentials.username"
 					class="focus:outline-none border border-gray-300 focus:border-gray-600 py-2 px-4 appearance-none leading-normal" />
 			</label>
 			<label class="flex gap-4 justify-between items-center">
 				<span>Password:</span>
-				<input type="password" autocomplete="current-password" value.bind="credentials.password"
+				<input focus.one-time="credentials.username" type="password" autocomplete="current-password"
+					value.bind="credentials.password"
 					class="focus:outline-none border border-gray-300 focus:border-gray-600 py-2 px-4 appearance-none leading-normal" />
 			</label>
 			<button disabled.bind="loginDisabled"
