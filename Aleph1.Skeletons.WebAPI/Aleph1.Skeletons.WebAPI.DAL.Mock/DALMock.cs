@@ -13,8 +13,8 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Mock
         private readonly List<Person> persons = new List<Person>();
         public DALMock()
         {
-            InsertPerson(new Person() { FirstName = "אברהם", LastName = "אסודרי", BirthDate = DateTimeOffset.Now });
-            InsertPerson(new Person() { FirstName = "Avraham", LastName = "Essoudry", BirthDate = new DateTimeOffset(1989, 1, 1, 0, 0, 0, TimeSpan.Zero) });
+            InsertPerson(new Person() { FirstName = "Avraham", LastName = "Essoudry", Gender = Genders.Male, BirthDate = DateTimeOffset.Now });
+            InsertPerson(new Person() { FirstName = "Some", LastName = "Body", Gender = Genders.Female, BirthDate = new DateTimeOffset(1989, 1, 1, 0, 0, 0, TimeSpan.Zero) });
         }
 
         public void SaveChanges(string username) { }

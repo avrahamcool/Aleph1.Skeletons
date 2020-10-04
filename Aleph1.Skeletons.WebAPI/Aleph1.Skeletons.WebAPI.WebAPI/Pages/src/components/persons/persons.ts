@@ -1,3 +1,5 @@
+import { PLATFORM } from "aurelia-pal";
+import { ComposeCellRenderer } from "./../../resources/elements/compose-cell-renderer";
 import { SelectedRowsStatus } from "resources/elements/selected-rows-status";
 import { ComposeStatusPanel } from "resources/elements/compose-status-panel";
 import { DateCellEditor } from "resources/elements/date-cell-editor";
@@ -8,6 +10,7 @@ import { PersonModel } from "./person-model";
 import format from "date-fns/format";
 import differenceInYears from "date-fns/differenceInYears";
 import { nameof } from "ts-simple-nameof";
+import * as genderCell from "./cells/gender-cell.html";
 
 @autoinject
 export class Persons
@@ -51,6 +54,12 @@ export class Persons
 					cellRenderer: "agAnimateShowChangeCellRenderer"
 				}
 			]
+		},
+		{
+			headerName: "Gender",
+			field: nameof<PersonModel>(p => p.gender),
+			cellRenderer: ComposeCellRenderer,
+			cellRendererParams: { view: PLATFORM.moduleName("components/persons/cells/gender-cell.html") }
 		},
 		{
 			headerName: "Date",

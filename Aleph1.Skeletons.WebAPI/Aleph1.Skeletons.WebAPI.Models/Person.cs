@@ -18,5 +18,8 @@ namespace Aleph1.Skeletons.WebAPI.Models
 
         /// <summary>birth date</summary>
         public DateTimeOffset BirthDate { get; set; }
+
+        /// <summary>Gender</summary>
+        public Genders Gender { get; set; }
     }
 }

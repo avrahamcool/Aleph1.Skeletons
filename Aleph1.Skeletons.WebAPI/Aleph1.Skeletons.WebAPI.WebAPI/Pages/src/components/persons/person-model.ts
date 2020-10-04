@@ -1,3 +1,4 @@
+import { Genders } from "./gender";
 import { Type } from "class-transformer";
 
 export class PersonModel
@@ -14,4 +15,6 @@ export class PersonModel
 	/** birth date */
 	@Type(() => Date)
 	public birthDate: Date;
+
+	public gender: Genders;
 }
