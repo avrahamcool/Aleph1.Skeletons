@@ -1,13 +1,13 @@
-import { ICellRendererComp, ICellRendererParams } from "ag-grid-community";
+import { IStatusPanelComp, IStatusPanelParams } from "ag-grid-community";
 import { TemplatingEngine, View, Container } from "aurelia-framework";
 
-export class ComposeCellRenderer implements ICellRendererComp
+export class ComposeStatusPanel implements IStatusPanelComp
 {
 	private templatingEngine: TemplatingEngine;
-	private params: ICellRendererParams;
+	private params: IStatusPanelParams;
 	private enhancedView: View;
 
-	init?(params: ICellRendererParams): void
+	init?(params: IStatusPanelParams): void
 	{
 		this.templatingEngine = Container.instance.get(TemplatingEngine);
 		this.params = params;
@@ -19,19 +19,14 @@ export class ComposeCellRenderer implements ICellRendererComp
 		compose.setAttribute("view-model.bind", "viewModel");
 		compose.setAttribute("view.bind", "view");
 		compose.setAttribute("model.bind", "$this");
-		compose.classList.add("block", "h-full");
+		compose.classList.add("block", "h-full", "py-2");
 
 		// element = <compose view-model.bind="viewModel" view.bind="view" model.bind="model"></compose>
 		this.enhancedView = this.templatingEngine.enhance({ element: compose, bindingContext: this.params });
 		return compose;
 	}
 
-	refresh(): boolean
-	{
-		return true;
-	}
-
-	destroy(): void
+	destroy?(): void
 	{
 		this.enhancedView.detached();
 		this.enhancedView.unbind();

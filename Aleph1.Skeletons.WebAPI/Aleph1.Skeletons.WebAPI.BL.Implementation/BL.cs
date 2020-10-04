@@ -73,6 +73,7 @@ namespace Aleph1.Skeletons.WebAPI.BL.Implementation
             {
                 target.FirstName = personToUpdate.FirstName;
                 target.LastName = personToUpdate.LastName;
+                target.BirthDate = personToUpdate.BirthDate;
 
                 DAL.SaveChanges(CurrentUser?.Username);
             }

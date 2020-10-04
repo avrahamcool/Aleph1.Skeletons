@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { UserService } from "resources/services";
 import { Aurelia } from "aurelia-framework";
 import { PLATFORM } from "aurelia-pal";

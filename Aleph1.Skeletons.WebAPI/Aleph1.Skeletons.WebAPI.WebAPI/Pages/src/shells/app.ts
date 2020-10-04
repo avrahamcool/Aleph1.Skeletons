@@ -3,7 +3,7 @@ import { Roles } from "resources/models";
 import { UserService } from "resources/services";
 import { PLATFORM } from "aurelia-pal";
 import { Router, RouterConfiguration, NavigationInstruction, Next } from "aurelia-router";
-
+import "ag-grid-enterprise";
 
 @autoinject
 export class AppShell

@@ -1,14 +1,7 @@
+import { Type } from "class-transformer";
+
 export class PersonModel
 {
-	constructor(fromServer?: PersonModel)
-	{
-		if (fromServer)
-		{
-			Object.assign(this, fromServer);
-			this.birthDate = fromServer.birthDate && new Date(fromServer.birthDate);
-		}
-	}
-
 	/** auto increment (1, 1) */
 	public id: number;
 
@@ -19,5 +12,6 @@ export class PersonModel
 	public lastName: string;
 
 	/** birth date */
+	@Type(() => Date)
 	public birthDate: Date;
 }

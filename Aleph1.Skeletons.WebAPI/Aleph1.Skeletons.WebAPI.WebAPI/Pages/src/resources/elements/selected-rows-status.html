@@ -1,0 +1,6 @@
+<template class="test">
+	<span>Selected:</span>
+	<span class="ag-status-name-value-value">${selected.length}</span>
+	<button click.delegate="deleteSelected()" disabled.bind="!selected.length"
+		class="bg-blue-500 font-semibold ${selected.length ? 'hover:bg-blue-700 text-white' : 'opacity-50 text-white cursor-not-allowed'}">delete</button>
+</template>

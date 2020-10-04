@@ -21,6 +21,7 @@
 	"editor.renameOnType": true,
 	"cSpell.words": [
 		"Notyf",
-		"autoinject"
+		"autoinject",
+		"nameof"
 	]
 }
