@@ -10,7 +10,6 @@ import { PersonModel } from "./person-model";
 import format from "date-fns/format";
 import differenceInYears from "date-fns/differenceInYears";
 import { nameof } from "ts-simple-nameof";
-import * as genderCell from "./cells/gender-cell.html";
 
 @autoinject
 export class Persons
