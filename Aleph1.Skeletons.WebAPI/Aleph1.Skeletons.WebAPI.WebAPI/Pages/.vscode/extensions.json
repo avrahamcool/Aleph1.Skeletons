@@ -9,6 +9,8 @@
 		"oderwat.indent-rainbow",
 		"ritwickdey.liveserver",
 		"steoates.autoimport",
-		"streetsidesoftware.code-spell-checker"
+		"streetsidesoftware.code-spell-checker",
+		"janne252.fontawesome-autocomplete",
+		"bradlc.vscode-tailwindcss"
 	]
 }
