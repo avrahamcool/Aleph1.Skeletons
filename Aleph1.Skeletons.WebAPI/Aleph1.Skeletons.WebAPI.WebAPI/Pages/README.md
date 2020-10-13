@@ -1,4 +1,4 @@
-# `without-tests`
+# `Aleph1.Skeletons.WebAPI.Pages`
 
 This project is bootstrapped by [aurelia-cli](https://github.com/aurelia/cli).
 
@@ -20,8 +20,6 @@ To change dev server host, do `npm start -- --host 127.0.0.1`
 
 **PS:** You could mix all the flags as well, `npm start -- --host 127.0.0.1 --port 7070 --open --hmr`
 
-For long time aurelia-cli user, you can still use `au run` with those arguments like `au run --env prod --open --hmr`. But `au run` now simply executes `npm start` command.
-
 ## Build for production
 
-Run `npm run build`, or the old way `au build --env prod`.
+Run `npm run build`.
