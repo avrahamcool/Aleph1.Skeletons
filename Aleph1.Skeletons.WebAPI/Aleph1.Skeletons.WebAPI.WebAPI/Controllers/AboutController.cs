@@ -12,7 +12,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
     public class AboutController : ApiController
     {
         /// <summary>Get data about the current API and user</summary>
-        [Logged, HttpGet, Route("api/About")]
+        [Logged, HttpGet, Route("api/about")]
         public AboutModel About()
         {
             return new AboutModel()

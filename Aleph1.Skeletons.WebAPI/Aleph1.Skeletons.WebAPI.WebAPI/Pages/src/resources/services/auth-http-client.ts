@@ -19,7 +19,7 @@ export class AuthHttpClient extends HttpClient
 	{
 		clearTimeout(this.inactiveSessionTimeoutHandler);
 	}
-	private refreshToken = () => this.fetch("/api/RefreshToken");
+	private refreshToken = () => this.post("/api/refresh-token");
 
 	constructor()
 	{

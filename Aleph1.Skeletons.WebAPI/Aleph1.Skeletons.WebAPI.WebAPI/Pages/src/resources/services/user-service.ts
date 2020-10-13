@@ -83,7 +83,7 @@ export class UserService
 
 	public login(credentials: LoginModel): Promise<void>
 	{
-		return this.httpClient.post("/api/Login", json(credentials))
+		return this.httpClient.post("/api/login", json(credentials))
 			.then(resp => resp.json())
 			.then((authInfo: AuthenticationInfo) => this.authenticationInfo = authInfo)
 			.then(() => this.au.setRoot(PLATFORM.moduleName("shells/app")))
@@ -92,7 +92,7 @@ export class UserService
 
 	public logout(): Promise<void>
 	{
-		return this.httpClient.post("/api/Logout")
+		return this.httpClient.post("/api/logout")
 			.then(() => this.authenticationInfo = null)
 			.then(() => this.router.navigate("", { replace: true, trigger: false }))
 			.then(() => this.au.setRoot(PLATFORM.moduleName("shells/login")))

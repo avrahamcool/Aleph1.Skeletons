@@ -12,14 +12,14 @@ export class PersonService
 
 	public getPersons(): Promise<PersonModel[]>
 	{
-		return this.httpClient.get("/api/Persons")
+		return this.httpClient.get("/api/persons")
 			.then(resp => resp.json())
 			.then((fromServer: PersonModel[]) => plainToClass(PersonModel, fromServer));
 	}
 
 	public updatePerson(toUpdate: PersonModel): Promise<PersonModel>
 	{
-		return this.httpClient.put(`/api/Persons/${ toUpdate.id }`, json(toUpdate))
+		return this.httpClient.put(`/api/persons/${ toUpdate.id }`, json(toUpdate))
 			.then(resp => resp.json())
 			.then((fromServer: PersonModel) => plainToClass(PersonModel, fromServer));
 	}
