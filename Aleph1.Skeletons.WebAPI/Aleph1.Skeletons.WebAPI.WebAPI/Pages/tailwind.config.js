@@ -4,7 +4,7 @@ module.exports = {
 		purgeLayersByDefault: true,
 	},
 	purge: {
-		enabled: true,
+		enabled: true,	//true in prod, false otherwise (changed inside webpack.config)
 		content: [
 			"./index.ejs",
 			"./src/**/*.html",
