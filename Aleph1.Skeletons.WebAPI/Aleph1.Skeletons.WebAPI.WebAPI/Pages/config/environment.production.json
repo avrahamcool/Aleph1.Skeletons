@@ -1,7 +1,0 @@
-{
-	"debug": false,
-	"testing": false,
-	"apiBaseUrl": "",
-	"idleDurationUntilWarningMin": 14,
-	"idleWarningDurationSec": 30
-}

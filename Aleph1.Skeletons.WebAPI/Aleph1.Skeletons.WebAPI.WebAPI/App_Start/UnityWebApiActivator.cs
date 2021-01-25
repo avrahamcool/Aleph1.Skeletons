@@ -1,3 +1,8 @@
+using System;
+using System.Reflection;
+using System.Web;
+using System.Web.Http;
+
 using Aleph1.DI.Contracts;
 using Aleph1.DI.UnityImplementation;
 using Aleph1.Skeletons.WebAPI.Models.Security;
@@ -9,11 +14,6 @@ using Aleph1.Skeletons.WebAPI.WebAPI.Security;
 using FluentValidation;
 using FluentValidation.WebApi;
 
-using System;
-using System.Reflection;
-using System.Web;
-using System.Web.Http;
-
 using Unity;
 using Unity.AspNet.WebApi;
 
@@ -22,41 +22,41 @@ using Unity.AspNet.WebApi;
 
 namespace Aleph1.Skeletons.WebAPI.WebAPI
 {
-    /// <summary>Provides the bootstrapping for integrating Unity with WebApi when it is hosted in ASP.NET.</summary>
-    internal static class UnityWebApiActivator
-    {
-        private static IUnityContainer DIContainer { get; set; }
+	/// <summary>Provides the bootstrapping for integrating Unity with WebApi when it is hosted in ASP.NET.</summary>
+	internal static class UnityWebApiActivator
+	{
+		private static IUnityContainer DIContainer { get; set; }
 
-        /// <summary>Integrates Unity when the application starts.</summary>
-        public static void Start()
-        {
-            // create an empty container
-            DIContainer = new UnityContainer();
+		/// <summary>Integrates Unity when the application starts.</summary>
+		public static void Start()
+		{
+			// create an empty container
+			DIContainer = new UnityContainer();
 
-            // register all your components with the container here
-            ModuleLoader.LoadModulesFromAssemblies(new UnityModuleRegistrar(DIContainer), AppDomain.CurrentDomain.BaseDirectory, SettingsManager.ModulesPath);
+			// register all your components with the container here
+			ModuleLoader.LoadModulesFromAssemblies(new UnityModuleRegistrar(DIContainer), AppDomain.CurrentDomain.BaseDirectory, SettingsManager.BaseModulesDir, SettingsManager.ModulesPath);
 
-            //Configure Model Validation to use FluentValidation, with Unity as resolver
-            FluentValidationModelValidatorProvider.Configure(GlobalConfiguration.Configuration, c => c.ValidatorFactory = new UnityValidatorFactory(DIContainer));
+			//Configure Model Validation to use FluentValidation, with Unity as resolver
+			FluentValidationModelValidatorProvider.Configure(GlobalConfiguration.Configuration, c => c.ValidatorFactory = new UnityValidatorFactory(DIContainer));
 
-            //Register all public Validators from this assembly
-            AssemblyScanner.FindValidatorsInAssembly(Assembly.GetExecutingAssembly())
-                .ForEach(validator => DIContainer.RegisterType(validator.InterfaceType, validator.ValidatorType));
+			//Register all public Validators from this assembly
+			AssemblyScanner.FindValidatorsInAssembly(Assembly.GetExecutingAssembly())
+				.ForEach(validator => DIContainer.RegisterType(validator.InterfaceType, validator.ValidatorType));
 
-            DIContainer.RegisterFactory<AuthenticationInfo>(container =>
-            {
-                ISecurity security = container.Resolve<ISecurity>();
-                return HttpContext.Current.Request.GetAuthenticationInfoFromCookie(security);
-            });
+			DIContainer.RegisterFactory<AuthenticationInfo>(container =>
+			{
+				ISecurity security = container.Resolve<ISecurity>();
+				return HttpContext.Current.Request.GetAuthenticationInfoFromCookie(security);
+			});
 
-            // point the WebAPI to use the container
-            GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(DIContainer);
-        }
+			// point the WebAPI to use the container
+			GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(DIContainer);
+		}
 
-        /// <summary>Disposes the Unity container when the application is shut down.</summary>
-        public static void Shutdown()
-        {
-            DIContainer.Dispose();
-        }
-    }
+		/// <summary>Disposes the Unity container when the application is shut down.</summary>
+		public static void Shutdown()
+		{
+			DIContainer.Dispose();
+		}
+	}
 }

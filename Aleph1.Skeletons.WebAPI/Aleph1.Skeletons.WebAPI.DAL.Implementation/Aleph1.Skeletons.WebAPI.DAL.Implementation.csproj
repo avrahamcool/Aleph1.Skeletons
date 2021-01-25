@@ -11,7 +11,7 @@
     <AssemblyName>Aleph1.Skeletons.WebAPI.DAL.Implementation</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <OutputPath>..\Output\$(Configuration)\Modules\</OutputPath>
+    <OutputPath>..\Output\$(Configuration)\Modules\net48</OutputPath>
     <LangVersion>latest</LangVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -61,15 +61,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAL.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Migrations\202006121249558_Initial.cs" />
-    <Compile Include="Migrations\202006121249558_Initial.designer.cs">
-      <DependentUpon>202006121249558_Initial.cs</DependentUpon>
-    </Compile>
+    <Compile Include="GenericContext.cs" />
+    <Compile Include="GenericRepo.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModuleInit.cs" />
-    <Compile Include="PersonContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -84,7 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Aleph1.DI.Contracts">
-      <Version>3.3.2</Version>
+      <Version>4.1.1</Version>
     </PackageReference>
     <PackageReference Include="Aleph1.Logging">
       <Version>6.0.1</Version>
@@ -95,25 +90,20 @@
     <PackageReference Include="EntityFramework">
       <Version>6.4.4</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers">
-      <Version>3.3.0</Version>
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers">
+      <Version>5.0.3</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="NLog">
-      <Version>4.7.4</Version>
+      <Version>4.7.7</Version>
     </PackageReference>
     <PackageReference Include="PostSharp">
-      <Version>6.6.14</Version>
+      <Version>6.8.8</Version>
     </PackageReference>
     <PackageReference Include="TrackerEnabledDbContext">
       <Version>3.8.3</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202006121249558_Initial.resx">
-      <DependentUpon>202006121249558_Initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

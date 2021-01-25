@@ -1,27 +1,20 @@
-﻿using Aleph1.Skeletons.WebAPI.Models;
-
-using System.Data.Entity.Migrations;
-
-namespace Aleph1.Skeletons.WebAPI.DAL.Implementation.Migrations
+﻿namespace Aleph1.Skeletons.WebAPI.DAL.Implementation.Migrations
 {
-    internal sealed class Configuration : DbMigrationsConfiguration<PersonContext>
-    {
-        public Configuration()
-        {
-            AutomaticMigrationsEnabled = false;
-        }
+	using System.Data.Entity.Migrations;
 
-        protected override void Seed(PersonContext context)
-        {
-            //  This method will be called after migrating to the latest version.
+	internal sealed class Configuration : DbMigrationsConfiguration<GenericContext>
+	{
+		public Configuration()
+		{
+			AutomaticMigrationsEnabled = false;
+		}
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
-            //  to avoid creating duplicate seed data.
+		protected override void Seed(GenericContext context)
+		{
+			//  This method will be called after migrating to the latest version.
 
-            context.Persons.AddOrUpdate(new Person() { ID = 1, FirstName = "Avraham", LastName = "Essoudry" });
-            context.Persons.AddOrUpdate(new Person() { ID = 2, FirstName = "MyFirst", LastName = "MyLast" });
-
-            context.SaveChanges("Seed");
-        }
-    }
+			//  You can use the DbSet<T>.AddOrUpdate() helper extension method
+			//  to avoid creating duplicate seed data.
+		}
+	}
 }

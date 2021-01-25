@@ -1,34 +1,39 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>net48</TargetFrameworks>
-    <Version>1.0.0</Version>
-    <Authors>Avraham Essoudry</Authors>
-    <PackageTags>Aleph1.Skeletons.WebAPI Models</PackageTags>
-    <Company>Aleph1</Company>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Copyright>Copyright Aleph1 © 2018</Copyright>
-    <Description>Model classes for Aleph1.Skeletons.WebAPI</Description>
-    <DebugType>full</DebugType>
-    <Configurations>Dev;Prod;Test</Configurations>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net48</TargetFrameworks>
+		<Version>1.0.0</Version>
+		<Authors>Avraham Essoudry</Authors>
+		<PackageTags>Aleph1.Skeletons.WebAPI Models</PackageTags>
+		<Company>Aleph1</Company>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<Copyright>Copyright Aleph1 © 2018</Copyright>
+		<Description>Model classes for Aleph1.Skeletons.WebAPI</Description>
+		<DebugType>full</DebugType>
+		<Configurations>Dev;Prod;Test</Configurations>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <DocumentationFile>..\Output\$(Configuration)\Documentation\$(MSBuildProjectName).xml</DocumentationFile>
-    <OutputPath>bin\$(Configuration)</OutputPath>
-    <LangVersion>latest</LangVersion>
-  </PropertyGroup>
+	<PropertyGroup>
+		<DocumentationFile>..\Output\$(Configuration)\Documentation\$(MSBuildProjectName).xml</DocumentationFile>
+		<OutputPath>bin\$(Configuration)</OutputPath>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dev|AnyCPU'">
-    <DefineConstants>DEBUG;TRACE;DEV</DefineConstants>
-    <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dev|AnyCPU'">
+		<DefineConstants>DEBUG;TRACE;DEV</DefineConstants>
+		<DebugSymbols>true</DebugSymbols>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Models\" />
+		<Folder Include="Enums\" />
+	</ItemGroup>
 
 </Project>
