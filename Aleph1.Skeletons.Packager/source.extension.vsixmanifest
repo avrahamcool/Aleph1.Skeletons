@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="6DBE7E10-35CF-444F-93A1-AD1B2B4119DE" Version="3.0.4" Language="en-US" Publisher="Avraham Essoudry" />
+        <Identity Id="6DBE7E10-35CF-444F-93A1-AD1B2B4119DE" Version="4.0.0" Language="en-US" Publisher="Avraham Essoudry" />
         <DisplayName>Aleph1.Skeletons</DisplayName>
         <Description xml:space="preserve">WebAPI skeleton includes Auth, Logging, Exception Handling, ModelValidation, Swagger, full N-TIER with DI.</Description>
         <MoreInfo>https://github.com/avrahamcool/Aleph1.Skeletons</MoreInfo>

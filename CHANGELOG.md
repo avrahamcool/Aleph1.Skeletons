@@ -1,3 +1,10 @@
+# 4.0.0
+* all projects changed to new csproj format
+* updated all nugets
+* added client skeleton
+* updated DAL concept
+* updated publish concept
+
 # 3.0.4
 * [WebAPI] fix loading issue right after creating new project
 * [Layer] fix layer project name when the root folder name was changed. closes: https://github.com/avrahamcool/Aleph1.Skeletons/issues/160
