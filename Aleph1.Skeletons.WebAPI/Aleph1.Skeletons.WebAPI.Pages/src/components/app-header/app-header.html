@@ -1,0 +1,17 @@
+<template class="bg-indigo-600 text-white flex p-4 gap-4 justify-between items-center">
+	<div class="flex gap-4 items-center">
+		<img class="w-12" src="./app-logo.png" />
+		<span>My Demo App</span>
+	</div>
+	<nav class="flex gap-4 items-center">
+		<a repeat.for="route of router.navigation | allowedRoutes:userService.authenticationInfo.roles"
+			href.bind="route.href" class="${route.isActive ? 'underline' : ''}">
+			${route.title}
+		</a>
+	</nav>
+	<div class="flex gap-4 items-center">
+		<span>hello ${userService.authenticationInfo.username} -
+			${Roles[userService.authenticationInfo.roles]}</span>
+		<a href="#" click.delegate="logout()">logout</a>
+	</div>
+</template>

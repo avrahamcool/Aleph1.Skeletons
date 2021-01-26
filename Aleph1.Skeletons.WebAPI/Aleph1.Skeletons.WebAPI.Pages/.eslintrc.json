@@ -1,0 +1,65 @@
+{
+	"root": true,
+	"env": {
+		"es6": true,
+		"browser": true,
+		"node": true
+	},
+	"parser": "@typescript-eslint/parser",
+	"plugins": [
+		"@typescript-eslint"
+	],
+	"extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/eslint-recommended",
+		"plugin:@typescript-eslint/recommended"
+	],
+	"parserOptions": {
+		"ecmaVersion": 2019,
+		"sourceType": "module",
+		"tsconfigRootDir": "."
+	},
+	"overrides": [
+		{
+			"files": [
+				"*.js",
+				"*.ts"
+			],
+			"parserOptions": {
+				"project": [
+					"./tsconfig.json"
+				]
+			}
+		}
+	],
+	"rules": {
+		"no-console": "warn",
+		"semi": "off",
+		"@typescript-eslint/semi": [
+			"error",
+			"always"
+		],
+		"comma-dangle": [
+			"error",
+			"never"
+		],
+		// "@typescript-eslint/comma-dangle": [
+		// 	"error",
+		// 	"never"
+		// ],
+		"indent": "off",
+		"@typescript-eslint/indent": [
+			"error",
+			"tab"
+		],
+		"quotes": "off",
+		"@typescript-eslint/quotes": [
+			"error",
+			"double",
+			{
+				"avoidEscape": true
+			}
+		],
+		"@typescript-eslint/no-var-requires": "off"
+	}
+}

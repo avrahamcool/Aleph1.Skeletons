@@ -1,0 +1,19 @@
+{
+	"recommendations": [
+		"aureliaeffect.aurelia",
+		"editorconfig.editorconfig",
+		"behzad88.aurelia",
+		"christian-kohler.path-intellisense",
+		"coenraads.bracket-pair-colorizer-2",
+		"dbaeumer.vscode-eslint",
+		"oderwat.indent-rainbow",
+		"ritwickdey.liveserver",
+		"steoates.autoimport",
+		"streetsidesoftware.code-spell-checker",
+		"streetsidesoftware.code-spell-checker-hebrew",
+		"natqe.reload",
+		"stylelint.vscode-stylelint",
+		"janne252.fontawesome-autocomplete",
+		"bradlc.vscode-tailwindcss"
+	]
+}

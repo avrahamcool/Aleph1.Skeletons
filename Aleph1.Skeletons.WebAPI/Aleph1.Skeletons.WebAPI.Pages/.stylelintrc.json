@@ -1,0 +1,56 @@
+{
+	"extends": [
+		"stylelint-config-standard",
+		"stylelint-config-sass-guidelines"
+	],
+	"rules": {
+		"color-hex-length": "long",
+		"color-named": null,
+		"font-family-no-missing-generic-family-keyword": [
+			true,
+			{
+				"ignoreFontFamilies": [
+					"Font Awesome 5 Pro"
+				]
+			}
+		],
+		"indentation": "tab",
+		"number-leading-zero": "never",
+		"unit-allowed-list": [
+			"rem",
+			"em",
+			"fr",
+			"px",
+			"%",
+			"s"
+		],
+		"selector-max-id": 1,
+		"selector-max-compound-selectors": 8,
+		"max-nesting-depth": 8,
+		"string-quotes": "double",
+		"selector-no-qualifying-type": null,
+		"selector-type-no-unknown": [
+			true,
+			{
+				"ignoreTypes": [
+					"router-view"
+				]
+			}
+		],
+		"scss/at-rule-no-unknown": [
+			true,
+			{
+				"ignoreAtRules": [
+					"tailwind",
+					"apply",
+					"layer",
+					"variants",
+					"responsive",
+					"screen"
+				]
+			}
+		],
+		"declaration-block-trailing-semicolon": null,
+		"no-descending-specificity": null
+	}
+}
