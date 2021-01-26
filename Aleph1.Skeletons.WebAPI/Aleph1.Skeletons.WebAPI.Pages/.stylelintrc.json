@@ -15,15 +15,6 @@
 			}
 		],
 		"indentation": "tab",
-		"number-leading-zero": "never",
-		"unit-allowed-list": [
-			"rem",
-			"em",
-			"fr",
-			"px",
-			"%",
-			"s"
-		],
 		"selector-max-id": 1,
 		"selector-max-compound-selectors": 8,
 		"max-nesting-depth": 8,
