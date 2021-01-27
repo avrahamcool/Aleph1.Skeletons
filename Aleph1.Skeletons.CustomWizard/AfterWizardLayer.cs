@@ -1,34 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
-using EnvDTE;
+﻿using EnvDTE;
 
 using EnvDTE80;
 
 using Microsoft.VisualStudio.TemplateWizard;
 
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
 namespace Aleph1.Skeletons.CustomWizard
 {
-	public class AfterWizardLayer : IWizard
+    public class AfterWizardLayer : IWizard
 	{
 		private DTE2 dte;
 		private Solution2 solution;
 		private string selectedFolderName;
 		private string pathToNewSolution;
 		private string pathToOldSolution;
-		private List<string> projectsToAdd;
+
+		private string webApiUniqueID;
+		private string[] newProjectsUniqueIds;
+		private string[] newProjectsPathToAdd;
 
 		public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
 		{
+			string NameToUniqueName(string projectPrefix, string projectName)
+			{
+				return $@"{projectPrefix}.{projectName}\{projectPrefix}.{projectName}.csproj";
+			}
+
 			dte = (DTE2)automationObject;
 			solution = (Solution2)(dte.Solution);
 
+			string solutionPrefix = replacementsDictionary["$specifiedsolutionname$"];
 			string destinationDirectory = replacementsDictionary["$destinationdirectory$"];
-			string solutionName = replacementsDictionary["$safeprojectname$"];
+			string newProjectsPrefix = replacementsDictionary["$safeprojectname$"];
 
-			pathToNewSolution = Path.Combine(destinationDirectory, solutionName + ".sln");
+			webApiUniqueID = NameToUniqueName(solutionPrefix, "WebAPI");
+
+			pathToNewSolution = Path.Combine(destinationDirectory, newProjectsPrefix + ".sln");
 			pathToOldSolution = Directory.EnumerateFiles(destinationDirectory, "*.sln").FirstOrDefault(path => path != pathToNewSolution);
 
 			//if a folder is selected - we will add the project to that folder
@@ -39,12 +50,14 @@ namespace Aleph1.Skeletons.CustomWizard
 				solution.SaveAs(pathToOldSolution);
 				solution.Close();
 
-				projectsToAdd = new List<string>()
-				{
-					Path.Combine(destinationDirectory, solutionName + ".Contracts", solutionName + ".Contracts.csproj"),
-					Path.Combine(destinationDirectory, solutionName + ".Implementation", solutionName + ".Implementation.csproj"),
-					Path.Combine(destinationDirectory, solutionName + ".Mock", solutionName + ".Mock.csproj")
+				string[] newLayerProjects = new[] {
+					"Contracts",
+					"Implementation",
+					"Mock"
 				};
+
+				newProjectsUniqueIds = newLayerProjects.Select(name => NameToUniqueName(newProjectsPrefix, name)).ToArray();
+				newProjectsPathToAdd = newProjectsUniqueIds.Select(uniqueId => Path.Combine(destinationDirectory, uniqueId)).ToArray();
 			}
 		}
 		public void RunFinished()
@@ -62,13 +75,21 @@ namespace Aleph1.Skeletons.CustomWizard
 				if (selectedProj != null)
 				{
 					SolutionFolder selectedFolder = (SolutionFolder)(selectedProj.Object);
-					foreach (string projPath in projectsToAdd)
+					foreach (string projPath in newProjectsPathToAdd)
 					{
 						selectedFolder.AddFromFile(projPath);
 					}
 				}
 			}
-			BuildDependencies dep = solution.SolutionBuild.BuildDependencies;
+            
+			BuildDependency webApiDependencies = solution.SolutionBuild.BuildDependencies.Item(webApiUniqueID);
+			if(webApiDependencies != default)
+            {
+				foreach (string projUniqueID in newProjectsUniqueIds)
+				{
+					webApiDependencies.AddProject(projUniqueID);
+				}
+			}
 		}
 
 		public void BeforeOpeningFile(ProjectItem projectItem)
