@@ -1,17 +1,17 @@
-﻿using EnvDTE;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+using EnvDTE;
 
 using EnvDTE80;
 
 using Microsoft.VisualStudio.TemplateWizard;
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
 namespace Aleph1.Skeletons.CustomWizard
 {
-    public class AfterWizardLayer : IWizard
+	public class AfterWizardLayer : IWizard
 	{
 		private DTE2 dte;
 		private Solution2 solution;
@@ -81,10 +81,10 @@ namespace Aleph1.Skeletons.CustomWizard
 					}
 				}
 			}
-            
+
 			BuildDependency webApiDependencies = solution.SolutionBuild.BuildDependencies.Item(webApiUniqueID);
-			if(webApiDependencies != default)
-            {
+			if (webApiDependencies != default)
+			{
 				foreach (string projUniqueID in newProjectsUniqueIds)
 				{
 					webApiDependencies.AddProject(projUniqueID);

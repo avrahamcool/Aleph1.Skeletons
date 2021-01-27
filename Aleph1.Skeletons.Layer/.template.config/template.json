@@ -1,7 +1,9 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "Avraham Essoudry",
-  "classifications": [ "Layer" ],
+  "classifications": [
+    "Layer"
+  ],
   "description": "Create an Aleph1 Layer including Contract, Implementation and Mock.",
   "name": "Aleph1.Layer",
   "defaultName": "Aleph1.Layer",
@@ -29,14 +31,13 @@
       "path": "Aleph1.Skeletons.Layer.Mock\\Aleph1.Skeletons.Layer.Mock.csproj"
     }
   ],
-
   "sources": [
     {
       "exclude": [
         "**/[Bb]in/**",
         "**/[Oo]bj/**",
-		"Output/**",
-		"packages/**",
+        "Output/**",
+        "packages/**",
         ".template.config/**/*",
         "**/*.filelist",
         "**/*.lock.json"
