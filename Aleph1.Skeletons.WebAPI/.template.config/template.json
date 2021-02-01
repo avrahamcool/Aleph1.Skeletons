@@ -1,80 +1,97 @@
 {
-  "$schema": "http://json.schemastore.org/template",
-  "author": "Avraham Essoudry",
-  "classifications": [ "WebAPI", "N-Tier" ],
-  "description": "WebAPI skeleton including Auth, Logging, Exception Handling, Swagger, full N-Tier with DI",
-  "name": "Aleph1.WebAPI",
-  "defaultName": "Aleph1.WebAPI",
-  "identity": "Aleph1.Skeletons.WebAPI",
-  "groupIdentity": "Aleph1.Skeletons.WebAPI",
-  "tags": {
-    "language": "C#",
-    "type": "project"
-  },
-  "shortName": "api",
-  "sourceName": "Aleph1.Skeletons.WebAPI",
-  "guids": [
-    "{45DDD773-6F76-4256-8071-9C6586EBA491}",	//WebAPI
-	"{0EE6E959-5BA0-4C79-9A9E-33F0B8FC43B0}",	//Pages
-    "{C171FE63-5703-4FAB-8C23-272B11851D28}",	//Models
-    "{73C0B117-488E-4A38-87FA-9A2943F444BC}",	//DAL.Contracts
-    "{E3936829-7BCD-4E05-A38F-95BE9BF28763}",	//DAL.Implementation
-    "{6564AE7C-6D6A-4E5D-B2F9-A5645EF9FE81}",	//DAL.Mock
-    "{2C46A29D-53DF-4908-A3B0-765DEC8E9F61}",	//BL.Contracts
-    "{3019CA45-A22F-4C17-98F5-480763CFB5C0}",	//BL.Implementation
-    "{5C88D276-6708-40E7-B3D0-AFAD5189B497}",	//Security.Contracts
-    "{E6DBED51-DACC-4493-B6B0-5F6BF63EE105}",	//Security.Implementation
-    "{58C18708-6523-4AFC-A7A2-DBD8715FF6D2}",	//Security.Mock
-    "{5BEE28FC-635A-4BB3-A82F-611BB51900F9}"	//Secret for AppPrefix
-  ],
-  "primaryOutputs": [
-    {
-      "path": "Aleph1.Skeletons.WebAPI.WebAPI\\Aleph1.Skeletons.WebAPI.WebAPI.csproj"
-    },
-    {
-      "path": "Aleph1.Skeletons.WebAPI.Models\\Aleph1.Skeletons.WebAPI.Models.csproj"
-    },
-    {
-      "path": "Aleph1.Skeletons.WebAPI.DAL.Contracts\\Aleph1.Skeletons.WebAPI.DAL.Contracts.csproj"
-    },
-    {
-      "path": "Aleph1.Skeletons.WebAPI.DAL.Implementation\\Aleph1.Skeletons.WebAPI.DAL.Implementation.csproj"
-    },
-    {
-      "path": "Aleph1.Skeletons.WebAPI.DAL.Mock\\Aleph1.Skeletons.WebAPI.DAL.Mock.csproj"
-    },
-    {
-      "path": "Aleph1.Skeletons.WebAPI.BL.Contracts\\Aleph1.Skeletons.WebAPI.BL.Contracts.csproj"
-    },
-    {
-      "path": "Aleph1.Skeletons.WebAPI.BL.Implementation\\Aleph1.Skeletons.WebAPI.BL.Implementation.csproj"
-    },
-    {
-      "path": "Aleph1.Skeletons.WebAPI.Security.Contracts\\Aleph1.Skeletons.WebAPI.Security.Contracts.csproj"
-    },
-    {
-      "path": "Aleph1.Skeletons.WebAPI.Security.Implementation\\Aleph1.Skeletons.WebAPI.Security.Implementation.csproj"
-    },
-    {
-      "path": "Aleph1.Skeletons.WebAPI.Security.Mock\\Aleph1.Skeletons.WebAPI.Security.Mock.csproj"
-    }
-  ],
+	"$schema": "http://json.schemastore.org/template",
+	"author": "Avraham Essoudry",
+	"classifications": [ "WebAPI", "N-Tier" ],
+	"description": "WebAPI skeleton including Auth, Logging, Exception Handling, Swagger, full N-Tier with DI",
+	"name": "Aleph1.WebAPI",
+	"defaultName": "Aleph1.WebAPI",
+	"identity": "Aleph1.Skeletons.WebAPI",
+	"groupIdentity": "Aleph1.Skeletons.WebAPI",
+	"tags": {
+		"language": "C#",
+		"type": "project"
+	},
+	"shortName": "api",
+	"sourceName": "Aleph1.Skeletons.WebAPI",
+	"guids": [
+		"{45DDD773-6F76-4256-8071-9C6586EBA491}", //WebAPI
+		"{0EE6E959-5BA0-4C79-9A9E-33F0B8FC43B0}", //Pages
+		"{C171FE63-5703-4FAB-8C23-272B11851D28}", //Models
+		"{73C0B117-488E-4A38-87FA-9A2943F444BC}", //DAL.Contracts
+		"{E3936829-7BCD-4E05-A38F-95BE9BF28763}", //DAL.Implementation
+		"{6564AE7C-6D6A-4E5D-B2F9-A5645EF9FE81}", //DAL.Mock
+		"{2C46A29D-53DF-4908-A3B0-765DEC8E9F61}", //BL.Contracts
+		"{3019CA45-A22F-4C17-98F5-480763CFB5C0}", //BL.Implementation
+		"{5C88D276-6708-40E7-B3D0-AFAD5189B497}", //Security.Contracts
+		"{E6DBED51-DACC-4493-B6B0-5F6BF63EE105}", //Security.Implementation
+		"{58C18708-6523-4AFC-A7A2-DBD8715FF6D2}", //Security.Mock
+		"{5BEE28FC-635A-4BB3-A82F-611BB51900F9}" //Secret for AppPrefix
+	],
+	"symbols": {
+		"TemplateAuthors": {
+			"type": "parameter",
+			"defaultValue": "Avraham Essoudry",
+			"replaces": "TemplateAuthors"
+		},
+		"TemplateCompany": {
+			"type": "parameter",
+			"defaultValue": "Aleph1",
+			"replaces": "TemplateCompany"
+		},
+		"TemplateYear": {
+			"type": "parameter",
+			"defaultValue": "2021",
+			"replaces": "TemplateYear"
+		}
+	},
+	"primaryOutputs": [
+		{
+			"path": "Aleph1.Skeletons.WebAPI.WebAPI\\Aleph1.Skeletons.WebAPI.WebAPI.csproj"
+		},
+		{
+			"path": "Aleph1.Skeletons.WebAPI.Models\\Aleph1.Skeletons.WebAPI.Models.csproj"
+		},
+		{
+			"path": "Aleph1.Skeletons.WebAPI.DAL.Contracts\\Aleph1.Skeletons.WebAPI.DAL.Contracts.csproj"
+		},
+		{
+			"path": "Aleph1.Skeletons.WebAPI.DAL.Implementation\\Aleph1.Skeletons.WebAPI.DAL.Implementation.csproj"
+		},
+		{
+			"path": "Aleph1.Skeletons.WebAPI.DAL.Mock\\Aleph1.Skeletons.WebAPI.DAL.Mock.csproj"
+		},
+		{
+			"path": "Aleph1.Skeletons.WebAPI.BL.Contracts\\Aleph1.Skeletons.WebAPI.BL.Contracts.csproj"
+		},
+		{
+			"path": "Aleph1.Skeletons.WebAPI.BL.Implementation\\Aleph1.Skeletons.WebAPI.BL.Implementation.csproj"
+		},
+		{
+			"path": "Aleph1.Skeletons.WebAPI.Security.Contracts\\Aleph1.Skeletons.WebAPI.Security.Contracts.csproj"
+		},
+		{
+			"path": "Aleph1.Skeletons.WebAPI.Security.Implementation\\Aleph1.Skeletons.WebAPI.Security.Implementation.csproj"
+		},
+		{
+			"path": "Aleph1.Skeletons.WebAPI.Security.Mock\\Aleph1.Skeletons.WebAPI.Security.Mock.csproj"
+		}
+	],
 
-  "sources": [
-    {
-      "exclude": [
-        "**/[Bb]in/**",
-        "**/[Oo]bj/**",
-        "**/*.user",
-        "Publish*/**",
-        "Output/**",
-        "Logs/**",
-        "Backups/**",
-        "packages/**",
-        ".template.config/**/*",
-        "**/*.filelist",
-        "**/*.lock.json"
-      ]
-    }
-  ]
+	"sources": [
+		{
+			"exclude": [
+				"**/[Bb]in/**",
+				"**/[Oo]bj/**",
+				"**/*.user",
+				"Publish*/**",
+				"Output/**",
+				"Logs/**",
+				"Backups/**",
+				"packages/**",
+				".template.config/**/*",
+				"**/*.filelist",
+				"**/*.lock.json"
+			]
+		}
+	]
 }

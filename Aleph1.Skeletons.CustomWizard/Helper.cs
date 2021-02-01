@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using EnvDTE;
 
@@ -8,6 +9,14 @@ namespace Aleph1.Skeletons.CustomWizard
 {
 	internal static class Helper
 	{
+		public static void EnrichTemplateVariables(this Dictionary<string, string> replacementsDictionary)
+		{
+			// need to add passthrough in order to work
+
+			replacementsDictionary.Add("passthrough:TemplateAuthors", replacementsDictionary["$username$"]);
+			//replacementsDictionary.Add("passthrough:TemplateCompany", "???");
+			replacementsDictionary.Add("passthrough:TemplateYear", replacementsDictionary["$year$"]);
+		}
 		public static Project NavigateProject(this Project p, string projectName)
 		{
 			if (p.Name.Equals(projectName, StringComparison.OrdinalIgnoreCase))

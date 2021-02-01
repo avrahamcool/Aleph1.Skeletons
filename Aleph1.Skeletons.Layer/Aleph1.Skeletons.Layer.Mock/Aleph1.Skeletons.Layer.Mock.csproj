@@ -3,12 +3,12 @@
 	<PropertyGroup>
 		<TargetFrameworks>net48</TargetFrameworks>
 		<Version>1.0.0</Version>
-		<Authors>Avraham Essoudry</Authors>
+		<Authors>TemplateAuthors</Authors>
+		<Company>TemplateCompany</Company>
+		<Copyright>Copyright TemplateCompany © TemplateYear</Copyright>
 		<PackageTags>Aleph1.Skeletons.Layer.Mock</PackageTags>
-		<Company>Aleph1</Company>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<Copyright>Copyright Aleph1 © 2018</Copyright>
-		<Description>Aleph1.Skeletons.Layer.Mock</Description>
+		<Description>Mock for Aleph1.Skeletons.Layer</Description>
 		<DebugType>full</DebugType>
 		<Configurations>Dev;Prod;Test</Configurations>
 	</PropertyGroup>

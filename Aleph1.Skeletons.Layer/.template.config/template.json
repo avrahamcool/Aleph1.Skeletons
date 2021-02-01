@@ -1,47 +1,64 @@
 {
-  "$schema": "http://json.schemastore.org/template",
-  "author": "Avraham Essoudry",
-  "classifications": [
-    "Layer"
-  ],
-  "description": "Create an Aleph1 Layer including Contract, Implementation and Mock.",
-  "name": "Aleph1.Layer",
-  "defaultName": "Aleph1.Layer",
-  "identity": "Aleph1.Skeletons.Layer",
-  "groupIdentity": "Aleph1.Skeletons.Layer",
-  "tags": {
-    "language": "C#",
-    "type": "project"
-  },
-  "shortName": "layer",
-  "sourceName": "Aleph1.Skeletons.Layer",
-  "guids": [
-    "{9586565D-5FAB-434A-87B4-F8BEB5BBB015}", //Layer.Contracts
-    "{C44C841C-AFC1-4A32-8AF7-2FE8A0FCE65E}", //Layer.Implementation
-    "{7EE86318-5634-41F8-9400-41CEC70740D9}", //Layer.Mock
-  ],
-  "primaryOutputs": [
-    {
-      "path": "Aleph1.Skeletons.Layer.Contracts\\Aleph1.Skeletons.Layer.Contracts.csproj"
-    },
-    {
-      "path": "Aleph1.Skeletons.Layer.Implementation\\Aleph1.Skeletons.Layer.Implementation.csproj"
-    },
-    {
-      "path": "Aleph1.Skeletons.Layer.Mock\\Aleph1.Skeletons.Layer.Mock.csproj"
-    }
-  ],
-  "sources": [
-    {
-      "exclude": [
-        "**/[Bb]in/**",
-        "**/[Oo]bj/**",
-        "Output/**",
-        "packages/**",
-        ".template.config/**/*",
-        "**/*.filelist",
-        "**/*.lock.json"
-      ]
-    }
-  ]
+	"$schema": "http://json.schemastore.org/template",
+	"author": "Avraham Essoudry",
+	"classifications": [
+		"Layer"
+	],
+	"description": "Create an Aleph1 Layer including Contract, Implementation and Mock.",
+	"name": "Aleph1.Layer",
+	"defaultName": "Aleph1.Layer",
+	"identity": "Aleph1.Skeletons.Layer",
+	"groupIdentity": "Aleph1.Skeletons.Layer",
+	"tags": {
+		"language": "C#",
+		"type": "project"
+	},
+	"shortName": "layer",
+	"sourceName": "Aleph1.Skeletons.Layer",
+	"guids": [
+		"{9586565D-5FAB-434A-87B4-F8BEB5BBB015}", //Layer.Contracts
+		"{C44C841C-AFC1-4A32-8AF7-2FE8A0FCE65E}", //Layer.Implementation
+		"{7EE86318-5634-41F8-9400-41CEC70740D9}" //Layer.Mock
+	],
+	"symbols": {
+		"TemplateAuthors": {
+			"type": "parameter",
+			"defaultValue": "Avraham Essoudry",
+			"replaces": "TemplateAuthors"
+		},
+		"TemplateCompany": {
+			"type": "parameter",
+			"defaultValue": "Aleph1",
+			"replaces": "TemplateCompany"
+		},
+		"TemplateYear": {
+			"type": "parameter",
+			"defaultValue": "2021",
+			"replaces": "TemplateYear"
+		}
+	},
+	"primaryOutputs": [
+		{
+			"path": "Aleph1.Skeletons.Layer.Contracts\\Aleph1.Skeletons.Layer.Contracts.csproj"
+		},
+		{
+			"path": "Aleph1.Skeletons.Layer.Implementation\\Aleph1.Skeletons.Layer.Implementation.csproj"
+		},
+		{
+			"path": "Aleph1.Skeletons.Layer.Mock\\Aleph1.Skeletons.Layer.Mock.csproj"
+		}
+	],
+	"sources": [
+		{
+			"exclude": [
+				"**/[Bb]in/**",
+				"**/[Oo]bj/**",
+				"Output/**",
+				"packages/**",
+				".template.config/**/*",
+				"**/*.filelist",
+				"**/*.lock.json"
+			]
+		}
+	]
 }

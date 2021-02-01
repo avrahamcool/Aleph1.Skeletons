@@ -1,34 +1,35 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
-	<Version>1.0.0</Version>
-    <Authors>Avraham Essoudry</Authors>
-	<Company>Aleph1</Company>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Copyright>Copyright Aleph1 © 2018</Copyright>
-    <Description>Contracts for Aleph1.Skeletons.Layer</Description>
-    <DebugType>full</DebugType>
-    <Configurations>Dev;Prod;Test</Configurations>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net48</TargetFramework>
+		<Version>1.0.0</Version>
+		<Authors>TemplateAuthors</Authors>
+		<Company>TemplateCompany</Company>
+		<Copyright>Copyright TemplateCompany © TemplateYear</Copyright>
+		<PackageTags>Aleph1.Skeletons.Layer.Contracts</PackageTags>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<Description>Contracts for Aleph1.Skeletons.Layer</Description>
+		<DebugType>full</DebugType>
+		<Configurations>Dev;Prod;Test</Configurations>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <DocumentationFile>..\Output\$(Configuration)\Documentation\$(MSBuildProjectName).xml</DocumentationFile>
-    <OutputPath>bin\$(Configuration)</OutputPath>
-	<LangVersion>latest</LangVersion>
-	<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-  </PropertyGroup>
-  
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dev|AnyCPU'">
-    <DefineConstants>DEBUG;TRACE;DEV</DefineConstants>
-    <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>
-  
-  <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-  
+	<PropertyGroup>
+		<DocumentationFile>..\Output\$(Configuration)\Documentation\$(MSBuildProjectName).xml</DocumentationFile>
+		<OutputPath>bin\$(Configuration)</OutputPath>
+		<LangVersion>latest</LangVersion>
+		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dev|AnyCPU'">
+		<DefineConstants>DEBUG;TRACE;DEV</DefineConstants>
+		<DebugSymbols>true</DebugSymbols>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
 </Project>

@@ -23,7 +23,7 @@
 		<ExcludeFromPackage Include="$(TemplateSourceRoot)**/.git/**/*" />
 		<ExcludeFromPackage Include="$(TemplateSourceRoot)**/packages/**/*" />
 		<ExcludeFromPackage Include="$(TemplateSourceRoot)**/Output/**/*" />
-		<ExcludeFromPackage Include="$(TemplateSourceRoot)**/Publish*/**/*" />
+		<ExcludeFromPackage Include="$(TemplateSourceRoot)**/Publish-*/**/*" />
 		<ExcludeFromPackage Include="$(TemplateSourceRoot)**/.gitattributes" />
 		<ExcludeFromPackage Include="$(TemplateSourceRoot)**/.gitignore" />
 		<ExcludeFromPackage Include="$(TemplateSourceRoot)**/.nupkg" />

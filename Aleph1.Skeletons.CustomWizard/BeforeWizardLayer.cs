@@ -11,6 +11,8 @@ namespace Aleph1.Skeletons.CustomWizard
 	{
 		public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
 		{
+			replacementsDictionary.EnrichTemplateVariables();
+
 			// Delete old directory(in my case VS creating it) and change destination
 			string oldDestinationDirectory = replacementsDictionary["$destinationdirectory$"];
 			if (Directory.Exists(oldDestinationDirectory))

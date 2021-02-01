@@ -14,6 +14,8 @@ namespace Aleph1.Skeletons.CustomWizard
 		private Solution2 solution;
 		public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
 		{
+			replacementsDictionary.EnrichTemplateVariables();
+
 			// Close new solution
 			solution = ((Solution2)((DTE)automationObject).Solution);
 			solution.Close();

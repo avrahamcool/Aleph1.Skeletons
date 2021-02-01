@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Aleph1.Skeletons.WebAPI.DAL.Implementation")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Aleph1.Skeletons.WebAPI.DAL.Implementation")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("TemplateCompany")]
 [assembly: AssemblyProduct("Aleph1.Skeletons.WebAPI.DAL.Implementation")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCopyright("Copyright TemplateCompany © TemplateYear")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
