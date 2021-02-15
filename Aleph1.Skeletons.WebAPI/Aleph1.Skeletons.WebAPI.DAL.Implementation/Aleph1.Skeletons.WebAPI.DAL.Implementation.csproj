@@ -99,7 +99,7 @@
       <Version>4.7.7</Version>
     </PackageReference>
     <PackageReference Include="PostSharp">
-      <Version>6.8.8</Version>
+      <Version>6.8.9</Version>
     </PackageReference>
     <PackageReference Include="TrackerEnabledDbContext">
       <Version>3.8.3</Version>
