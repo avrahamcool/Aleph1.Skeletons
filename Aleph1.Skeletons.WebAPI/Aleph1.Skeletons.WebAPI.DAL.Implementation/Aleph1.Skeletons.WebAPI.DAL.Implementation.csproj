@@ -95,11 +95,16 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Net.Compilers.Toolset">
+      <Version>3.9.0</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="NLog">
-      <Version>4.7.7</Version>
+      <Version>4.7.10</Version>
     </PackageReference>
     <PackageReference Include="PostSharp">
-      <Version>6.8.8</Version>
+      <Version>6.9.5</Version>
     </PackageReference>
     <PackageReference Include="TrackerEnabledDbContext">
       <Version>3.8.3</Version>

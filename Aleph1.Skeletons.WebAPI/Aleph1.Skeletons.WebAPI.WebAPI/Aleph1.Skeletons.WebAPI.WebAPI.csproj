@@ -1,6 +1,6 @@
 ﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\PostSharp.6.8.8\build\PostSharp.props" Condition="Exists('..\packages\PostSharp.6.8.8\build\PostSharp.props')" />
-  <Import Project="..\packages\Microsoft.Net.Compilers.3.8.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.3.8.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.Toolset.3.9.0\build\Microsoft.Net.Compilers.Toolset.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.Toolset.3.9.0\build\Microsoft.Net.Compilers.Toolset.props')" />
+  <Import Project="..\packages\PostSharp.6.9.5\build\PostSharp.props" Condition="Exists('..\packages\PostSharp.6.9.5\build\PostSharp.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Dev</Configuration>
@@ -76,26 +76,26 @@
       <HintPath>..\packages\FluentValidation.WebApi.8.6.1\lib\net45\FluentValidation.WebApi.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Owin, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.4.1.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    <Reference Include="Microsoft.Owin, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.2.0\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.7.7\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.4.7.10\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="NLog.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.Web.4.10.0\lib\net35\NLog.Web.dll</HintPath>
+      <HintPath>..\packages\NLog.Web.4.12.0\lib\net35\NLog.Web.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="PostSharp, Version=6.8.8.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
-      <HintPath>..\packages\PostSharp.Redist.6.8.8\lib\net45\PostSharp.dll</HintPath>
+    <Reference Include="PostSharp, Version=6.9.5.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
+      <HintPath>..\packages\PostSharp.Redist.6.9.5\lib\net45\PostSharp.dll</HintPath>
     </Reference>
     <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
       <HintPath>..\packages\Swashbuckle.Core.5.6.0\lib\net40\Swashbuckle.Core.dll</HintPath>
@@ -160,14 +160,14 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Unity.Abstractions, Version=5.11.6.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.Abstractions.5.11.6\lib\net48\Unity.Abstractions.dll</HintPath>
+    <Reference Include="Unity.Abstractions, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Abstractions.5.11.7\lib\net48\Unity.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Unity.AspNet.WebApi, Version=5.11.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.AspNet.WebApi.5.11.2\lib\net47\Unity.AspNet.WebApi.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Container, Version=5.11.10.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.Container.5.11.10\lib\net48\Unity.Container.dll</HintPath>
+    <Reference Include="Unity.Container, Version=5.11.11.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Container.5.11.11\lib\net48\Unity.Container.dll</HintPath>
     </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
@@ -363,9 +363,9 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.3.8.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.3.8.0\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\packages\PostSharp.6.8.8\build\PostSharp.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PostSharp.6.8.8\build\PostSharp.props'))" />
-    <Error Condition="!Exists('..\packages\PostSharp.6.8.8\build\PostSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PostSharp.6.8.8\build\PostSharp.targets'))" />
+    <Error Condition="!Exists('..\packages\PostSharp.6.9.5\build\PostSharp.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PostSharp.6.9.5\build\PostSharp.props'))" />
+    <Error Condition="!Exists('..\packages\PostSharp.6.9.5\build\PostSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PostSharp.6.9.5\build\PostSharp.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.Toolset.3.9.0\build\Microsoft.Net.Compilers.Toolset.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.Toolset.3.9.0\build\Microsoft.Net.Compilers.Toolset.props'))" />
   </Target>
-  <Import Project="..\packages\PostSharp.6.8.8\build\PostSharp.targets" Condition="Exists('..\packages\PostSharp.6.8.8\build\PostSharp.targets')" />
+  <Import Project="..\packages\PostSharp.6.9.5\build\PostSharp.targets" Condition="Exists('..\packages\PostSharp.6.9.5\build\PostSharp.targets')" />
 </Project>
