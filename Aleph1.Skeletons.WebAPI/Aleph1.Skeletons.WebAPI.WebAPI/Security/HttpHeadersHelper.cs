@@ -41,11 +41,11 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
 				return;
 			}
 
-			CookieHeaderValue cookie = new CookieHeaderValue(SettingsManager.AuthenticationHeaderKey, value)
+			CookieHeaderValue cookie = new(SettingsManager.AuthenticationHeaderKey, value)
 			{
 				HttpOnly = true,
 				Secure = true,
-				Path = "/",
+				Path = SettingsManager.EnableCORS ? "/; SameSite=None" : "/",
 				MaxAge = SettingsManager.TicketDurationTimeSpan
 			};
 			responseAction.Response.Headers.AddCookies(new CookieHeaderValue[] { cookie });
@@ -53,11 +53,11 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
 
 		internal static void RemoveAuthenticationInfoValueFromCookie(this HttpResponseMessage response)
 		{
-			CookieHeaderValue cookie = new CookieHeaderValue(SettingsManager.AuthenticationHeaderKey, "")
+			CookieHeaderValue cookie = new(SettingsManager.AuthenticationHeaderKey, "")
 			{
 				HttpOnly = true,
 				Secure = true,
-				Path = "/",
+				Path = SettingsManager.EnableCORS ? "/; SameSite=None" : "/",
 				MaxAge = TimeSpan.FromSeconds(-1)
 			};
 			response.Headers.AddCookies(new CookieHeaderValue[] { cookie });

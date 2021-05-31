@@ -1,4 +1,6 @@
-﻿using Aleph1.Skeletons.WebAPI.Models.Security;
+﻿using System.Threading.Tasks;
+
+using Aleph1.Skeletons.WebAPI.Models.Security;
 
 namespace Aleph1.Skeletons.WebAPI.Security.Contracts
 {
@@ -22,8 +24,9 @@ namespace Aleph1.Skeletons.WebAPI.Security.Contracts
 		/// <summary>Generate a AuthenticationInfo based on the given credentials</summary>
 		/// <param name="username">the user-name</param>
 		/// <param name="password">the password</param>
+		/// <param name="captchaToken">CAPTCHA token</param>
 		/// <returns>an AuthenticationInfo representing the credentials of the user</returns>
-		AuthenticationInfo Login(string username, string password);
+		Task<AuthenticationInfo> Login(string username, string password, string captchaToken);
 
 		/// <summary>return whether the current user is allowed for content</summary>
 		/// <param name="authenticationInfo">the user authentication info</param>

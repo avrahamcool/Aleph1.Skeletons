@@ -29,10 +29,4 @@
   <ItemGroup>
     <None Remove="Mahar.Pages.csproj.vspscc" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="3.9.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
 </Project>

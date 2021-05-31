@@ -10,6 +10,7 @@ import * as environment from "../../../config/environment.json";
 import { IdleSessionTimeout } from "idle-session-timeout";
 import { json } from "aurelia-fetch-client";
 import { DialogService } from "aurelia-dialog";
+import { load } from "recaptcha-v3";
 
 @autoinject()
 export class UserService
@@ -81,13 +82,17 @@ export class UserService
 		this.httpClient.startInactiveSessionTimeout();
 	}
 
-	public login(credentials: LoginModel): Promise<void>
+	public async login(credentials: LoginModel): Promise<void>
 	{
-		return this.httpClient.post("/api/login", json(credentials))
-			.then(resp => resp.json())
-			.then((authInfo: AuthenticationInfo) => this.authenticationInfo = authInfo)
-			.then(() => this.au.setRoot(PLATFORM.moduleName("shells/app")))
-			.then(() => this.startIdleTimeout());
+		const captcha = await load(environment.captchaSiteKey);
+		credentials.captchaToken = await captcha.execute();
+		const resp = await this.httpClient.post("/api/login", json(credentials));
+		const authInfo = await resp.json();
+		this.authenticationInfo = authInfo;
+		await this.au.setRoot(PLATFORM.moduleName("shells/app"));
+
+		captcha.hideBadge();
+		return this.startIdleTimeout();
 	}
 
 	public logout(): Promise<void>
@@ -100,6 +105,8 @@ export class UserService
 			{
 				this.httpClient.clearInactiveSessionTimeoutHandler();
 				this.idleGUITimeout.dispose();
-			});
+			})
+			.then(() => load(environment.captchaSiteKey))
+			.then(captcha => captcha.showBadge());
 	}
 }

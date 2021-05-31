@@ -2,6 +2,7 @@
 	"debug": true,
 	"testing": true,
 	"apiBaseUrl": "https://localhost:44331",
+	"captchaSiteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
 	"idleDurationUntilWarningMin": 14,
 	"idleWarningDurationSec": 30
 }

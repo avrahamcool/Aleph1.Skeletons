@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.Contracts;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 using Aleph1.Logging;
@@ -25,11 +26,11 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
 		/// <summary>Login to the APP (use same user and password for successful login. use 'admin' 'admin' for manager).</summary>
 		/// <param name="loginModel">Credentials for login</param>
 		[Authenticated(Roles.Anonymous), Logged(LogParameters = false), HttpPost, Route("api/login")]
-		public AuthenticationInfo Login(LoginModel loginModel)
+		public async Task<AuthenticationInfo> Login(LoginModel loginModel)
 		{
 			Contract.Requires(loginModel != null);
 
-			AuthenticationInfo authenticationInfo = SecurityService.Login(loginModel.Username, loginModel.Password);
+			AuthenticationInfo authenticationInfo = await SecurityService.Login(loginModel.Username, loginModel.Password, loginModel.CaptchaToken);
 			Request.AddAuthenticationInfo(SecurityService, authenticationInfo);
 
 			return authenticationInfo;

@@ -8,5 +8,8 @@
 
 		/// <summary>The password (length must be 2-10)</summary>
 		public string Password { get; set; }
+
+		/// <summary>CAPTCHA token to verify users humanity</summary>
+		public string CaptchaToken { get; set; }
 	}
 }

@@ -4,11 +4,15 @@ import { Aurelia } from "aurelia-framework";
 import { PLATFORM } from "aurelia-pal";
 import * as environment from "../config/environment.json";
 import { DialogConfiguration } from "aurelia-dialog";
+import { load } from "recaptcha-v3";
 
 import "./main.scss";
 
 export function configure(aurelia: Aurelia): void
 {
+	// Load CAPTCHA
+	load(environment.captchaSiteKey);
+
 	aurelia.use
 		.standardConfiguration()
 		.feature(PLATFORM.moduleName("resources/index"))

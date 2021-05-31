@@ -1,11 +1,13 @@
-﻿using Aleph1.Skeletons.WebAPI.Models.Security;
+﻿using System.Threading.Tasks;
+
+using Aleph1.Skeletons.WebAPI.Models.Security;
 using Aleph1.Skeletons.WebAPI.Security.Contracts;
 
 namespace Aleph1.Skeletons.WebAPI.Security.Mock
 {
 	internal class SecurityMock : ISecurity
 	{
-		private readonly AuthenticationInfo MockAuth = new AuthenticationInfo()
+		private readonly AuthenticationInfo MockAuth = new()
 		{
 			Username = "Mock",
 			Roles = Roles.Admin
@@ -21,9 +23,9 @@ namespace Aleph1.Skeletons.WebAPI.Security.Mock
 			return MockAuth;
 		}
 
-		public AuthenticationInfo Login(string username, string password)
+		public Task<AuthenticationInfo> Login(string username, string password, string captchaToken)
 		{
-			return MockAuth;
+			return Task.FromResult(MockAuth);
 		}
 
 		public bool IsAllowedForContent(AuthenticationInfo authenticationInfo, Roles[] allowedForRoles)
