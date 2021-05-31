@@ -25,6 +25,9 @@
 		"{5C88D276-6708-40E7-B3D0-AFAD5189B497}", //Security.Contracts
 		"{E6DBED51-DACC-4493-B6B0-5F6BF63EE105}", //Security.Implementation
 		"{58C18708-6523-4AFC-A7A2-DBD8715FF6D2}", //Security.Mock
+		"{300E3841-6CD1-43A2-A885-E2E7FA53D09A}", //Captcha.Contracts
+		"{C492F688-058A-4751-9FF0-05C262E10733}", //Captcha.Implementation
+		"{DD4E2927-35B1-40E6-8692-9E0A7C82893F}", //Captcha.Mock
 		"{5BEE28FC-635A-4BB3-A82F-611BB51900F9}" //Secret for AppPrefix
 	],
 	"symbols": {
