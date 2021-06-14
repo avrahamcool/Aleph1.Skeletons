@@ -10,7 +10,7 @@
         <ReleaseNotes>https://github.com/avrahamcool/Aleph1.Skeletons/blob/master/CHANGELOG.md</ReleaseNotes>
         <Icon>Properties\project-icon.png</Icon>
         <PreviewImage>Properties\project-icon.png</PreviewImage>
-        <Tags>skeleton Aleph1 WebAPI Logging FluentValidation, Swagger, DI</Tags>
+        <Tags>skeleton;Aleph1;WebAPI;Logging;FluentValidation;Swagger;DI</Tags>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0, 17.0)" />
