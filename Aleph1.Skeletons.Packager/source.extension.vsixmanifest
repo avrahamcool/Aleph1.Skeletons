@@ -5,16 +5,18 @@
         <DisplayName>Aleph1.Skeletons</DisplayName>
         <Description xml:space="preserve">WebAPI skeleton includes Auth, Logging, Exception Handling, ModelValidation, Swagger, full N-TIER with DI.</Description>
         <MoreInfo>https://github.com/avrahamcool/Aleph1.Skeletons</MoreInfo>
+        <License>LICENSE.txt</License>
         <GettingStartedGuide>https://github.com/avrahamcool/Aleph1.Skeletons</GettingStartedGuide>
         <ReleaseNotes>https://github.com/avrahamcool/Aleph1.Skeletons/blob/master/CHANGELOG.md</ReleaseNotes>
         <Icon>Properties\project-icon.png</Icon>
+        <PreviewImage>Properties\project-icon.png</PreviewImage>
         <Tags>skeleton Aleph1 WebAPI Logging FluentValidation, Swagger, DI</Tags>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0, 17.0)" />
     </Installation>
     <Dependencies>
-        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.8,)" />
     </Dependencies>
     <Prerequisites>
         <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0,)" DisplayName="Visual Studio core editor" />

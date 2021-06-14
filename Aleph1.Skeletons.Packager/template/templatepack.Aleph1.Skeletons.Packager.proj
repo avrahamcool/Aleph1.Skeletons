@@ -15,6 +15,7 @@
 		<TemplateSourceRoot>$(MSBuildThisFileDirectory)</TemplateSourceRoot>
 	</PropertyGroup>
 	<ItemGroup>
+		<ExcludeFromPackage Include="$(TemplateSourceRoot)**/node_modules/**/*" />
 		<ExcludeFromPackage Include="$(TemplateSourceRoot)**/bin/**/*" />
 		<ExcludeFromPackage Include="$(TemplateSourceRoot)**/obj/**/*" />
 		<ExcludeFromPackage Include="$(TemplateSourceRoot)**/*.suo" />
@@ -24,10 +25,12 @@
 		<ExcludeFromPackage Include="$(TemplateSourceRoot)**/packages/**/*" />
 		<ExcludeFromPackage Include="$(TemplateSourceRoot)**/Output/**/*" />
 		<ExcludeFromPackage Include="$(TemplateSourceRoot)**/Publish-*/**/*" />
+		<ExcludeFromPackage Include="$(TemplateSourceRoot)**/Logs/**/*" />
 		<ExcludeFromPackage Include="$(TemplateSourceRoot)**/.gitattributes" />
 		<ExcludeFromPackage Include="$(TemplateSourceRoot)**/.gitignore" />
 		<ExcludeFromPackage Include="$(TemplateSourceRoot)**/.nupkg" />
-					   
+		<ExcludeFromPackage Include="$(TemplateSourceRoot)**/yarn.lock" />
+		
 		<TemplateFiles Include="$(TemplateSourceRoot)/**/*"
 					  Exclude="@(ExcludeFromPackage)" />
 	</ItemGroup>
@@ -41,7 +44,6 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<Content  Include="@(TemplateFiles)"
-				  Exclude="@(ExcludeFromPackage)"
 				  PackagePath="Content/%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 	<!-- created with SideWaffle -->

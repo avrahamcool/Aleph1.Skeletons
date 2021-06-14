@@ -77,23 +77,31 @@
 		},
 		{
 			"path": "Aleph1.Skeletons.WebAPI.Security.Mock\\Aleph1.Skeletons.WebAPI.Security.Mock.csproj"
+		},
+		{
+			"path": "Aleph1.Skeletons.WebAPI.Captcha.Contracts\\Aleph1.Skeletons.WebAPI.Captcha.Contracts.csproj"
+		},
+		{
+			"path": "Aleph1.Skeletons.WebAPI.Captcha.Implementation\\Aleph1.Skeletons.WebAPI.Captcha.Implementation.csproj"
+		},
+		{
+			"path": "Aleph1.Skeletons.WebAPI.Captcha.Mock\\Aleph1.Skeletons.WebAPI.Captcha.Mock.csproj"
 		}
 	],
 
 	"sources": [
 		{
 			"exclude": [
+				"Aleph1.Skeletons.WebAPI.Pages/node_modules/**",
+				"Aleph1.Skeletons.WebAPI.WebAPI/Logs/**",
+				"Publish*/**",
+				"Output/**",
+				"packages/**",
+				".vs/**"
+				".template.config/**/*",
 				"**/[Bb]in/**",
 				"**/[Oo]bj/**",
 				"**/*.user",
-				"Publish*/**",
-				"Output/**",
-				"Logs/**",
-				"Backups/**",
-				"packages/**",
-				".template.config/**/*",
-				"**/*.filelist",
-				"**/*.lock.json"
 			]
 		}
 	]
