@@ -2,7 +2,7 @@
 	"$schema": "http://json.schemastore.org/template",
 	"author": "Avraham Essoudry",
 	"classifications": [ "WebAPI", "N-Tier" ],
-	"description": "WebAPI skeleton including Auth, Logging, Exception Handling, Swagger, full N-Tier with DI",
+	"description": "WebAPI skeleton including Authentication, Logging, Exception Handling, Swagger, full N-Tier with DI",
 	"name": "Aleph1.WebAPI",
 	"defaultName": "Aleph1.WebAPI",
 	"identity": "Aleph1.Skeletons.WebAPI",
@@ -97,11 +97,11 @@
 				"Publish*/**",
 				"Output/**",
 				"packages/**",
-				".vs/**"
+				".vs/**",
 				".template.config/**/*",
 				"**/[Bb]in/**",
 				"**/[Oo]bj/**",
-				"**/*.user",
+				"**/*.user"
 			]
 		}
 	]

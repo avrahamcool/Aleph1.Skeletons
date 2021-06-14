@@ -1,7 +1,7 @@
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="ProjectGroup">
 	<TemplateData>
 		<Name>Aleph1.WebAPI</Name>
-		<Description>WebAPI skeleton includes Auth, Logging, Exception Handling, ModelValidation, Swagger, full N-TIER with DI.</Description>
+		<Description>WebAPI skeleton includes Authentication, Logging, Exception Handling, ModelValidation, Swagger, full N-TIER with DI.</Description>
 		<TemplateID>Aleph1.Skeletons.WebAPI</TemplateID>
 		<DefaultName>Aleph1.WebAPI</DefaultName>
 
