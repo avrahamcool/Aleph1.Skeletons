@@ -1,7 +1,7 @@
 {
 	"$schema": "http://json.schemastore.org/template",
 	"author": "Avraham Essoudry",
-	"classifications": [ "WebAPI", "Proxy" ],
+	"classifications": [ "Web", "Solution" ],
 	"description": "Proxy skeleton including Api",
 	"name": "Aleph1.Proxy",
 	"defaultName": "Aleph1.Proxy",
@@ -9,7 +9,7 @@
 	"groupIdentity": "Aleph1.Skeletons.Proxy",
 	"tags": {
 		"language": "C#",
-		"type": "project"
+		"type": "solution"
 	},
 	"shortName": "api",
 	"sourceName": "Aleph1.Skeletons.Proxy",

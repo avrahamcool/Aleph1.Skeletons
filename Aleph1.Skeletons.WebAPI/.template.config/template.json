@@ -1,7 +1,7 @@
 {
 	"$schema": "http://json.schemastore.org/template",
 	"author": "Avraham Essoudry",
-	"classifications": [ "WebAPI", "N-Tier" ],
+	"classifications": [ "Web", "Solution" ],
 	"description": "WebAPI skeleton including Authentication, Logging, Exception Handling, Swagger, full N-Tier with DI",
 	"name": "Aleph1.WebAPI",
 	"defaultName": "Aleph1.WebAPI",
@@ -9,7 +9,7 @@
 	"groupIdentity": "Aleph1.Skeletons.WebAPI",
 	"tags": {
 		"language": "C#",
-		"type": "project"
+		"type": "solution"
 	},
 	"shortName": "api",
 	"sourceName": "Aleph1.Skeletons.WebAPI",
