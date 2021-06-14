@@ -10,9 +10,10 @@
 		<Version>1.0.0</Version>
 	</PropertyGroup>
 	<PropertyGroup Label="PackageConfiguration">
-		<TargetFramework>netstandard1.0</TargetFramework>
+		<TargetFramework>net48</TargetFramework>
 		<PackageType>Template</PackageType>
 		<TemplateSourceRoot>$(MSBuildThisFileDirectory)</TemplateSourceRoot>
+		<SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
 	</PropertyGroup>
 	<ItemGroup>
 		<ExcludeFromPackage Include="$(TemplateSourceRoot)**/node_modules/**/*" />
