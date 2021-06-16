@@ -21,10 +21,7 @@ namespace Aleph1.Skeletons.WebAPI.Security.Implementation
 			Captcha = captcha;
 		}
 
-		public string GenerateTicket(AuthenticationInfo authenticationInfo, string userUniqueID)
-		{
-			return CipherService.Encrypt(SettingsManager.AppPrefix, userUniqueID, authenticationInfo, SettingsManager.TicketDurationTimeSpan);
-		}
+		public string GenerateTicket(AuthenticationInfo authenticationInfo, string userUniqueID) => CipherService.Encrypt(SettingsManager.AppPrefix, userUniqueID, authenticationInfo, SettingsManager.TicketDurationTimeSpan);
 		public AuthenticationInfo ReadTicket(string ticketValue, string userUniqueID)
 		{
 			try
@@ -41,7 +38,7 @@ namespace Aleph1.Skeletons.WebAPI.Security.Implementation
 		[Logged(LogParameters = false, LogReturnValue = true)]
 		public async Task<AuthenticationInfo> Login(string username, string password, string captchaToken)
 		{
-			await Captcha.ValidateCaptcha(captchaToken);
+			await Captcha.ValidateCaptcha(captchaToken).ConfigureAwait(false);
 
 			// TODO: put your real implementation here
 			if (!username.Equals(password, StringComparison.OrdinalIgnoreCase))
@@ -57,9 +54,6 @@ namespace Aleph1.Skeletons.WebAPI.Security.Implementation
 		}
 
 		[Logged(LogParameters = false, LogReturnValue = true)]
-		public bool IsAllowedForContent(AuthenticationInfo authenticationInfo, Roles[] allowedForRoles)
-		{
-			return authenticationInfo != default && allowedForRoles.Any(r => authenticationInfo.Roles.HasFlag(r));
-		}
+		public bool IsAllowedForContent(AuthenticationInfo authenticationInfo, Roles[] allowedForRoles) => authenticationInfo != default && allowedForRoles.Any(r => authenticationInfo.Roles.HasFlag(r));
 	}
 }

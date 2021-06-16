@@ -25,7 +25,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
 
 		/// <summary>Login to the APP (use same user and password for successful login. use 'admin' 'admin' for manager).</summary>
 		/// <param name="loginModel">Credentials for login</param>
-		[Authenticated(Roles.Anonymous), Logged(LogParameters = false), HttpPost, Route("api/login")]
+		[Authenticated(Roles.None), Logged(LogParameters = false), HttpPost, Route("api/login")]
 		public async Task<AuthenticationInfo> Login(LoginModel loginModel)
 		{
 			Contract.Requires(loginModel != null);
@@ -37,7 +37,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Controllers
 		}
 
 		/// <summary>refresh access token.</summary>
-		[Authenticated(Roles.Anonymous), Logged, HttpPost, Route("api/refresh-token")]
+		[Authenticated(Roles.None), Logged, HttpPost, Route("api/refresh-token")]
 		public void RefreshToken() { }
 
 		/// <summary>Logout from the application</summary>

@@ -4,10 +4,7 @@
 
 	internal sealed class Configuration : DbMigrationsConfiguration<GenericContext>
 	{
-		public Configuration()
-		{
-			AutomaticMigrationsEnabled = false;
-		}
+		public Configuration() => AutomaticMigrationsEnabled = false;
 
 		protected override void Seed(GenericContext context)
 		{

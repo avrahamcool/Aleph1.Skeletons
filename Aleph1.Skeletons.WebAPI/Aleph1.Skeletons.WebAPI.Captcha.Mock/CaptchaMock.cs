@@ -7,9 +7,6 @@ namespace Aleph1.Skeletons.WebAPI.Captcha.Mock
 {
 	internal class CaptchaMock : ICaptcha
 	{
-		public Task ValidateCaptcha(string captchaToken)
-		{
-			return Task.CompletedTask;
-		}
+		public Task ValidateCaptcha(string captchaToken) => Task.CompletedTask;
 	}
 }

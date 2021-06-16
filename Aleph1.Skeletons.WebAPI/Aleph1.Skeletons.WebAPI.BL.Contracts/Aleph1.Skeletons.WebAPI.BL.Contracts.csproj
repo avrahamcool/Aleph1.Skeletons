@@ -17,6 +17,9 @@
 		<DocumentationFile>..\Output\$(Configuration)\Documentation\$(MSBuildProjectName).xml</DocumentationFile>
 		<OutputPath>bin\$(Configuration)</OutputPath>
 		<LangVersion>latest</LangVersion>
+		<EnableNETAnalyzers>true</EnableNETAnalyzers>
+		<AnalysisMode>AllEnabledByDefault</AnalysisMode>
+		<AnalysisLevel>latest</AnalysisLevel>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dev|AnyCPU'">
@@ -28,10 +31,6 @@
 		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="3.10.0">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
 

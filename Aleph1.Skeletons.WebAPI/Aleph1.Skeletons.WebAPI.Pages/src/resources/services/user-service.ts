@@ -45,7 +45,7 @@ export class UserService
 
 	public isAllowedForRole(roles: Roles): boolean
 	{
-		if (roles === Roles.Anonymous)
+		if (roles === Roles.None)
 		{
 			return true;
 		}

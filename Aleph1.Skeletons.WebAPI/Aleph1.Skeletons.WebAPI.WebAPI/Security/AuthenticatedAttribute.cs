@@ -29,7 +29,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
 				? new[] { Roles.User }
 				: AllowedRoles;
 
-			AllowAnonymous = AllowedRoles.Contains(Roles.Anonymous);
+			AllowAnonymous = AllowedRoles.Contains(Roles.None);
 		}
 
 		/// <summary>Authenticates the request.</summary>

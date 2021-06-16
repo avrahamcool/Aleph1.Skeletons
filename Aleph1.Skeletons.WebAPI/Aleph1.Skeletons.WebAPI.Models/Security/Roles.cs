@@ -7,16 +7,16 @@ namespace Aleph1.Skeletons.WebAPI.Models.Security
 	public enum Roles
 	{
 		/// <summary>Not logged in</summary>
-		Anonymous = 0b000,
+		None = 0,
 
 		/// <summary>Regular user</summary>
-		User = 0b001,
+		User = 1 << 0,
 
-		//AnotherRole = 0b010,
-		//YetAnotherRole = 0b100,
+		/// <summary>Another role for demonstration</summary>
+		SomeOtherRole = 1 << 1,
 
 		/// <summary>Administrator</summary>
 		/// <remarks>includes all below rules</remarks>
-		Admin = 0b111
+		Admin = None | User | SomeOtherRole
 	}
 }

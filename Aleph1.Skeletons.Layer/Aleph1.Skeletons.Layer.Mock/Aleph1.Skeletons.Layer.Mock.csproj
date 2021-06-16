@@ -17,6 +17,9 @@
 		<DocumentationFile>..\Output\$(Configuration)\Documentation\$(MSBuildProjectName).xml</DocumentationFile>
 		<OutputPath>..\Output\$(Configuration)\Modules\</OutputPath>
 		<LangVersion>latest</LangVersion>
+		<EnableNETAnalyzers>true</EnableNETAnalyzers>
+		<AnalysisMode>AllEnabledByDefault</AnalysisMode>
+		<AnalysisLevel>latest</AnalysisLevel>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dev|AnyCPU'">

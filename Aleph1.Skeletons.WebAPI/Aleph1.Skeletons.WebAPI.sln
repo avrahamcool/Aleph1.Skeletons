@@ -59,6 +59,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aleph1.Skeletons.WebAPI.Cap
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Captcha", "Captcha", "{DE7E11BE-AB0A-4785-BBBA-D63FE37A6AFC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7F5AB5EE-895E-41E3-9770-8CF7AD26CB51}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Dev|Any CPU = Dev|Any CPU

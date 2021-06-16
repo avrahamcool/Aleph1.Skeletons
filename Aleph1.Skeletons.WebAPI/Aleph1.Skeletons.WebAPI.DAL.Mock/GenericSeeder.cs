@@ -8,7 +8,7 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Mock
 	{
 		internal static void SeedAll()
 		{
-			using GenericContextMock context = new GenericContextMock(SettingsManager.DBOptions);
+			using GenericContextMock context = new(SettingsManager.DBOptions);
 
 			Type seederType = typeof(ISeed);
 			IEnumerable<Type> allSeeders = seederType

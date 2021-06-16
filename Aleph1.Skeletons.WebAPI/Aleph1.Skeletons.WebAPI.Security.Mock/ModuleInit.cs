@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.Composition;
 using System.Diagnostics.Contracts;
 
@@ -7,7 +8,7 @@ using Aleph1.Skeletons.WebAPI.Security.Contracts;
 namespace Aleph1.Skeletons.WebAPI.Security.Mock
 {
 	/// <summary>Used to register concrete implementations to the DI container</summary>
-	[Export(typeof(IModule))]
+	[CLSCompliant(false), Export(typeof(IModule))]
 	public class ModuleInit : IModule
 	{
 		/// <summary>Used to register concrete implementations to the DI container</summary>

@@ -1,18 +1,19 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 
 namespace Aleph1.Skeletons.WebAPI.Captcha.Implementation
 {
 	/// <summary>Handle settings from web.config</summary>
 	internal static class SettingsManager
 	{
-		private static string _captchaAPIUrl;
-		public static string CaptchaAPIUrl
+		private static Uri _captchaAPIUrl;
+		public static Uri CaptchaAPIUrl
 		{
 			get
 			{
 				if (_captchaAPIUrl == default)
 				{
-					_captchaAPIUrl = ConfigurationManager.AppSettings["CaptchaAPIUrl"];
+					_captchaAPIUrl = new Uri(ConfigurationManager.AppSettings["CaptchaAPIUrl"]);
 				}
 				return _captchaAPIUrl;
 			}

@@ -1,14 +1,15 @@
+/** Authorization roles */
 export enum Roles
 {
 	/** Not logged in */
-	Anonymous = 0b000,
+	None = 0,
 
 	/** Regular user */
-	User = 0b001,
+	User = 1 << 0,
 
-	//AnotherRole = 0b010,
-	//YetAnotherRole = 0b100,
+	/** Another role for demonstration  */
+	SomeOtherRole = 1 << 1,
 
 	/** Administrator - includes all below rules */
-	Admin = 0b111
+	Admin = None | User | SomeOtherRole
 }

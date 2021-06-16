@@ -13,24 +13,12 @@ namespace Aleph1.Skeletons.WebAPI.Security.Mock
 			Roles = Roles.Admin
 		};
 
-		public string GenerateTicket(AuthenticationInfo authenticationInfo, string userUniqueID)
-		{
-			return "MockTicket";
-		}
+		public string GenerateTicket(AuthenticationInfo authenticationInfo, string userUniqueID) => "MockTicket";
 
-		public AuthenticationInfo ReadTicket(string ticketValue, string userUniqueID)
-		{
-			return MockAuth;
-		}
+		public AuthenticationInfo ReadTicket(string ticketValue, string userUniqueID) => MockAuth;
 
-		public Task<AuthenticationInfo> Login(string username, string password, string captchaToken)
-		{
-			return Task.FromResult(MockAuth);
-		}
+		public Task<AuthenticationInfo> Login(string username, string password, string captchaToken) => Task.FromResult(MockAuth);
 
-		public bool IsAllowedForContent(AuthenticationInfo authenticationInfo, Roles[] allowedForRoles)
-		{
-			return true;
-		}
+		public bool IsAllowedForContent(AuthenticationInfo authenticationInfo, Roles[] allowedForRoles) => true;
 	}
 }

@@ -3,9 +3,9 @@
 	<PropertyGroup>
 		<TargetFramework>net48</TargetFramework>
 		<Version>1.0.0</Version>
-		<Authors>essou</Authors>
-		<Company>Aleph1</Company>
-		<Copyright>Copyright Aleph1 © 2021</Copyright>
+		<Authors>TemplateAuthors</Authors>
+		<Company>TemplateCompany</Company>
+		<Copyright>Copyright TemplateCompany © TemplateYear</Copyright>
 		<PackageTags>Aleph1.Skeletons.WebAPI.Captcha.Contracts</PackageTags>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<Description>Contracts for Aleph1.Skeletons.WebAPI.Captcha</Description>
@@ -18,6 +18,9 @@
 		<OutputPath>bin\$(Configuration)</OutputPath>
 		<LangVersion>latest</LangVersion>
 		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+		<EnableNETAnalyzers>true</EnableNETAnalyzers>
+		<AnalysisMode>AllEnabledByDefault</AnalysisMode>
+		<AnalysisLevel>latest</AnalysisLevel>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dev|AnyCPU'">

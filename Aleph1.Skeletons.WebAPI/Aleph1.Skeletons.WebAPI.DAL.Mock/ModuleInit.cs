@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.Composition;
 using System.Diagnostics.Contracts;
 
@@ -9,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Aleph1.Skeletons.WebAPI.DAL.Mock
 {
 	/// <summary>Used to register concrete implementations to the DI container</summary>
-	[Export(typeof(IModule))]
+	[CLSCompliant(false), Export(typeof(IModule))]
 	public class ModuleInit : IModule
 	{
 		/// <summary>Used to register concrete implementations to the DI container</summary>

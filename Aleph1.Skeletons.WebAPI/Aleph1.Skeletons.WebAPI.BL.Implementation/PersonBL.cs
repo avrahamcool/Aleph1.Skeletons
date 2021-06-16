@@ -13,15 +13,9 @@ namespace Aleph1.Skeletons.WebAPI.BL.Implementation
 	{
 		private readonly IGenericRepo Repo;
 
-		public PersonBL(IGenericRepo repo)
-		{
-			Repo = repo;
-		}
+		public PersonBL(IGenericRepo repo) => Repo = repo;
 
-		public void Dispose()
-		{
-			Repo.Dispose();
-		}
+		public void Dispose() => Repo.Dispose();
 
 		[Logged]
 		public IEnumerable<Person> GetPersons()
@@ -40,10 +34,7 @@ namespace Aleph1.Skeletons.WebAPI.BL.Implementation
 		}
 
 		[Logged]
-		public Person GetPersonByID(int ID)
-		{
-			return Repo.GetByID<Person>(ID);
-		}
+		public Person GetPersonByID(int ID) => Repo.GetByID<Person>(ID);
 
 		[Logged]
 		public IEnumerable<Person> SearchByName(string searchTerm)
@@ -53,10 +44,9 @@ namespace Aleph1.Skeletons.WebAPI.BL.Implementation
 				throw new ArgumentNullException(nameof(searchTerm));
 			};
 
-			string searchTermSanitized = searchTerm.ToUpperInvariant();
 			return Repo
 				.GetAll<Person>()
-				.Where(p => p.FirstName.ToUpperInvariant().Contains(searchTermSanitized) || p.LastName.ToUpperInvariant().Contains(searchTermSanitized))
+				.Where(p => p.FirstName.Contains(searchTerm) || p.LastName.Contains(searchTerm))
 				.ToList();
 		}
 

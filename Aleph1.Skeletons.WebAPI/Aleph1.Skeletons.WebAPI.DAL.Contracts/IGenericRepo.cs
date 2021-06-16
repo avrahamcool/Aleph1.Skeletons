@@ -13,21 +13,21 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Contracts
 
 		/// <summary>returns all entities</summary>
 		/// <returns>entities</returns>
-		IQueryable<TEntity> GetAll<TEntity>() where TEntity : class, IEntity;
+		IQueryable<TEntity> GetAll<TEntity>() where TEntity : class, IReadableEntity;
 
 		/// <summary>returns a single entity (tracked)</summary>
 		/// <param name="keyValues">The values of the primary key for the entity to be found</param>
 		/// <returns>entity</returns>
-		TEntity GetByID<TEntity>(params object[] keyValues) where TEntity : class, IEntity;
+		TEntity GetByID<TEntity>(params object[] keyValues) where TEntity : class, IWritableEntity;
 
 		/// <summary>insert a single entity</summary>
 		/// <param name="entity">the entity to insert</param>
 		/// <returns>entity</returns>
-		TEntity Insert<TEntity>(TEntity entity) where TEntity : class, IEntity;
+		TEntity Insert<TEntity>(TEntity entity) where TEntity : class, IWritableEntity;
 
 		/// <summary>delete a single entity</summary>
 		/// <param name="keyValues">The values of the primary key for the entity to be deleted</param>
 		/// <returns>entity</returns>
-		TEntity Delete<TEntity>(params object[] keyValues) where TEntity : class, IEntity;
+		TEntity Delete<TEntity>(params object[] keyValues) where TEntity : class, IWritableEntity;
 	}
 }

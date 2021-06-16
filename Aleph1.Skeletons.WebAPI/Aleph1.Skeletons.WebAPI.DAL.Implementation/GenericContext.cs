@@ -18,10 +18,7 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Implementation
 		// 
 		// If you wish to target a different database and/or database provider, modify the 'GenericContext' 
 		// connection string in the application configuration file.
-		public GenericContext() : base("name=GenericContext")
-		{
-			Configuration.ProxyCreationEnabled = false;
-		}
+		public GenericContext() : base("name=GenericContext") => Configuration.ProxyCreationEnabled = false;
 
 		// Add a DbSet for each entity type that you want to include in your model. For more information 
 		// on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.

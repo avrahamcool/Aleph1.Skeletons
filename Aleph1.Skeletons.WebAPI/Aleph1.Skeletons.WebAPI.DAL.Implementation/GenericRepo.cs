@@ -16,40 +16,25 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Implementation
 			GenericContext = genericContext;
 			CurrentUser = currentUser;
 		}
-		public void Dispose()
-		{
-			GenericContext.Dispose();
-		}
+		public void Dispose() => GenericContext.Dispose();
 
 		[Logged]
-		public IQueryable<TEntity> GetAll<TEntity>() where TEntity : class, IEntity
-		{
-			return GenericContext.Set<TEntity>().AsNoTracking();
-		}
+		public IQueryable<TEntity> GetAll<TEntity>() where TEntity : class, IReadableEntity => GenericContext.Set<TEntity>().AsNoTracking();
 
 		[Logged]
-		public TEntity GetByID<TEntity>(params object[] keyValues) where TEntity : class, IEntity
-		{
-			return GenericContext.Set<TEntity>().Find(keyValues);
-		}
+		public TEntity GetByID<TEntity>(params object[] keyValues) where TEntity : class, IWritableEntity => GenericContext.Set<TEntity>().Find(keyValues);
 
 		[Logged]
-		public TEntity Insert<TEntity>(TEntity entity) where TEntity : class, IEntity
-		{
-			return GenericContext.Set<TEntity>().Add(entity);
-		}
+		public TEntity Insert<TEntity>(TEntity entity) where TEntity : class, IWritableEntity => GenericContext.Set<TEntity>().Add(entity);
 
 		[Logged]
-		public TEntity Delete<TEntity>(params object[] keyValues) where TEntity : class, IEntity
+		public TEntity Delete<TEntity>(params object[] keyValues) where TEntity : class, IWritableEntity
 		{
 			TEntity entity = GetByID<TEntity>(keyValues);
 			return GenericContext.Set<TEntity>().Remove(entity);
 		}
 
 		[Logged]
-		public void SaveChanges()
-		{
-			GenericContext.SaveChanges(CurrentUser?.Username);
-		}
+		public void SaveChanges() => GenericContext.SaveChanges(CurrentUser?.Username);
 	}
 }

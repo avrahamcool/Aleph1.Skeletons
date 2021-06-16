@@ -19,10 +19,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
 	internal static class HttpHeadersHelper
 	{
 		/// <summary>Implement a logic to identify user uniquely</summary>
-		private static string GetUserUniqueID(this HttpRequestMessage request)
-		{
-			return request.GetClientIpAddress();
-		}
+		private static string GetUserUniqueID(this HttpRequestMessage request) => request.GetClientIpAddress();
 
 		internal static AuthenticationInfo GetAuthenticationInfoFromCookie(this HttpRequest request, ISecurity securityService)
 		{
@@ -68,10 +65,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
 			string ticket = securityService.GenerateTicket(authInfo, request.GetUserUniqueID());
 			request.Properties[SettingsManager.AuthenticationHeaderKey] = ticket;
 		}
-		internal static string GetAuthenticationInfo(this HttpRequestMessage request)
-		{
-			return request.Properties.ContainsKey(SettingsManager.AuthenticationHeaderKey) ? request.Properties[SettingsManager.AuthenticationHeaderKey] as string : null;
-		}
+		internal static string GetAuthenticationInfo(this HttpRequestMessage request) => request.Properties.ContainsKey(SettingsManager.AuthenticationHeaderKey) ? request.Properties[SettingsManager.AuthenticationHeaderKey] as string : null;
 
 		internal static T GetHttpParameter<T>(this HttpActionContext context, params string[] parameterNames)
 		{

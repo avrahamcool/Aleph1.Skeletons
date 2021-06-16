@@ -9,7 +9,7 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Mock.Seed
 	{
 		public void Seed(GenericContextMock context)
 		{
-			List<Person> seed = new List<Person>()
+			List<Person> seed = new()
 			{
 				new Person()
 				{

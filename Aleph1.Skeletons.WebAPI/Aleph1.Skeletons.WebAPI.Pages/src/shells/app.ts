@@ -42,7 +42,7 @@ export class AppShell
 				{
 					const requiredRoles = instruction
 						.getAllInstructions()
-						.map(i => i.config.settings?.auth as Roles || Roles.Anonymous);
+						.map(i => i.config.settings?.auth as Roles || Roles.None);
 
 					if (!requiredRoles.every(r => this.userService.isAllowedForRole(r)))
 					{

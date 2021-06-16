@@ -3,7 +3,7 @@
 namespace Aleph1.Skeletons.WebAPI.Models.Entities
 {
 	/// <summary>person details</summary>
-	public class Person : IEntity
+	public class Person : IWritableEntity
 	{
 		/// <summary>auto increment (1, 1)</summary>
 		public int ID { get; set; }

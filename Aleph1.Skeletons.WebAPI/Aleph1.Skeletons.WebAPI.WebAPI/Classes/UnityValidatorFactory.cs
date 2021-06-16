@@ -10,10 +10,7 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Classes
 	{
 		private readonly IUnityContainer container;
 
-		public UnityValidatorFactory(IUnityContainer container)
-		{
-			this.container = container;
-		}
+		public UnityValidatorFactory(IUnityContainer container) => this.container = container;
 
 		public override IValidator CreateInstance(Type validatorType)
 		{

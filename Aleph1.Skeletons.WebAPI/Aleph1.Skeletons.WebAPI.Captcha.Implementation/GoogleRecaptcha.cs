@@ -11,15 +11,9 @@ namespace Aleph1.Skeletons.WebAPI.Captcha.Implementation
 	internal class GoogleRecaptcha : ICaptcha, IDisposable
 	{
 		private readonly HttpClient httpClient;
-		public GoogleRecaptcha()
-		{
-			httpClient = new HttpClient();
-		}
+		public GoogleRecaptcha() => httpClient = new HttpClient();
 
-		public void Dispose()
-		{
-			httpClient.Dispose();
-		}
+		public void Dispose() => httpClient.Dispose();
 
 		[Logged]
 		public async Task ValidateCaptcha(string captchaToken)
@@ -29,8 +23,11 @@ namespace Aleph1.Skeletons.WebAPI.Captcha.Implementation
 				{ "secret", SettingsManager.CaptchaSecret },
 				{ "response", captchaToken }
 			};
-			HttpResponseMessage response = await httpClient.PostAsync(SettingsManager.CaptchaAPIUrl, new FormUrlEncodedContent(bodyUrlEncoded));
-			CaptchaResponse result = await response.Content.ReadAsAsync<CaptchaResponse>();
+			using FormUrlEncodedContent content = new(bodyUrlEncoded);
+			HttpResponseMessage response = await httpClient.PostAsync(SettingsManager.CaptchaAPIUrl, content)
+				.ConfigureAwait(false);
+			CaptchaResponse result = await response.Content.ReadAsAsync<CaptchaResponse>()
+				.ConfigureAwait(false);
 			if (!result.Success)
 			{
 				throw new UnauthorizedAccessException(string.Join(",", result.ErrorCodes));
