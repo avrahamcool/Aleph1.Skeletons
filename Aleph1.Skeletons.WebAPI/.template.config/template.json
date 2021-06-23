@@ -33,6 +33,24 @@
 		"{5BEE28FC-635A-4BB3-A82F-611BB51900F9}"
 	],
 	"symbols": {
+		"HttpPort": {
+			"type": "generated",
+			"generator": "port",
+			"parameters": {
+				"low": 49000,
+				"high": 49099
+			},
+			"replaces": "49382"
+		},
+		"HttpsPort": {
+			"type": "generated",
+			"generator": "port",
+			"parameters": {
+				"low": 44300,
+				"high": 44399
+			},
+			"replaces": "44331"
+		},
 		"TemplateAuthors": {
 			"type": "parameter",
 			"defaultValue": "Avraham Essoudry",
