@@ -1,7 +1,9 @@
 {
 	"$schema": "http://json.schemastore.org/template",
 	"author": "Avraham Essoudry",
-	"classifications": [ "Web", "Solution" ],
+	"classifications": [
+		"Web"
+	],
 	"description": "WebAPI skeleton including Authentication, Logging, Exception Handling, Swagger, full N-Tier with DI",
 	"name": "Aleph1.WebAPI",
 	"defaultName": "Aleph1.WebAPI",
@@ -9,26 +11,26 @@
 	"groupIdentity": "Aleph1.Skeletons.WebAPI",
 	"tags": {
 		"language": "C#",
-		"type": "solution"
+		"type": "project"
 	},
 	"shortName": "api",
 	"sourceName": "Aleph1.Skeletons.WebAPI",
 	"guids": [
-		"{45DDD773-6F76-4256-8071-9C6586EBA491}", //WebAPI
-		"{0EE6E959-5BA0-4C79-9A9E-33F0B8FC43B0}", //Pages
-		"{C171FE63-5703-4FAB-8C23-272B11851D28}", //Models
-		"{73C0B117-488E-4A38-87FA-9A2943F444BC}", //DAL.Contracts
-		"{E3936829-7BCD-4E05-A38F-95BE9BF28763}", //DAL.Implementation
-		"{6564AE7C-6D6A-4E5D-B2F9-A5645EF9FE81}", //DAL.Mock
-		"{2C46A29D-53DF-4908-A3B0-765DEC8E9F61}", //BL.Contracts
-		"{3019CA45-A22F-4C17-98F5-480763CFB5C0}", //BL.Implementation
-		"{5C88D276-6708-40E7-B3D0-AFAD5189B497}", //Security.Contracts
-		"{E6DBED51-DACC-4493-B6B0-5F6BF63EE105}", //Security.Implementation
-		"{58C18708-6523-4AFC-A7A2-DBD8715FF6D2}", //Security.Mock
-		"{300E3841-6CD1-43A2-A885-E2E7FA53D09A}", //Captcha.Contracts
-		"{C492F688-058A-4751-9FF0-05C262E10733}", //Captcha.Implementation
-		"{DD4E2927-35B1-40E6-8692-9E0A7C82893F}", //Captcha.Mock
-		"{5BEE28FC-635A-4BB3-A82F-611BB51900F9}" //Secret for AppPrefix
+		"{45DDD773-6F76-4256-8071-9C6586EBA491}",
+		"{0EE6E959-5BA0-4C79-9A9E-33F0B8FC43B0}",
+		"{C171FE63-5703-4FAB-8C23-272B11851D28}",
+		"{73C0B117-488E-4A38-87FA-9A2943F444BC}",
+		"{E3936829-7BCD-4E05-A38F-95BE9BF28763}",
+		"{6564AE7C-6D6A-4E5D-B2F9-A5645EF9FE81}",
+		"{2C46A29D-53DF-4908-A3B0-765DEC8E9F61}",
+		"{3019CA45-A22F-4C17-98F5-480763CFB5C0}",
+		"{5C88D276-6708-40E7-B3D0-AFAD5189B497}",
+		"{E6DBED51-DACC-4493-B6B0-5F6BF63EE105}",
+		"{58C18708-6523-4AFC-A7A2-DBD8715FF6D2}",
+		"{300E3841-6CD1-43A2-A885-E2E7FA53D09A}",
+		"{C492F688-058A-4751-9FF0-05C262E10733}",
+		"{DD4E2927-35B1-40E6-8692-9E0A7C82893F}",
+		"{5BEE28FC-635A-4BB3-A82F-611BB51900F9}"
 	],
 	"symbols": {
 		"TemplateAuthors": {
@@ -88,7 +90,6 @@
 			"path": "Aleph1.Skeletons.WebAPI.Captcha.Mock\\Aleph1.Skeletons.WebAPI.Captcha.Mock.csproj"
 		}
 	],
-
 	"sources": [
 		{
 			"exclude": [

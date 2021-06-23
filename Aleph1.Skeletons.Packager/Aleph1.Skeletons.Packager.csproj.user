@@ -8,5 +8,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <ExtensibilityEssentialsInstalled>true</ExtensibilityEssentialsInstalled>
+    <ProjectView>ProjectFiles</ProjectView>
   </PropertyGroup>
 </Project>

@@ -1,7 +1,9 @@
 {
 	"$schema": "http://json.schemastore.org/template",
 	"author": "Avraham Essoudry",
-	"classifications": [ "Web", "Solution" ],
+	"classifications": [
+		"Web"
+	],
 	"description": "Proxy skeleton including Api",
 	"name": "Aleph1.Proxy",
 	"defaultName": "Aleph1.Proxy",
@@ -9,16 +11,16 @@
 	"groupIdentity": "Aleph1.Skeletons.Proxy",
 	"tags": {
 		"language": "C#",
-		"type": "solution"
+		"type": "project"
 	},
 	"shortName": "api",
 	"sourceName": "Aleph1.Skeletons.Proxy",
 	"guids": [
-		"{45DDD773-6F76-4256-8071-9C6586EBA491}", //WebAPI
-		"{C171FE63-5703-4FAB-8C23-272B11851D28}", //Models
-		"{73C0B117-488E-4A38-87FA-9A2943F444BC}", //Proxy.Contracts
-		"{E3936829-7BCD-4E05-A38F-95BE9BF28763}", //Proxy.Implementation
-		"{6564AE7C-6D6A-4E5D-B2F9-A5645EF9FE81}" //Proxy.Mock
+		"{45DDD773-6F76-4256-8071-9C6586EBA491}",
+		"{C171FE63-5703-4FAB-8C23-272B11851D28}",
+		"{73C0B117-488E-4A38-87FA-9A2943F444BC}",
+		"{E3936829-7BCD-4E05-A38F-95BE9BF28763}",
+		"{6564AE7C-6D6A-4E5D-B2F9-A5645EF9FE81}"
 	],
 	"symbols": {
 		"TemplateAuthors": {
@@ -54,7 +56,6 @@
 			"path": "Aleph1.Skeletons.Proxy.Proxy.Mock\\Aleph1.Skeletons.Proxy.Proxy.Mock.csproj"
 		}
 	],
-
 	"sources": [
 		{
 			"exclude": [

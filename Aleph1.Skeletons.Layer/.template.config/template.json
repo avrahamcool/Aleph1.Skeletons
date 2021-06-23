@@ -1,7 +1,9 @@
 {
 	"$schema": "http://json.schemastore.org/template",
 	"author": "Avraham Essoudry",
-	"classifications": [ "Web", "Solution" ],
+	"classifications": [
+		"Web"
+	],
 	"description": "Create an Aleph1 Layer including Contract, Implementation and Mock.",
 	"name": "Aleph1.Layer",
 	"defaultName": "Aleph1.Layer",
@@ -9,14 +11,14 @@
 	"groupIdentity": "Aleph1.Skeletons.Layer",
 	"tags": {
 		"language": "C#",
-		"type": "solution"
+		"type": "project"
 	},
 	"shortName": "layer",
 	"sourceName": "Aleph1.Skeletons.Layer",
 	"guids": [
-		"{9586565D-5FAB-434A-87B4-F8BEB5BBB015}", //Layer.Contracts
-		"{C44C841C-AFC1-4A32-8AF7-2FE8A0FCE65E}", //Layer.Implementation
-		"{7EE86318-5634-41F8-9400-41CEC70740D9}" //Layer.Mock
+		"{9586565D-5FAB-434A-87B4-F8BEB5BBB015}",
+		"{C44C841C-AFC1-4A32-8AF7-2FE8A0FCE65E}",
+		"{7EE86318-5634-41F8-9400-41CEC70740D9}"
 	],
 	"symbols": {
 		"TemplateAuthors": {
