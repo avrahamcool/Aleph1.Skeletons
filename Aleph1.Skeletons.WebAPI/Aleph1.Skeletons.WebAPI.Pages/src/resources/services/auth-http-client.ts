@@ -1,26 +1,9 @@
-import { minute } from ".";
 import { HttpClient } from "aurelia-fetch-client";
-import * as environment from "../../../config/environment.json";
+import { minute } from "resources/helpers";
+import { default as environment } from "../../../config/environment.json";
 
 export class AuthHttpClient extends HttpClient
 {
-	private inactiveSessionTimeoutHandler: number;
-	public startInactiveSessionTimeout(): void
-	{
-		this.refreshToken();
-		this.resetInactiveSessionTimeout();
-	}
-	private resetInactiveSessionTimeout()
-	{
-		this.clearInactiveSessionTimeoutHandler();
-		this.inactiveSessionTimeoutHandler = window.setTimeout(this.refreshToken, minute * environment.idleDurationUntilWarningMin);
-	}
-	public clearInactiveSessionTimeoutHandler(): void
-	{
-		clearTimeout(this.inactiveSessionTimeoutHandler);
-	}
-	private refreshToken = () => this.post("/api/refresh-token");
-
 	constructor()
 	{
 		super();
@@ -39,16 +22,40 @@ export class AuthHttpClient extends HttpClient
 		});
 	}
 
-	public queryString(baseUrl: string, parameters: { [key: string]: string | number | boolean | Date }): string
+	private inactiveSessionTimeoutHandler: number;
+
+	public startInactiveSessionTimeout(): void
 	{
-		const query = Object.entries(parameters)
+		this.refreshToken();
+		this.resetInactiveSessionTimeout();
+	}
+
+	private resetInactiveSessionTimeout()
+	{
+		this.clearInactiveSessionTimeoutHandler();
+		this.inactiveSessionTimeoutHandler = window.setTimeout(
+			this.refreshToken,
+			minute * environment.idleDurationUntilWarningInMin
+		);
+	}
+
+	public clearInactiveSessionTimeoutHandler(): void
+	{
+		clearTimeout(this.inactiveSessionTimeoutHandler);
+	}
+
+	private refreshToken = () => this.post("/api/refresh-token");
+
+	static queryString(url: string, params: { [key: string]: string | number | boolean | Date }): string
+	{
+		const query = Object.entries(params)
 			.filter(([, value]) => value != null)
 			.map(([key, value]) =>
 			{
 				const valueAsString = value instanceof Date ? value.toJSON() : value.toString();
-				return `${ key }=${ valueAsString }`;
+				return `${key}=${valueAsString}`;
 			})
 			.join("&");
-		return `${ baseUrl }?${ query }`;
+		return `${url}?${query}`;
 	}
 }

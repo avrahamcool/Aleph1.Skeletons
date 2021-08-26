@@ -1,0 +1,48 @@
+.tippy-box {
+	@apply bg-gray-800 text-white border border-solid border-gray-600 #{!important};
+	@apply select-none;
+}
+
+.tippy-arrow {
+	@apply text-gray-800 border-gray-600 #{!important};
+}
+
+.tippy-tooltip {
+	@apply bg-gray-800 #{!important};
+}
+
+.tippy-box[data-placement^=top] > .tippy-arrow::after {
+	border-top-color: rgb(75, 85, 99);
+	border-width: 8px 8px 0;
+	bottom: -8px;
+	left: 0
+}
+
+.tippy-box[data-placement^=bottom] > .tippy-arrow::after {
+	border-bottom-color: rgb(75, 85, 99);
+	border-width: 0 8px 8px;
+	left: 0;
+	top: -8px
+}
+
+.tippy-box[data-placement^=left] > .tippy-arrow::after {
+	border-left-color: rgb(75, 85, 99);
+	border-width: 8px 0 8px 8px;
+	right: -8px;
+	top: 0
+}
+
+.tippy-box[data-placement^=right] > .tippy-arrow::after {
+	border-right-color: rgb(75, 85, 99);
+	border-width: 8px 8px 8px 0;
+	left: -8px;
+	top: 0
+}
+
+.tippy-arrow::after {
+	border-color: transparent;
+	border-style: solid;
+	content: "";
+	position: absolute;
+	z-index: -1
+}

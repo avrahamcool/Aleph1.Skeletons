@@ -1,0 +1,57 @@
+/* stylelint-disable selector-class-pattern */
+
+.flatpickr-calendar {
+	direction: ltr !important;
+
+	.flatpickr-innerContainer {
+		direction: rtl;
+
+		.dayContainer {
+			.flatpickr-day {
+				&.startRange {
+					border-radius: 0 50px 50px 0 !important;
+				}
+
+				&.endRange {
+					border-radius: 50px 0 0 50px !important;
+				}
+			}
+		}
+	}
+
+	.flatpickr-months {
+		.flatpickr-current-month {
+			direction: rtl;
+
+			> .flatpickr-monthDropdown-months {
+				direction: rtl;
+			}
+
+			> .numInputWrapper {
+				> .arrowUp,
+				> .arrowDown {
+					left: 0;
+					right: unset;
+				}
+			}
+		}
+
+		.flatpickr-prev-month {
+			left: unset;
+			right: 0;
+			transform: scaleX(-1);
+		}
+
+		.flatpickr-next-month {
+			left: 0;
+			right: unset;
+			transform: scaleX(-1);
+		}
+	}
+}
+
+.flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n+1)),
+.flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n+1)),
+.flatpickr-day.endRange.startRange + .endRange:not(:nth-child(7n+1)) {
+	box-shadow: 10px 0 0 #569ff7;
+}

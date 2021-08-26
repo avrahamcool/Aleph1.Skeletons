@@ -1,17 +1,25 @@
-<template class="bg-indigo-600 text-white flex p-4 gap-4 justify-between items-center">
-	<div class="flex gap-4 items-center">
-		<img class="w-12" src="./app-logo.png" />
-		<span>My Demo App</span>
+<template>
+	<require from="components/spinner/spinner.html"></require>
+
+	<spinner if.bind="signOutPending"></spinner>
+
+	<div
+		class="flex-grow md:flex-grow-0 flex-shrink md:flex-shrink-0 flex items-center justify-center md:justify-start h-full mr-auto md:mr-0 ml-auto select-none">
+		<img class="w-10 h-10 pb-1 ml-4" src="./app-logo.png" />
+		<a class="pb-1 font-sans font-bold text-3xl text-white tracking-tighter cursor-pointer no-underline rounded-2 focusable"
+			route-href="route: default">Demo App</a>
 	</div>
-	<nav class="flex gap-4 items-center">
-		<a repeat.for="route of router.navigation | allowedRoutes:userService.authenticationInfo.roles"
-			href.bind="route.href" class="${route.isActive ? 'underline' : ''}">
-			${route.title}
-		</a>
-	</nav>
-	<div class="flex gap-4 items-center">
-		<span>hello ${userService.authenticationInfo.username} -
-			${Roles[userService.authenticationInfo.roles]}</span>
-		<a href="#" click.delegate="logout()">logout</a>
+	<div class="h-full flex-shrink-0 flex-center-start gap-4 mr-auto ml-0 select-none">
+		<div class="h-10 hidden md:flex items-center justify-center text-white gap-1">
+			<span class="whitespace-nowrap overflow-hidden overflow-ellipsis">
+				שלום ${userService.identity.username}
+			</span>
+		</div>
+		<span class="w-px h-6 bg-white opacity-50 rounded-full"></span>
+		<button type="button" if.bind="userService.isSignedIn" classgg="tw-button w-10 md:w-auto button-transparent-white"
+			click.delegate="signOutHandler()">
+			<i class="far fa-sign-out fa-flip-horizontal"></i>
+			<span class="hidden md:inline-block whitespace-nowrap overflow-hidden overflow-ellipsis">יציאה</span>
+		</button>
 	</div>
 </template>

@@ -1,17 +1,25 @@
-import { UserService } from "resources/services";
-import { Router } from "aurelia-router";
 import { autoinject } from "aurelia-framework";
-import { handleErrors } from "resources/decorators/handle-errors";
+import { UserService } from "resources/services";
+import { displayCustomError } from "resources/helpers";
+import { busyTracking } from "resources/decorators";
 
 @autoinject()
 export class AppHeader
 {
-	constructor(public router: Router, public userService: UserService)
-	{ }
+	constructor(
+		private userService: UserService
+	) { }
 
-	@handleErrors("התרחשה שגיאה בעת ההתנתקות")
-	public logout(): Promise<void>
+	@busyTracking("signOutPending")
+	public async signOutHandler(): Promise<void>
 	{
-		return this.userService.logout();
+		try
+		{
+			await this.userService.signOut();
+		}
+		catch
+		{
+			displayCustomError("התרחשה שגיאה בעת ההתנתקות");
+		}
 	}
 }

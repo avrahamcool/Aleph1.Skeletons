@@ -16,7 +16,6 @@
 	"build": {
 		"options": {
 			"server": "dev",
-			"extractCss": "prod",
 			"coverage": false
 		}
 	},

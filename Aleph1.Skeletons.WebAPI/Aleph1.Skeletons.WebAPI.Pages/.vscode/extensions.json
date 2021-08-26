@@ -1,19 +1,19 @@
 {
 	"recommendations": [
 		"aureliaeffect.aurelia",
-		"editorconfig.editorconfig",
 		"behzad88.aurelia",
+		"bradlc.vscode-tailwindcss",
 		"christian-kohler.path-intellisense",
 		"coenraads.bracket-pair-colorizer-2",
 		"dbaeumer.vscode-eslint",
+		"editorconfig.editorconfig",
+		"gruntfuggly.todo-tree",
+		"janne252.fontawesome-autocomplete",
+		"natqe.reload",
 		"oderwat.indent-rainbow",
-		"ritwickdey.liveserver",
-		"steoates.autoimport",
 		"streetsidesoftware.code-spell-checker",
 		"streetsidesoftware.code-spell-checker-hebrew",
-		"natqe.reload",
 		"stylelint.vscode-stylelint",
-		"janne252.fontawesome-autocomplete",
-		"bradlc.vscode-tailwindcss"
+		"wmaurer.change-case"
 	]
 }

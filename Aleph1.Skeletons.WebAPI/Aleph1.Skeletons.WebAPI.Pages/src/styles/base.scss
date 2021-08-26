@@ -1,0 +1,53 @@
+*,
+*::before,
+*::after {
+	@apply reset-root tap-transparent;
+	@apply outline-none border-none box-border;
+	@apply scroll-behavior-smooth scrollbar-w-none;
+	@apply m-0 p-0 min-w-0 min-h-0;
+}
+
+:-moz-ui-invalid {
+	box-shadow: none;
+}
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+	@apply h-auto;
+}
+
+::-webkit-search-decoration {
+	@apply webkit-appearance-none;
+}
+
+html {
+	@apply h-full dir-rtl overflow-hidden;
+}
+
+body {
+	@apply h-full overflow-hidden;
+	@apply text-gray-800 bg-white;
+	@apply font-sans font-medium text-base cursor-default;
+}
+
+#app {
+	@apply h-full w-full flex flex-col;
+	@apply bg-transparent;
+}
+
+header {
+	@apply w-full h-12 px-0 md:px-4 flex-center-start;
+	@apply text-white bg-gray-800;
+}
+
+main {
+	@apply flex-1 flex-start flex-col overflow-x-hidden overflow-y-auto;
+}
+
+input::-ms-clear {
+	@apply hidden;
+}
+
+select::-ms-expand {
+	@apply hidden;
+}

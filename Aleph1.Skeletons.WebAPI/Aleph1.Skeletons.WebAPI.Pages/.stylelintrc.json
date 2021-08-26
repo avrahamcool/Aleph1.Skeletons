@@ -10,11 +10,17 @@
 			true,
 			{
 				"ignoreFontFamilies": [
-					"Font Awesome 5 Pro"
+					"Font Awesome 5 Pro",
+					"Font Awesome 5 Brands",
+					"Font Awesome 5 Duotone"
 				]
 			}
 		],
+		"function-parentheses-space-inside": "never-single-line",
 		"indentation": "tab",
+		"number-leading-zero": "never",
+		"value-list-max-empty-lines": null,
+		"no-invalid-position-at-import-rule": null,
 		"selector-max-id": 1,
 		"selector-max-compound-selectors": 8,
 		"max-nesting-depth": 8,
@@ -24,7 +30,13 @@
 			true,
 			{
 				"ignoreTypes": [
-					"router-view"
+					"router-view",
+					"ux-dialog-overlay",
+					"ux-dialog-container",
+					"ux-dialog",
+					"ux-dialog-header",
+					"ux-dialog-body",
+					"ux-dialog-footer"
 				]
 			}
 		],

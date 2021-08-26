@@ -1,28 +1,45 @@
 {
 	"compileOnSave": false,
 	"compilerOptions": {
-		"module": "esnext",
-		"typeRoots": [
-			"./node_modules/@types"
-		],
+		"target": "ES2017",
+		"module": "ESNext",
+		"moduleResolution": "node",
+		"alwaysStrict": true,
+		"noImplicitAny": true,
+		"noImplicitOverride": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"strictBindCallApply": true,
+		"strictFunctionTypes": false,
+		"strictNullChecks": true,
+		"strictPropertyInitialization": false,
+		"resolveJsonModule": true,
+		"importHelpers": true,
+		"downlevelIteration": true,
 		"removeComments": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
 		"sourceMap": true,
-		"target": "es5",
-		"lib": [
-			"es2015",
-			"dom"
-		],
-		"moduleResolution": "node",
 		"baseUrl": "src",
-		"resolveJsonModule": true,
-		"allowJs": true,
-		"outDir": "someOutDir"
+		"outDir": "dist",
+		"lib": [
+			"ESNext",
+			"DOM"
+		],
+		"paths": {
+			"tslib": [
+				"./node_modules/tslib"
+			]
+		}
 	},
 	"include": [
 		"**/*.js",
 		"**/*.ts"
+	],
+	"exclude": [
+		"**/aurelia_project/generators/**"
 	],
 	"atom": {
 		"rewriteTsconfig": false

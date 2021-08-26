@@ -1,5 +1,18 @@
-@import "notyf/notyf.min.css";
-@import "flatpickr/dist/flatpickr.min.css";
-@import "~tailwindcss/base";
+// Packages
+@import "~notyf/notyf.min.css";
+@import "~tippy.js/dist/tippy.css";
+@import "~flatpickr/dist/flatpickr.min.css";
+@import "~overlayscrollbars/css/OverlayScrollbars.min.css";
+
+// Tailwind
 @import "~tailwindcss/components";
 @import "~tailwindcss/utilities";
+
+// Custom styles
+@import "./styles/fonts";
+@import "./styles/base";
+@import "./styles/dialog";
+@import "./styles/flatpickr";
+@import "./styles/notyf";
+@import "./styles/overlay-scrollbars";
+@import "./styles/tippy";
