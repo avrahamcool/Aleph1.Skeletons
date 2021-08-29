@@ -1,4 +1,6 @@
 <template>
+	<require from="components/app-header/app-header"></require>
+	<header as-element="app-header"></header>
 	<main class="p-4 md:p-8">
 		<form submit.delegate="signIn()" class="flex-shrink-0 flex-start flex-col m-auto p-8 rounded-2 tw-shadow">
 			<label
@@ -16,16 +18,15 @@
 			</label>
 			<div ref="wrapperElement" class="${!showAlert ? 'overflow-hidden' : ''} max-w-fit">
 				<div ref="alertsElement" class="text-red-500 text-sm font-bold pb-8 md:pb-4">
-					<span if.bind="capsLockModifier || hebrewModifier" class="ml-1">נא לשים<i
-							class="fas fa-heart mr-1"></i></span>${capsLockModifier ? "Caps Lock פעיל" : ""}${hebrewModifier ?
+					<span if.bind="capsLockModifier || hebrewModifier" class="ml-1">נא לשים לב:</span>${capsLockModifier ? "Caps
+					Lock פעיל" : ""}${hebrewModifier ?
 					((capsLockModifier ? ", וגם " : "") + "סיסמתך מכילה אותיות בעברית") : ""}${capsLockModifier || hebrewModifier
 					? "!" : ""}
 				</div>
 			</div>
 			<button type="submit" disabled.bind="signInDisabled" data-pending.bind="signInPending > 0"
 				class="tw-button w-full flex-shrink-0">
-				<i
-					class="absolute far fa-spinner-third fa-spin-faster transition-opacity ${!signInPending ? 'opacity-0' : ''}"></i>
+				<div class="spinner absolute h-4 w-4 transition-opacity ${!signInPending ? 'opacity-0' : ''}"></div>
 				<span class="absolute transition-opacity duration-75 ${signInPending > 0 ? 'opacity-0' : ''}">כניסה</span>
 			</button>
 		</form>

@@ -262,3 +262,5 @@ paket-files/
 __pycache__/
 *.pyc
 /Aleph1.Skeletons.WebAPI/Aleph1.Skeletons.WebAPI.Pages/dist
+
+.DS_Store

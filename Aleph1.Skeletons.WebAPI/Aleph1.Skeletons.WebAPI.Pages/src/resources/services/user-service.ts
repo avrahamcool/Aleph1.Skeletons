@@ -89,14 +89,15 @@ export class UserService
 		this.httpClient.startInactiveSessionTimeout();
 	}
 
-	public async signIn(credentials: Credentials): Promise<string>
+	public async signIn(credentials: Credentials): Promise<void>
 	{
 		const captcha = await loadCaptcha(environment.captchaSiteKey, { explicitRenderParameters: { badge: "bottomleft" } });
 		credentials.reCaptcha = await captcha.execute();
 		const response = await this.httpClient.post("/api/sign-in", serialize(credentials));
-		const secret = await response.json();
+		this.identity = await response.json();
+		await this.au.setRoot(PLATFORM.moduleName("shells/app"));
 		captcha.hideBadge();
-		return secret;
+		this.startIdleTimeout();
 	}
 
 	public async signOut(): Promise<void>

@@ -4,8 +4,8 @@ import { watch } from "aurelia-watch-decorator";
 import { gsap } from "gsap";
 import { UserService } from "resources/services";
 import { Credentials } from "resources/models";
-import { displayCustomError, outerHeight } from "resources/helpers";
-import { busyTracking } from "resources/decorators";
+import { outerHeight } from "resources/helpers";
+import { busyTracking, handleErrors } from "resources/decorators";
 
 @autoinject()
 export class SignInShell
@@ -47,18 +47,12 @@ export class SignInShell
 		return !this.credentials.username || !this.credentials.password;
 	}
 
+	@handleErrors("התרחשה שגיאה בעת ההזדהות")
 	@busyTracking("signInPending")
 	public async signIn(): Promise<void>
 	{
-		try
-		{
-			await this.userService.signIn(this.credentials);
-			this.credentials.password = "";
-		}
-		catch
-		{
-			displayCustomError("התרחשה שגיאה בעת ההזדהות");
-		}
+		await this.userService.signIn(this.credentials);
+		this.credentials.password = "";
 	}
 
 	@watch<SignInShell>(x => x.capsLockModifier)

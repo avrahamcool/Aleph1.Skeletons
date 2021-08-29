@@ -25,7 +25,7 @@ export class AppShell
 					route: ["", "persons"],
 					name: "persons",
 					moduleId: PLATFORM.moduleName("components/persons/persons"),
-					title: "Demo App",
+					title: "Persons",
 					nav: true,
 					settings: {
 						auth: Roles.User
@@ -62,6 +62,5 @@ export class AppShell
 
 			return config;
 		});
-
 	}
 }
