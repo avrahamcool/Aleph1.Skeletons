@@ -42,7 +42,7 @@ export default class ElementGenerator
     	this.message = 'Hello world';
 	}
 }
-`
+`;
 	}
 
 	generateHTMLSource(className: string): string
@@ -50,6 +50,6 @@ export default class ElementGenerator
 		return `<template>
 	<h1>${ className } message: \${message}</h1>
 </template>
-`
+`;
 	}
 }
