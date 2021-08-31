@@ -1,69 +1,33 @@
-import { second } from "../services/time";
-import { getLogger } from "aurelia-logging";
-import { Notyf } from "notyf";
+import { displayError } from "resources/helpers";
 
-type IMethodDecorator<T> = (target: T, propertyKey: string, descriptor: PropertyDescriptor) => void;
-
-
-const logger = getLogger("handleErrors");
-export function displayError(friendlyError: string, realError?: unknown): void
+export function handleErrors(message: string): MethodDecorator
 {
-	const notyfInstance = new Notyf({
-		duration: 5 * second,
-		dismissible: true
-	});
-
-	if (realError instanceof Response)
+	return function decoratorInstance(target, property, descriptor: PropertyDescriptor)
 	{
-		realError.text()
-			.then(bodyAsText =>
-			{
-				try { return JSON.parse(bodyAsText); }
-				catch { return bodyAsText; }
-			})
-			.then(errorObj =>
-			{
-				let errorsArray = [friendlyError];
-				if (realError.status === 400 && errorObj.modelState)
-				{
-					errorsArray = errorsArray.concat(...Object.values(errorObj.modelState) as string[]);
-				}
-
-				notyfInstance.error(errorsArray.join("<br>"));
-				logger.error(friendlyError, realError.status, errorObj);
-			});
-	}
-	else
-	{
-		notyfInstance.error(friendlyError);
-		logger.error(friendlyError, realError);
-	}
-}
-
-export function handleErrors<T>(friendlyError: string): IMethodDecorator<T>
-{
-	return function (_target: T, propertyKey: string, descriptor: PropertyDescriptor)
-	{
-		const givenFunc = descriptor.value;
-		if (typeof givenFunc !== "function")
+		if (typeof descriptor.value !== "function")
 		{
-			throw Error(`'handleErrors' Decorator should be used on functions only! you used it on [${ propertyKey }]`);
+			throw new Error(`Decorator 'handleErrors' was used on '${String(property)}', which is not a function.`);
 		}
 
-		descriptor.value = function (...params: unknown[])
+		const originalMethod = descriptor.value;
+
+		descriptor.value = function patch(...args: any[]): any
 		{
 			try
 			{
-				const retVal: unknown = givenFunc.call(this, ...params);
-				if (retVal instanceof Promise)
+				const result = originalMethod.apply(this, args);
+
+				if (result instanceof Promise)
 				{
-					return retVal.catch(e => displayError(friendlyError, e));
+					return result.catch(error => displayError(message, error));
 				}
-				return retVal;
+
+				return result;
 			}
-			catch (e)
+			catch (error)
 			{
-				displayError(friendlyError, e);
+				displayError(message, error);
+				throw error;
 			}
 		};
 	};
