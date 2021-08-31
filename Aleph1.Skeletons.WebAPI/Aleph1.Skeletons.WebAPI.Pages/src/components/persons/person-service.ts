@@ -6,13 +6,14 @@ import { plainToClass } from "class-transformer";
 @autoinject()
 export class PersonService
 {
-	constructor(private httpClient: AuthHttpClient)
-	{ }
+	constructor(
+		private httpClient: AuthHttpClient
+	) { }
 
-	public getPersons(): Promise<PersonModel[]>
+	public async getPersons(): Promise<PersonModel[]>
 	{
-		return this.httpClient.get("/api/persons")
-			.then(resp => resp.json())
-			.then((fromServer: PersonModel[]) => plainToClass(PersonModel, fromServer));
+		const response = await this.httpClient.get("/api/persons");
+		const data: object[] = await response.json();
+		return plainToClass(PersonModel, data);
 	}
 }
