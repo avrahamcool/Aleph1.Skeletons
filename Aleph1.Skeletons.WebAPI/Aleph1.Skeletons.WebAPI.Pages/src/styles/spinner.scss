@@ -1,0 +1,31 @@
+.spinner::after {
+	animation: spinner .7s linear infinite;
+	border-bottom: 2px solid;
+	border-left: 2px solid rgba(255, 255, 255, 0);
+	border-radius: 50%;
+	border-right: 2px solid rgba(255, 255, 255, 0);
+	border-top: 2px solid;
+	box-sizing: border-box;
+	content: "";
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+
+.spinner.spinner-2x::after {
+	border-width: 4px;
+}
+
+.spinner.spinner-3x::after {
+	border-width: 6px;
+}
+
+.spinner.spinner-4x::after {
+	border-width: 8px;
+}
+
+@keyframes spinner {
+	to { transform: rotate(360deg); }
+}

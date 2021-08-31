@@ -1,0 +1,66 @@
+/* stylelint-disable selector-class-pattern */
+
+@keyframes notyf-fadeoutleft {
+	0% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	to {
+		opacity: 0;
+		transform: translateX(-25%);
+	}
+}
+
+.notyf {
+	@apply dir-rtl;
+}
+
+.notyf__wrapper {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.notyf__icon {
+	margin-left: 13px;
+	margin-right: unset;
+}
+
+.notyf__dismiss {
+	left: 0;
+	margin-left: -15px;
+	margin-right: unset;
+	right: unset;
+}
+
+.notyf__toast--dismissible .notyf__wrapper {
+	padding-left: 30px;
+	padding-right: unset;
+}
+
+.notyf__toast {
+	@apply max-w-sm;
+}
+
+.notyf__toast--disappear .notyf__dismiss {
+	animation: notyf-fadeoutleft .3s forwards !important;
+}
+
+.notyf__ripple {
+	height: 600px !important;
+	width: 600px !important;
+}
+
+@media only screen and (max-width: 480px) {
+	.notyf__toast {
+		@apply max-w-full;
+	}
+
+	.notyf__message {
+		padding-left: 15px !important;
+	}
+
+	.notyf__dismiss {
+		width: 48px !important;
+	}
+}

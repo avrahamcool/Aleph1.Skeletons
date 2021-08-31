@@ -1,0 +1,46 @@
+ux-dialog-overlay {
+	@apply fixed inset-0 opacity-0;
+
+	&.active {
+		@apply bg-gray-800 opacity-25;
+	}
+}
+
+ux-dialog-container {
+	@apply fixed block inset-0 w-full h-full overflow-x-hidden overflow-y-auto;
+	@apply transition-opacity opacity-0 p-8 pb-0;
+
+	&.active {
+		@apply opacity-100;
+	}
+
+	> div {
+		@apply m-auto #{!important};
+		@apply flex-center w-full h-full;
+
+		> div {
+			@apply block m-auto pb-8 w-fit h-fit;
+		}
+	}
+}
+
+ux-dialog {
+	@apply block m-auto p-8 w-fit h-fit md:min-w-xs max-w-full max-h-full;
+	@apply tw-shadow-dialog rounded-2 bg-white;
+
+	> ux-dialog-header {
+		@apply flex-center-start flex-shrink-0 w-full;
+	}
+
+	> ux-dialog-body {
+		@apply flex-center-start w-full;
+	}
+
+	> ux-dialog-footer {
+		@apply flex-center-start flex-shrink-0 w-full;
+	}
+}
+
+.ux-dialog-open {
+	@apply overflow-hidden;
+}
