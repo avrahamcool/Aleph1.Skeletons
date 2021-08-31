@@ -1,28 +1,41 @@
-type IMethodDecorator<T> = (target: T, propertyKey: string, descriptor: PropertyDescriptor) => void;
+export const Forced = Symbol("Forced");
 
-export function cache<T>(): IMethodDecorator<T>
+export function cache(): MethodDecorator
 {
-	return function (_target: T, propertyKey: string, descriptor: PropertyDescriptor)
+	return function decorator(target, property, descriptor: PropertyDescriptor)
 	{
-		const givenFunc: (...params: unknown[]) => Promise<unknown> = descriptor.value;
-		if (typeof givenFunc !== "function")
+		if (typeof descriptor.value !== "function")
 		{
-			throw Error(`'cache' Decorator should be used on functions only! you used it on [${ propertyKey }]`);
+			throw new Error(`Decorator 'cache' was used on '${String(property)}', which is not a function.`);
 		}
 
-		// holding all results of previous calls in a map, allowing caching differently for each parameter
-		const cachedResultMap = new Map<string, unknown>();
+		const originalMethod = descriptor.value;
 
-		// changing the given function by altering it's descriptor value
-		// using "function" syntax to take advantage of correct "this" scope
-		descriptor.value = function (...params: unknown[]): unknown
+		// Caching results of previous calls in a map
+		const results = new Map<string, unknown>();
+
+		// Caching the results by altering the method's descriptor value,
+		// using 'function' syntax to take advantage of correct 'this' scope
+		descriptor.value = function patch(...args: any[]): any
 		{
-			const cacheKey = JSON.stringify(params);
-			if (!cachedResultMap.has(cacheKey))
+			const isForced = args.find(arg => arg === Forced);
+			const resultKey = JSON.stringify(args.filter(arg => arg && arg !== Forced));
+
+			if (!results.has(resultKey) || isForced)
 			{
-				cachedResultMap.set(cacheKey, givenFunc.call(this, ...params));
+				const result = originalMethod.apply(this, args);
+				results.set(resultKey, result);
+				if (result instanceof Promise)
+				{
+					result.catch(error =>
+					{
+						results.delete(resultKey);
+						throw error;
+					});
+				}
 			}
-			return cachedResultMap.get(cacheKey);
+
+			return results.get(resultKey)!;
 		};
 	};
 }
