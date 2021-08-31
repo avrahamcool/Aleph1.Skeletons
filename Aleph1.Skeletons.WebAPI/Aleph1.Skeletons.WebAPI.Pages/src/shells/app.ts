@@ -1,26 +1,31 @@
 import { autoinject, Aurelia } from "aurelia-framework";
-import { Roles } from "resources/models";
-import { UserService } from "resources/services";
 import { PLATFORM } from "aurelia-pal";
 import { Router, RouterConfiguration, NavigationInstruction, Next } from "aurelia-router";
+import { Roles } from "resources/enums";
+import { UserService } from "resources/services";
 
 @autoinject()
 export class AppShell
 {
-	constructor(private au: Aurelia, private userService: UserService, private router: Router)
-	{ }
+	constructor(
+		private aurelia: Aurelia,
+		private userService: UserService,
+		private router: Router
+	) { }
 
 	public activate(): void
 	{
 		this.router.configure((config: RouterConfiguration) =>
 		{
 			config.title = "Demo App";
+			config.fallbackRoute("persons");
+
 			config.map([
 				{
 					route: ["", "persons"],
 					name: "persons",
-					moduleId: PLATFORM.moduleName("../components/persons/persons"),
-					title: "persons",
+					moduleId: PLATFORM.moduleName("components/persons/persons"),
+					title: "Persons",
 					nav: true,
 					settings: {
 						auth: Roles.User
@@ -29,14 +34,15 @@ export class AppShell
 				{
 					route: "admin",
 					name: "admin",
-					moduleId: PLATFORM.moduleName("../components/admin/admin"),
-					title: "admin",
+					moduleId: PLATFORM.moduleName("components/admin/admin"),
+					title: "Admin",
 					nav: true,
 					settings: {
 						auth: Roles.Admin
 					}
 				}
 			]);
+
 			config.addAuthorizeStep({
 				run: (instruction: NavigationInstruction, next: Next) =>
 				{
@@ -46,7 +52,7 @@ export class AppShell
 
 					if (!requiredRoles.every(r => this.userService.isAllowedForRole(r)))
 					{
-						this.au.setRoot(PLATFORM.moduleName("shells/login"));
+						this.aurelia.setRoot(PLATFORM.moduleName("shells/sign-in"));
 						return next.cancel();
 					}
 
@@ -56,6 +62,5 @@ export class AppShell
 
 			return config;
 		});
-
 	}
 }
