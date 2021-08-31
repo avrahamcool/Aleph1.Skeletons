@@ -1,9 +1,14 @@
-import format from "date-fns/format";
+import { default as format } from "date-fns/format";
 
 export class DateFormatValueConverter
 {
-	toView(value: Date, pattern = "dd/MM/yyyy"): string
+	// eslint-disable-next-line class-methods-use-this
+	public toView(value: Date, pattern = "dd/MM/yyyy"): string
 	{
-		return format(value, pattern);
+		if (value)
+		{
+			return format(value, pattern);
+		}
+		return "";
 	}
 }
