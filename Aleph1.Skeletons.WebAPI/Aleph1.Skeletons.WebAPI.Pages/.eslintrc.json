@@ -1,21 +1,25 @@
 {
 	"root": true,
 	"env": {
-		"es6": true,
+		"amd": true,
+		"node": true,
 		"browser": true,
-		"node": true
+		"es2021": true
 	},
 	"parser": "@typescript-eslint/parser",
 	"plugins": [
+		"import",
+		"declaration-quotes",
 		"@typescript-eslint"
 	],
 	"extends": [
-		"eslint:recommended",
-		"plugin:@typescript-eslint/eslint-recommended",
-		"plugin:@typescript-eslint/recommended"
+		"airbnb-typescript/base",
+		"plugin:import/errors",
+		"plugin:import/warnings",
+		"plugin:import/typescript"
 	],
 	"parserOptions": {
-		"ecmaVersion": 2019,
+		"ecmaVersion": 2021,
 		"sourceType": "module",
 		"tsconfigRootDir": "."
 	},
@@ -32,25 +36,94 @@
 			}
 		}
 	],
+	"settings": {
+		"import/resolver": "typescript"
+	},
 	"rules": {
+		"declaration-quotes/quotes": [
+			"error",
+			"double"
+		],
+		"import/prefer-default-export": "off",
+		"import/no-named-default": "off",
+		"arrow-parens": [
+			"error",
+			"as-needed"
+		],
+		"no-empty": [
+			"error",
+			{
+				"allowEmptyCatch": true
+			}
+		],
+		"no-tabs": "off",
+		"no-param-reassign": "off",
+		"object-curly-newline": "off",
+		"linebreak-style": [
+			"error",
+			"windows"
+		],
+		"prefer-destructuring": "off",
+		"max-len": [
+			"error",
+			120,
+			2,
+			{
+				"ignoreUrls": true,
+				"ignoreComments": false,
+				"ignoreRegExpLiterals": true,
+				"ignoreStrings": true,
+				"ignoreTemplateLiterals": true
+			}
+		],
+		"no-underscore-dangle": "off",
+		"no-bitwise": "off",
+		"no-plusplus": "off",
 		"no-console": "warn",
+		"@typescript-eslint/type-annotation-spacing": [
+			"error",
+			{
+				"before": true,
+				"after": true,
+				"overrides": {
+					"colon": {
+						"before": false,
+						"after": true
+					}
+				}
+			}
+		],
+		"brace-style": "off",
+		"@typescript-eslint/brace-style": [
+			"error",
+			"allman",
+			{
+				"allowSingleLine": true
+			}
+		],
+		"lines-between-class-members": "off",
+		"@typescript-eslint/lines-between-class-members": "off",
 		"semi": "off",
 		"@typescript-eslint/semi": [
 			"error",
 			"always"
 		],
-		"comma-dangle": [
+		"comma-dangle": "off",
+		"@typescript-eslint/comma-dangle": [
 			"error",
 			"never"
 		],
-		// "@typescript-eslint/comma-dangle": [
-		// 	"error",
-		// 	"never"
-		// ],
 		"indent": "off",
 		"@typescript-eslint/indent": [
 			"error",
 			"tab"
+		],
+		"no-unused-vars": "off",
+		"@typescript-eslint/no-unused-vars": [
+			"error",
+			{
+				"argsIgnorePattern": "^_"
+			}
 		],
 		"quotes": "off",
 		"@typescript-eslint/quotes": [
@@ -60,6 +133,7 @@
 				"avoidEscape": true
 			}
 		],
-		"@typescript-eslint/no-var-requires": "off"
+		"@typescript-eslint/no-var-requires": "off",
+		"no-return-assign": "off"
 	}
 }

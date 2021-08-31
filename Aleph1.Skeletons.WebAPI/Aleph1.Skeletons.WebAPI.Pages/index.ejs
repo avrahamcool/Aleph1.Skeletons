@@ -1,17 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="he">
 
-	<head>
-		<meta charset="utf-8">
-		<title>Demo App</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<base href="<%- htmlWebpackPlugin.options.metadata.baseUrl %>">
-		<link rel="icon" href="favicon.ico">
+<head>
+	<meta charset="utf-8">
+	<title>Demo App</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="<%- htmlWebpackPlugin.options.metadata.baseUrl %>">
+	<link rel="icon" href="favicon.ico">
+</head>
 
-		<!-- imported CSS are concatenated and added automatically -->
-	</head>
-
-	<body aurelia-app="main" class="font-sans h-screen flex flex-col">
-	</body>
+<body>
+	<div id="app" aurelia-app="main"></div>
+</body>
 
 </html>
