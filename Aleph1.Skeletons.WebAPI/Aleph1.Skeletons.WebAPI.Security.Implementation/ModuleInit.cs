@@ -9,16 +9,15 @@ using Aleph1.Skeletons.WebAPI.Security.Contracts;
 
 namespace Aleph1.Skeletons.WebAPI.Security.Implementation
 {
-	/// <summary>Used to register concrete implementations to the DI container</summary>
+	/// <summary>Module initialization</summary>
 	[CLSCompliant(false), Export(typeof(IModule))]
 	public class ModuleInit : IModule
 	{
-		/// <summary>Used to register concrete implementations to the DI container</summary>
-		/// <param name="registrar">add implementation to the DI container using this registrar</param>
+		/// <summary>Register concrete implementations to the dependency injection container</summary>
+		/// <param name="registrar">Add an implementation using this registrar</param>
 		public void Initialize(IModuleRegistrar registrar)
 		{
 			Contract.Requires(registrar != null);
-
 			registrar.RegisterTypeAsSingelton<ICipher, RijndaelManagedCipher>();
 			registrar.RegisterTypeAsSingelton<ISecurity, SecurityService>();
 		}

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 using Aleph1.Skeletons.WebAPI.Models.Security;
 using Aleph1.Skeletons.WebAPI.Security.Contracts;
@@ -7,18 +8,26 @@ namespace Aleph1.Skeletons.WebAPI.Security.Mock
 {
 	internal class SecurityMock : ISecurity
 	{
-		private readonly AuthenticationInfo MockAuth = new()
+		private readonly Identity Identity = new()
 		{
-			Username = "Mock",
+			Username = "john",
 			Roles = Roles.Admin
 		};
 
-		public string GenerateTicket(AuthenticationInfo authenticationInfo, string userUniqueID) => "MockTicket";
+		private readonly Claims Claims = new()
+		{
+			Username = "john",
+			Roles = Roles.Admin
+		};
 
-		public AuthenticationInfo ReadTicket(string ticketValue, string userUniqueID) => MockAuth;
+		public string EncryptClaims(Claims claims, string signature) => "claims";
 
-		public Task<AuthenticationInfo> Login(string username, string password, string captchaToken) => Task.FromResult(MockAuth);
+		public Claims DecryptToken(string token, string signature) => Claims;
 
-		public bool IsAllowedForContent(AuthenticationInfo authenticationInfo, Roles[] allowedForRoles) => true;
+		public (Identity, Claims) CreateIdentityAndClaims(string username, DateTimeOffset expirationMaxAge) => (Identity, Claims);
+
+		public Task<(Identity, Claims)> SignIn(Credentials credentials) => Task.FromResult((Identity, Claims));
+
+		public bool IsAllowedForContent(Claims claims, Roles[] requiredRoles) => true;
 	}
 }

@@ -21,36 +21,34 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
 		/// <summary>Implement a logic to identify user uniquely</summary>
 		private static string GetUserUniqueID(this HttpRequestMessage request) => request.GetClientIpAddress();
 
-		internal static AuthenticationInfo GetAuthenticationInfoFromCookie(this HttpRequest request, ISecurity securityService)
+		internal static Claims GetClaimsFromCookies(this HttpRequest request, ISecurity securityService)
 		{
-			string ticket = HttpUtility.UrlDecode(request.Cookies.Get(SettingsManager.AuthenticationHeaderKey)?.Value);
-			return securityService.ReadTicket(ticket, request.UserHostAddress);
+			string token = HttpUtility.UrlDecode(request.Cookies.Get(SettingsManager.TokenKey)?.Value);
+			return securityService.DecryptToken(token, request.UserHostAddress);
 		}
-		internal static AuthenticationInfo GetAuthenticationInfoFromCookie(this HttpActionContext requestAction, ISecurity securityService)
+		internal static Claims GetClaimsFromCookies(this HttpActionContext requestAction, ISecurity securityService)
 		{
-			string ticket = requestAction.Request.Headers.GetCookies(SettingsManager.AuthenticationHeaderKey).FirstOrDefault()?[SettingsManager.AuthenticationHeaderKey]?.Value;
-			return securityService.ReadTicket(ticket, requestAction.Request.GetUserUniqueID());
+			string token = requestAction.Request.Headers.GetCookies(SettingsManager.TokenKey).FirstOrDefault()?[SettingsManager.TokenKey]?.Value;
+			return securityService.DecryptToken(token, requestAction.Request.GetUserUniqueID());
 		}
-		internal static void AddAuthenticationInfoValueToCookie(this HttpActionExecutedContext responseAction, string value)
+		internal static void AddTokenToCookies(this HttpActionExecutedContext responseAction, string token)
 		{
 			if (responseAction?.Response == default)
 			{
 				return;
 			}
-
-			CookieHeaderValue cookie = new(SettingsManager.AuthenticationHeaderKey, value)
+			CookieHeaderValue cookie = new(SettingsManager.TokenKey, token)
 			{
 				HttpOnly = true,
 				Secure = true,
 				Path = SettingsManager.EnableCORS ? "/; SameSite=None" : "/",
-				MaxAge = SettingsManager.TicketDurationTimeSpan
+				MaxAge = SettingsManager.ClaimsInactivityMaxAge
 			};
 			responseAction.Response.Headers.AddCookies(new CookieHeaderValue[] { cookie });
 		}
-
-		internal static void RemoveAuthenticationInfoValueFromCookie(this HttpResponseMessage response)
+		internal static void RemoveTokenFromCookies(this HttpResponseMessage response)
 		{
-			CookieHeaderValue cookie = new(SettingsManager.AuthenticationHeaderKey, "")
+			CookieHeaderValue cookie = new(SettingsManager.TokenKey, "")
 			{
 				HttpOnly = true,
 				Secure = true,
@@ -60,16 +58,17 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
 			response.Headers.AddCookies(new CookieHeaderValue[] { cookie });
 		}
 
-		internal static void AddAuthenticationInfo(this HttpRequestMessage request, ISecurity securityService, AuthenticationInfo authInfo)
+		internal static void SetToken(this HttpRequestMessage request, ISecurity securityService, Claims claims)
 		{
-			string ticket = securityService.GenerateTicket(authInfo, request.GetUserUniqueID());
-			request.Properties[SettingsManager.AuthenticationHeaderKey] = ticket;
+			string token = securityService.EncryptClaims(claims, request.GetUserUniqueID());
+			request.Properties[SettingsManager.TokenKey] = token;
 		}
-		internal static string GetAuthenticationInfo(this HttpRequestMessage request) => request.Properties.ContainsKey(SettingsManager.AuthenticationHeaderKey) ? request.Properties[SettingsManager.AuthenticationHeaderKey] as string : null;
+		internal static string GetToken(this HttpRequestMessage request) => request.Properties.ContainsKey(SettingsManager.TokenKey) ? request.Properties[SettingsManager.TokenKey] as string : null;
 
 		internal static T GetHttpParameter<T>(this HttpActionContext context, params string[] parameterNames)
 		{
 			object possibleValue = null;
+
 			foreach (string parameterName in parameterNames)
 			{
 				if (parameterName.Contains("."))
@@ -79,7 +78,6 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
 					{
 						continue;
 					}
-
 					object curentObject = context.ActionArguments[parameterParts[0]];
 					IEnumerable<string> nestedProperties = parameterParts.Skip(1);
 					possibleValue = curentObject.GetPropValue(nestedProperties);

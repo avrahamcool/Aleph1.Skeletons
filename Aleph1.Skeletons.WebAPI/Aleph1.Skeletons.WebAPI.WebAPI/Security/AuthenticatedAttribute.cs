@@ -18,22 +18,18 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
 	internal sealed class AuthenticatedAttribute : ActionFilterAttribute
 	{
 		private bool AllowAnonymous { get; set; }
-		private Roles[] AllowedRoles { get; set; }
+		private Roles[] RequiredRoles { get; set; }
 
-		/// <summary></summary>
-		/// <param name="AllowedRoles"></param>
-		public AuthenticatedAttribute(params Roles[] AllowedRoles)
+		/// <summary>Authenticated controller attribute</summary>
+		/// <param name="requiredRoles">Minimum required user roles</param>
+		public AuthenticatedAttribute(params Roles[] requiredRoles)
 		{
-			// Set default usage to regular user
-			this.AllowedRoles = AllowedRoles.Length == 0
-				? new[] { Roles.User }
-				: AllowedRoles;
-
-			AllowAnonymous = AllowedRoles.Contains(Roles.None);
+			RequiredRoles = requiredRoles.Length == 0 ? new[] { Roles.User } : requiredRoles;
+			AllowAnonymous = RequiredRoles.Contains(Roles.None);
 		}
 
-		/// <summary>Authenticates the request.</summary>
-		/// <param name="actionContext">The action context.</param>
+		/// <summary>Authenticates the request</summary>
+		/// <param name="actionContext">Action context</param>
 		public override void OnActionExecuting(HttpActionContext actionContext)
 		{
 			try
@@ -42,18 +38,35 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
 				IDependencyScope DI = actionContext.Request.GetDependencyScope();
 				ISecurity securityService = DI.GetService(typeof(ISecurity)) as ISecurity;
 
-				//read the ticket
-				AuthenticationInfo authInfo = actionContext.GetAuthenticationInfoFromCookie(securityService);
+				// Read authentication claims
+				Claims claims = actionContext.GetClaimsFromCookies(securityService);
 
-				if (!AllowAnonymous && !securityService.IsAllowedForContent(authInfo, AllowedRoles))
+				if (!AllowAnonymous)
 				{
-					LogManager.GetCurrentClassLogger().LogAleph1(LogLevel.Warn, $"{authInfo?.Username ?? "UNKNOWN"} tried to access {actionContext.Request.RequestUri}");
-					actionContext.Response = actionContext.Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "");
-					return;
+					// Unauthorized if claims timed out
+					if (DateTimeOffset.Now > claims.ExpirationMaxAge)
+					{
+						LogManager.GetCurrentClassLogger().LogAleph1(LogLevel.Warn, $"{claims?.Username ?? "Unknown user"} token timed out");
+						actionContext.Response = actionContext.Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Token timed out");
+						return;
+					}
+
+					// Re-evaluate authentication claims
+					if (DateTimeOffset.Now > claims.RefreshMaxAge)
+					{
+						(_, claims) = securityService.CreateIdentityAndClaims(claims.Username, claims.ExpirationMaxAge);
+					}
+
+					if (!securityService.IsAllowedForContent(claims, RequiredRoles))
+					{
+						LogManager.GetCurrentClassLogger().LogAleph1(LogLevel.Warn, $"{claims?.Username ?? "Unknown user"} tried to access {actionContext.Request.RequestUri}");
+						actionContext.Response = actionContext.Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "");
+						return;
+					}
 				}
 
-				//Regenerating a ticket with the same data - to reset the ticket life span
-				actionContext.Request.AddAuthenticationInfo(securityService, authInfo);
+				// Regenerate user claims with the same data to reset time out
+				actionContext.Request.SetToken(securityService, claims);
 			}
 			catch (Exception ex)
 			{
@@ -65,12 +78,12 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Security
 			}
 		}
 
-		/// <summary>pass the AuthenticationInfo value from the request to the response - if present</summary>
-		/// <param name="actionExecutedContext">action context</param>
+		/// <summary>If present, passes the token value from the request to the response</summary>
+		/// <param name="actionExecutedContext">Action context</param>
 		public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
 		{
-			string authValue = actionExecutedContext.Request.GetAuthenticationInfo();
-			actionExecutedContext.AddAuthenticationInfoValueToCookie(authValue);
+			string authValue = actionExecutedContext.Request.GetToken();
+			actionExecutedContext.AddTokenToCookies(authValue);
 		}
 	}
 }

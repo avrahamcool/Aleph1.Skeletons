@@ -4,11 +4,11 @@ using FluentValidation;
 
 namespace Aleph1.Skeletons.WebAPI.WebAPI.Validators
 {
-	/// <summary>Validates the Person input</summary>
-	public class PersonValidationsCollection : AbstractValidator<Person>
+	/// <summary>Validate Person model</summary>
+	public class PersonValidator : AbstractValidator<Person>
 	{
-		/// <summary>Initializes a new instance of the <see cref="PersonValidationsCollection"/> class.</summary>
-		public PersonValidationsCollection()
+		/// <summary>Validation rules</summary>
+		public PersonValidator()
 		{
 			RuleFor(x => x.FirstName)
 				.NotEmpty()

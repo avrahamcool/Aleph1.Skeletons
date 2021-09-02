@@ -1,37 +1,40 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 using Aleph1.Skeletons.WebAPI.Models.Security;
 
 namespace Aleph1.Skeletons.WebAPI.Security.Contracts
 {
-	/// <summary>Handles security (authentication/authorization)</summary>
+	/// <summary>Security layer (authentication/authorization)</summary>
 	public interface ISecurity
 	{
-		#region GeneralAuth
-		/// <summary>create an encrypted ticked that includes all the AuthenticationInfo - can only be opened for a specific user</summary>
-		/// <param name="authenticationInfo">the data to encrypt</param>
-		/// <param name="userUniqueID">ticket will be open-able for this user only</param>
-		/// <returns>encrypted ticket</returns>
-		string GenerateTicket(AuthenticationInfo authenticationInfo, string userUniqueID);
+		/// <summary>Encrypts user identity</summary>
+		/// <param name="claims">User claims to be encrypted</param>
+		/// <param name="signature">Encryption signature</param>
+		/// <returns>Encrypted token</returns>
+		string EncryptClaims(Claims claims, string signature);
 
-		/// <summary>decrypt a ticket</summary>
-		/// <param name="ticketValue">the encrypted ticket</param>
-		/// <param name="userUniqueID">the user that this ticket was encrypted to</param>
-		/// <returns>the data</returns>
-		AuthenticationInfo ReadTicket(string ticketValue, string userUniqueID);
-		#endregion GeneralAuth
+		/// <summary>Decrypts an encrypted token</summary>
+		/// <param name="token">Encrypted token</param>
+		/// <param name="signature">Encryption signature</param>
+		/// <returns>Decrypted user claims</returns>
+		Claims DecryptToken(string token, string signature);
 
-		/// <summary>Generate a AuthenticationInfo based on the given credentials</summary>
-		/// <param name="username">the user-name</param>
-		/// <param name="password">the password</param>
-		/// <param name="captchaToken">CAPTCHA token</param>
-		/// <returns>an AuthenticationInfo representing the credentials of the user</returns>
-		Task<AuthenticationInfo> Login(string username, string password, string captchaToken);
+		/// <summary>Creates user identity and user claims</summary>
+		/// <param name="username">User name</param>
+		/// <param name="expirationMaxAge">Maximum Claims time out</param>
+		/// <returns>User identity and user claims</returns>
+		(Identity, Claims) CreateIdentityAndClaims(string username, DateTimeOffset expirationMaxAge);
 
-		/// <summary>return whether the current user is allowed for content</summary>
-		/// <param name="authenticationInfo">the user authentication info</param>
-		/// <param name="allowedForRoles">indicate the roles that are permitted to the current asset</param>
-		/// <returns>true if allowed, false otherwise</returns>
-		bool IsAllowedForContent(AuthenticationInfo authenticationInfo, Roles[] allowedForRoles);
+		/// <summary>Creates user identity and claims from given credentials</summary>
+		/// <param name="credentials">User credentials</param>
+		/// <returns>User identity and claims</returns>
+		Task<(Identity, Claims)> SignIn(Credentials credentials);
+
+		/// <summary>Checks whether the current user is allowed for content</summary>
+		/// <param name="claims">User claims</param>
+		/// <param name="requiredRoles">Minimum required roles to access a selected resource</param>
+		/// <returns>True if allowed, false otherwise</returns>
+		bool IsAllowedForContent(Claims claims, Roles[] requiredRoles);
 	}
 }

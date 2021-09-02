@@ -21,12 +21,14 @@ namespace Aleph1.Skeletons.WebAPI.Security.Implementation
 			Captcha = captcha;
 		}
 
-		public string GenerateTicket(AuthenticationInfo authenticationInfo, string userUniqueID) => CipherService.Encrypt(SettingsManager.AppPrefix, userUniqueID, authenticationInfo, SettingsManager.TicketDurationTimeSpan);
-		public AuthenticationInfo ReadTicket(string ticketValue, string userUniqueID)
+		public string EncryptClaims(Claims claims, string signature) => CipherService.Encrypt(SettingsManager.AppPrefix, signature, claims, SettingsManager.ClaimsInactivityMaxAge);
+
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "Need a catch-all block")]
+		public Claims DecryptToken(string token, string signature)
 		{
 			try
 			{
-				return CipherService.Decrypt<AuthenticationInfo>(SettingsManager.AppPrefix, userUniqueID, ticketValue);
+				return CipherService.Decrypt<Claims>(SettingsManager.AppPrefix, signature, token);
 			}
 			catch
 			{
@@ -34,26 +36,45 @@ namespace Aleph1.Skeletons.WebAPI.Security.Implementation
 			}
 		}
 
+		public (Identity, Claims) CreateIdentityAndClaims(string username, DateTimeOffset expirationMaxAge)
+		{
+			// TODO: Put your real implementation here!
+
+			var roles = username.Equals("admin", StringComparison.OrdinalIgnoreCase) ? Roles.Admin : Roles.User;
+
+			Identity identity = new()
+			{
+				Username = username,
+				Roles = roles
+			};
+
+			Claims claims = new()
+			{
+				Username = username,
+				Roles = roles,
+				RefreshMaxAge = DateTimeOffset.Now + SettingsManager.ClaimsRefreshMaxAge,
+				ExpirationMaxAge = expirationMaxAge
+			};
+
+			return (identity, claims);
+		}
 
 		[Logged(LogParameters = false, LogReturnValue = true)]
-		public async Task<AuthenticationInfo> Login(string username, string password, string captchaToken)
+		public async Task<(Identity, Claims)> SignIn(Credentials credentials)
 		{
-			await Captcha.ValidateCaptcha(captchaToken).ConfigureAwait(false);
+			await Captcha.ValidateCaptcha(credentials.Captcha).ConfigureAwait(false);
 
-			// TODO: put your real implementation here
-			if (!username.Equals(password, StringComparison.OrdinalIgnoreCase))
+			// TODO: Put your real implementation here!
+
+			if (!credentials.Username.Equals(credentials.Password, StringComparison.OrdinalIgnoreCase))
 			{
 				throw new UnauthorizedAccessException();
 			}
 
-			return new AuthenticationInfo()
-			{
-				Username = username,
-				Roles = username.Equals("admin", StringComparison.OrdinalIgnoreCase) ? Roles.Admin : Roles.User
-			};
+			return CreateIdentityAndClaims(credentials.Username, DateTimeOffset.Now + SettingsManager.ClaimsExpirationMaxAge);
 		}
 
 		[Logged(LogParameters = false, LogReturnValue = true)]
-		public bool IsAllowedForContent(AuthenticationInfo authenticationInfo, Roles[] allowedForRoles) => authenticationInfo != default && allowedForRoles.Any(r => authenticationInfo.Roles.HasFlag(r));
+		public bool IsAllowedForContent(Claims claims, Roles[] requiredRoles) => claims != default && requiredRoles.Any(r => claims.Roles.HasFlag(r));
 	}
 }

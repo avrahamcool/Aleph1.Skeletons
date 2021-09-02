@@ -29,7 +29,8 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Implementation
 		{
 			Contract.Requires(modelBuilder != null);
 
-			// setting default length of all strings instead of VarChar(max) - each property can be overwritten later
+			// Set max length for all strings instead of VarChar(max)
+			// Each property can be individually overwritten later
 			modelBuilder.Properties<string>().Configure(s => s.IsUnicode(false).HasMaxLength(256));
 
 			#region Logs

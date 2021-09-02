@@ -73,34 +73,34 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Classes
 			}
 		}
 
-		private static string _authenticationHeaderKey;
-		public static string AuthenticationHeaderKey
+		private static string _tokenKey;
+		public static string TokenKey
 		{
 			get
 			{
-				if (_authenticationHeaderKey == default)
+				if (_tokenKey == default)
 				{
-					_authenticationHeaderKey = ConfigurationManager.AppSettings["AuthenticationHeaderKey"];
+					_tokenKey = ConfigurationManager.AppSettings["TokenKey"];
 				}
-				return _authenticationHeaderKey;
+				return _tokenKey;
 			}
 		}
 
-		private static int? _ticketDurationMin;
-		private static TimeSpan? _ticketDurationTimeSpan;
-		public static TimeSpan? TicketDurationTimeSpan
+		private static int? _claimsInactivityMaxAgeValue;
+		private static TimeSpan? _claimsInactivityMaxAge;
+		public static TimeSpan? ClaimsInactivityMaxAge
 		{
 			get
 			{
-				if (_ticketDurationMin == default)
+				if (_claimsInactivityMaxAgeValue == default)
 				{
-					_ticketDurationMin = int.Parse(ConfigurationManager.AppSettings["TicketDurationMin"], CultureInfo.InvariantCulture);
-					if (_ticketDurationMin.Value != 0)
+					_claimsInactivityMaxAgeValue = int.Parse(ConfigurationManager.AppSettings["ClaimsInactivityMaxAge"], CultureInfo.InvariantCulture);
+					if (_claimsInactivityMaxAgeValue.Value != 0)
 					{
-						_ticketDurationTimeSpan = TimeSpan.FromMinutes(_ticketDurationMin.Value);
+						_claimsInactivityMaxAge = TimeSpan.FromMinutes(_claimsInactivityMaxAgeValue.Value);
 					}
 				}
-				return _ticketDurationTimeSpan;
+				return _claimsInactivityMaxAge;
 			}
 		}
 
