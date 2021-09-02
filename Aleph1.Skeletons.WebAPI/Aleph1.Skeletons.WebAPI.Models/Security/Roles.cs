@@ -2,21 +2,20 @@
 
 namespace Aleph1.Skeletons.WebAPI.Models.Security
 {
-	/// <summary>Authorization roles</summary>
+	/// <summary>User roles</summary>
 	[Flags]
 	public enum Roles
 	{
-		/// <summary>Not logged in</summary>
+		/// <summary>Not signed in</summary>
 		None = 0,
 
 		/// <summary>Regular user</summary>
 		User = 1 << 0,
 
-		/// <summary>Another role for demonstration</summary>
+		/// <summary>Some other role</summary>
 		SomeOtherRole = 1 << 1,
 
-		/// <summary>Administrator</summary>
-		/// <remarks>includes all below rules</remarks>
+		/// <summary>Includes all of the above roles</summary>
 		Admin = None | User | SomeOtherRole
 	}
 }

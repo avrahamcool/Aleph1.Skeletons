@@ -13,19 +13,19 @@ using WebApiThrottle;
 
 namespace Aleph1.Skeletons.WebAPI.WebAPI
 {
-	/// <summary>web api configurations</summary>
+	/// <summary>WebAPI configuration</summary>
 	internal static class WebApiConfig
 	{
-		/// <summary>Registers web api configurations</summary>
-		/// <param name="config">The current configuration</param>
+		/// <summary>Registers WebAPI configurations</summary>
+		/// <param name="config">Current configuration</param>
 		[Logged(LogParameters = false)]
 		public static void Register(HttpConfiguration config)
 		{
-			// Web API routes
+			// WebAPI routes
 			config.MapHttpAttributeRoutes();
 			config.Routes.MapHttpRoute(name: "DefaultApi", routeTemplate: "api/{controller}/{id}", defaults: new { id = RouteParameter.Optional });
 
-			// configure CORS from config
+			// Cross-origin resource sharing
 			if (SettingsManager.EnableCORS)
 			{
 				config.EnableCors(new EnableCorsAttribute(SettingsManager.Origins, SettingsManager.Headers, SettingsManager.Methods, SettingsManager.ExposedHeaders)
@@ -34,11 +34,10 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI
 				});
 			}
 
-			// configure JSON settings so that output will be camelCase, input parameters can be camelCase or PascalCase
+			// JSON field names formatting
 			config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
-			// Apply Throttling Policy on all Controllers - from web.config
-			// see more configs here: https://github.com/stefanprodan/WebApiThrottle
+			// Throttling policy, see: https://github.com/stefanprodan/WebApiThrottle
 			config.MessageHandlers.Add(new ThrottlingHandler(
 				policy: ThrottlePolicy.FromStore(new PolicyConfigurationProvider()),
 				policyRepository: null,
@@ -47,10 +46,10 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI
 				ipAddressParser: new XForwaredIPAddressParser()
 			));
 
-			// Apply model validation attribute to all controllers
+			// Model validation attribute
 			config.Filters.Add(new ValidatedAttribute());
 
-			// Configure Model validation errors to be in Hebrew
+			// Model validation errors language
 			ValidatorOptions.LanguageManager.Culture = new CultureInfo("he");
 		}
 	}

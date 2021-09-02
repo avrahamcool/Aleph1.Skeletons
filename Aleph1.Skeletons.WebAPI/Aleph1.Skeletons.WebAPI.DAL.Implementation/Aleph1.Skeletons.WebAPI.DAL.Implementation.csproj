@@ -97,10 +97,10 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="NLog">
-      <Version>4.7.10</Version>
+      <Version>4.7.11</Version>
     </PackageReference>
     <PackageReference Include="PostSharp">
-      <Version>6.9.6</Version>
+      <Version>6.9.8</Version>
     </PackageReference>
     <PackageReference Include="TrackerEnabledDbContext">
       <Version>3.8.3</Version>

@@ -18,56 +18,46 @@ namespace Aleph1.Skeletons.WebAPI.BL.Implementation
 		public void Dispose() => Repo.Dispose();
 
 		[Logged]
-		public IEnumerable<Person> GetPersons()
-		{
-			return Repo
-				.GetAll<Person>()
-				.ToList();
-		}
+		public IEnumerable<Person> GetPersons() => Repo.GetAll<Person>().ToList();
 
 		[Logged]
-		public int GetPersonsCount()
-		{
-			return Repo
-				.GetAll<Person>()
-				.Count();
-		}
+		public int GetPersonsCount() => Repo.GetAll<Person>().Count();
 
 		[Logged]
-		public Person GetPersonByID(int ID) => Repo.GetByID<Person>(ID);
+		public Person GetPersonById(int Id) => Repo.GetById<Person>(Id);
 
 		[Logged]
-		public IEnumerable<Person> SearchByName(string searchTerm)
+		public IEnumerable<Person> SearchByName(string name)
 		{
-			if (string.IsNullOrWhiteSpace(searchTerm))
+			if (string.IsNullOrWhiteSpace(name))
 			{
-				throw new ArgumentNullException(nameof(searchTerm));
+				throw new ArgumentNullException(nameof(name));
 			};
 
 			return Repo
 				.GetAll<Person>()
-				.Where(p => p.FirstName.Contains(searchTerm) || p.LastName.Contains(searchTerm))
+				.Where(person => person.FirstName.Contains(name) || person.LastName.Contains(name))
 				.ToList();
 		}
 
 		[Logged]
 		public Person InsertPerson(Person person)
 		{
-			Person added = Repo.Insert(person);
+			Person target = Repo.Insert(person);
 			Repo.SaveChanges();
-			return added;
+			return target;
 		}
 
 		[Logged]
-		public Person UpdatePerson(int ID, Person personToUpdate)
+		public Person UpdatePerson(int Id, Person person)
 		{
-			Person target = Repo.GetByID<Person>(ID);
+			Person target = Repo.GetById<Person>(Id);
+
 			if (target != default)
 			{
-				target.FirstName = personToUpdate.FirstName;
-				target.LastName = personToUpdate.LastName;
-				target.BirthDate = personToUpdate.BirthDate;
-
+				target.FirstName = person.FirstName;
+				target.LastName = person.LastName;
+				target.Birthdate = person.Birthdate;
 				Repo.SaveChanges();
 			}
 
@@ -75,11 +65,11 @@ namespace Aleph1.Skeletons.WebAPI.BL.Implementation
 		}
 
 		[Logged]
-		public Person DeletePerson(int ID)
+		public Person DeletePerson(int Id)
 		{
-			Person deleted = Repo.Delete<Person>(ID);
+			Person target = Repo.Delete<Person>(Id);
 			Repo.SaveChanges();
-			return deleted;
+			return target;
 		}
 	}
 }

@@ -11,18 +11,8 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Mock.Seed
 		{
 			List<Person> seed = new()
 			{
-				new Person()
-				{
-					FirstName = "Avraham",
-					LastName = "Essoudry",
-					BirthDate = DateTimeOffset.Now
-				},
-				new Person()
-				{
-					FirstName = "Some",
-					LastName = "Body",
-					BirthDate = new DateTimeOffset(1989, 1, 1, 0, 0, 0, TimeSpan.Zero)
-				}
+				new Person() { FirstName = "John", LastName = "Doe", Birthdate = DateTimeOffset.Now },
+				new Person() { FirstName = "Jane", LastName = "Roe", Birthdate = new DateTimeOffset(1989, 1, 1, 0, 0, 0, TimeSpan.Zero) }
 			};
 			context.AddRange(seed);
 		}

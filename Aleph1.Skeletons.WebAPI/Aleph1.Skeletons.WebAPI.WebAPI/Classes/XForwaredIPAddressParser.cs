@@ -18,7 +18,6 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI.Classes
 			{
 				return ParseIp(headerValues.FirstOrDefault()?.Split(X_FORWARD_FOR_DELIMITER).FirstOrDefault()?.Trim());
 			}
-
 			return base.GetClientIp(request);
 		}
 	}

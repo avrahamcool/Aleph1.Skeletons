@@ -5,41 +5,41 @@ using Aleph1.Skeletons.WebAPI.Models.Entities;
 
 namespace Aleph1.Skeletons.WebAPI.BL.Contracts
 {
-	/// <summary>Handles business logic</summary>
+	/// <summary>Person business logic layer</summary>
 	public interface IPersonBL : IDisposable
 	{
-		/// <summary>get the number of persons currently saved in our system</summary>
-		/// <returns>the number of persons in our system</returns>
+		/// <summary>Get the number of persons currently saved in the system</summary>
+		/// <returns>Number of persons</returns>
 		int GetPersonsCount();
 
-		/// <summary>get a list of all persons</summary>
-		/// <returns>all persons</returns>
+		/// <summary>Get a list of all persons</summary>
+		/// <returns>List of persons</returns>
 		IEnumerable<Person> GetPersons();
 
-		/// <summary>get person by ID</summary>
-		/// <param name="ID">the ID of the person</param>
-		/// <returns>the person</returns>
-		Person GetPersonByID(int ID);
+		/// <summary>Gets a single person by identification number</summary>
+		/// <param name="Id">Unique identification number</param>
+		/// <returns>A single person</returns>
+		Person GetPersonById(int Id);
 
-		/// <summary>get a list of persons with a name including the search term</summary>
-		/// <param name="searchTerm">a string to query against the persons full name</param>
-		/// <returns>the persons that include the given query in their name</returns>
-		IEnumerable<Person> SearchByName(string searchTerm);
+		/// <summary>Find persons whose name includes the search query</summary>
+		/// <param name="name">Search query string</param>
+		/// <returns>List of persons</returns>
+		IEnumerable<Person> SearchByName(string name);
 
 		/// <summary>Insert a new person</summary>
-		/// <param name="personToAdd">the person</param>
-		/// <returns>the person</returns>
-		Person InsertPerson(Person personToAdd);
+		/// <param name="person">Person to be inserted</param>
+		/// <returns>Inserted person</returns>
+		Person InsertPerson(Person person);
 
-		/// <summary>update a person</summary>
-		/// <param name="ID">the ID of the person</param>
-		/// <param name="personToUpdate">the person to update</param>
-		/// <returns>the updated person</returns>
-		Person UpdatePerson(int ID, Person personToUpdate);
+		/// <summary>Update a person's details</summary>
+		/// <param name="Id">Selected person identification number</param>
+		/// <param name="person">Person to be updated</param>
+		/// <returns>Updated person</returns>
+		Person UpdatePerson(int Id, Person person);
 
-		/// <summary>delete a person by ID</summary>
-		/// <param ID="personToDelete">the ID of the person to delete</param>
-		/// <returns>the deleted person</returns>
-		Person DeletePerson(int ID);
+		/// <summary>Delete a person by their identification number</summary>
+		/// <param name="Id">Selected person identification number</param>
+		/// <returns>Deleted person</returns>
+		Person DeletePerson(int Id);
 	}
 }

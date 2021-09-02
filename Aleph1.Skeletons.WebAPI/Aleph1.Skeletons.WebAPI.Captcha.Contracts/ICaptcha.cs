@@ -2,11 +2,11 @@
 
 namespace Aleph1.Skeletons.WebAPI.Captcha.Contracts
 {
-	/// <summary>Ensure humanity of user</summary>
+	/// <summary>Completely automated public Turing test to tell computers and humans apart</summary>
 	public interface ICaptcha
 	{
-		/// <summary>Validate the CAPTCHA token - throws if invalid</summary>
-		/// <param name="captchaToken">a token to be validated with a BackEnd service</param>
-		Task ValidateCaptcha(string captchaToken);
+		/// <summary>Validate a CAPTCHA token; Throws if invalid</summary>
+		/// <param name="captcha">CAPTCHA token to be validated</param>
+		Task ValidateCaptcha(string captcha);
 	}
 }

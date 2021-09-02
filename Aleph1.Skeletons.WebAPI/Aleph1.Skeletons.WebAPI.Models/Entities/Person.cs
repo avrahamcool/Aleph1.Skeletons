@@ -2,21 +2,19 @@
 
 namespace Aleph1.Skeletons.WebAPI.Models.Entities
 {
-	/// <summary>person details</summary>
+	/// <summary>Person entity</summary>
 	public class Person : IWritableEntity
 	{
-		/// <summary>auto increment (1, 1)</summary>
-		public int ID { get; set; }
+		/// <summary>Unique identification number</summary>
+		public int Id { get; set; }
 
-		/// <summary>first name</summary>
-		/// <remarks>256 max length</remarks>
+		/// <summary>First name</summary>
 		public string FirstName { get; set; }
 
-		/// <summary>last name</summary>
-		/// <remarks>256 max length</remarks>
+		/// <summary>Last name</summary>
 		public string LastName { get; set; }
 
-		/// <summary>birth date</summary>
-		public DateTimeOffset BirthDate { get; set; }
+		/// <summary>Birth date</summary>
+		public DateTimeOffset Birthdate { get; set; }
 	}
 }

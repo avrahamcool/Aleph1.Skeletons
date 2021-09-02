@@ -11,10 +11,12 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Mock
 			using GenericContextMock context = new(SettingsManager.DBOptions);
 
 			Type seederType = typeof(ISeed);
+
 			IEnumerable<Type> allSeeders = seederType
 				.Assembly
 				.GetTypes()
 				.Where(someClass => someClass.IsClass && seederType.IsAssignableFrom(someClass));
+
 			foreach (Type seeder in allSeeders)
 			{
 				ISeed instance = Activator.CreateInstance(seeder) as ISeed;
