@@ -54,6 +54,9 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI
 		}
 
 		/// <summary>Disposes the Unity container when the application is shut down.</summary>
-		public static void Shutdown() => DIContainer.Dispose();
+		public static void Shutdown()
+		{
+			DIContainer.Dispose();
+		}
 	}
 }

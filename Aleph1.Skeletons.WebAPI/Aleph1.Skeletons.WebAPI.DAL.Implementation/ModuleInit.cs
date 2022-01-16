@@ -5,6 +5,8 @@ using System.Diagnostics.Contracts;
 using Aleph1.DI.Contracts;
 using Aleph1.Skeletons.WebAPI.DAL.Contracts;
 
+using Microsoft.EntityFrameworkCore;
+
 namespace Aleph1.Skeletons.WebAPI.DAL.Implementation
 {
 	/// <summary>Used to register concrete implementations to the DI container</summary>
@@ -17,6 +19,7 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Implementation
 		{
 			Contract.Requires(registrar != null);
 
+			registrar.RegisterTypeAsSingelton<DbContextOptions<GenericContext>, DbContextOptions<GenericContext>>(SettingsManager.DBOptions);
 			registrar.RegisterType<GenericContext, GenericContext>();
 			registrar.RegisterType<IGenericRepo, GenericRepo>();
 		}

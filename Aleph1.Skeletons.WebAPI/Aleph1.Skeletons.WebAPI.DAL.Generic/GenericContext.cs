@@ -4,7 +4,8 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Aleph1.Skeletons.WebAPI.DAL.Implementation
+
+namespace Aleph1.Skeletons.WebAPI.DAL.Generic
 {
 	/// <summary>generic context base</summary>
 	public partial class GenericContext : DbContext

@@ -12,11 +12,16 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI
 	{
 		/// <summary>Applications start</summary>
 		[Logged(LogParameters = false)]
-		protected void Application_Start() => GlobalConfiguration.Configure(WebApiConfig.Register);
+		protected void Application_Start()
+		{
+			GlobalConfiguration.Configure(WebApiConfig.Register);
+		}
 
 		/// <summary>Manage CorrelationID for the logger to use</summary>
-		protected void Application_BeginRequest(object sender, EventArgs e) =>
+		protected void Application_BeginRequest(object sender, EventArgs e)
+		{
 			//Set a CorrelationID that is unique and consistent across the request.
 			HttpContext.Current.Items["CorrelationID"] = Guid.NewGuid();
+		}
 	}
 }

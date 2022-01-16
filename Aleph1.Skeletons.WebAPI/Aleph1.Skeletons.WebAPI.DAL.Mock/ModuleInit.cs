@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 
 using Aleph1.DI.Contracts;
 using Aleph1.Skeletons.WebAPI.DAL.Contracts;
+using Aleph1.Skeletons.WebAPI.DAL.Implementation;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -19,8 +20,8 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Mock
 		{
 			Contract.Requires(registrar != null);
 
-			registrar.RegisterTypeAsSingelton<DbContextOptions<GenericContextMock>, DbContextOptions<GenericContextMock>>(SettingsManager.DBOptions);
-			registrar.RegisterType<GenericContextMock, GenericContextMock>();
+			registrar.RegisterTypeAsSingelton<DbContextOptions<GenericContext>, DbContextOptions<GenericContext>>(SettingsManager.DBOptions);
+			registrar.RegisterType<GenericContext, GenericContext>();
 			registrar.RegisterType<IGenericRepo, GenericRepoMock>();
 
 			GenericSeeder.SeedAll();

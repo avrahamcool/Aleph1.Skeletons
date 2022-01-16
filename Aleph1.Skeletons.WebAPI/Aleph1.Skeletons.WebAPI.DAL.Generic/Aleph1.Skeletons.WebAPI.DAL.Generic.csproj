@@ -6,16 +6,16 @@
 		<Authors>TemplateAuthors</Authors>
 		<Company>TemplateCompany</Company>
 		<Copyright>Copyright TemplateCompany © TemplateYear</Copyright>
-		<PackageTags>Aleph1.Skeletons.WebAPI.DAL.Implementation</PackageTags>
+		<PackageTags>Aleph1.Skeletons.WebAPI.DAL.Generic</PackageTags>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<Description>Aleph1.Skeletons.WebAPI.DAL.Implementation</Description>
+		<Description>Aleph1.Skeletons.WebAPI.DAL.Generic</Description>
 		<DebugType>full</DebugType>
 		<Configurations>Dev;Prod;Test</Configurations>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<DocumentationFile>..\Output\$(Configuration)\Documentation\$(MSBuildProjectName).xml</DocumentationFile>
-		<OutputPath>..\Output\$(Configuration)\Modules\</OutputPath>
+		<OutputPath>bin\$(Configuration)</OutputPath>
 		<LangVersion>latest</LangVersion>
 		<EnableNETAnalyzers>true</EnableNETAnalyzers>
 		<AnalysisMode>AllEnabledByDefault</AnalysisMode>
@@ -28,22 +28,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Aleph1.DI.Contracts" Version="4.1.1" />
-		<PackageReference Include="Aleph1.Logging" Version="6.0.1" />
 		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="[3.1.21, 5.0.0)" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="[3.1.21, 5.0.0)">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="[3.1.21, 5.0.0)" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="[3.1.22, 5.0.0)" />
 	</ItemGroup>
-	
+
 	<ItemGroup>
 		<ProjectReference Include="..\Aleph1.Skeletons.WebAPI.Models\Aleph1.Skeletons.WebAPI.Models.csproj" />
-		<ProjectReference Include="..\Aleph1.Skeletons.WebAPI.DAL.Contracts\Aleph1.Skeletons.WebAPI.DAL.Contracts.csproj" />
 	</ItemGroup>
+
 </Project>

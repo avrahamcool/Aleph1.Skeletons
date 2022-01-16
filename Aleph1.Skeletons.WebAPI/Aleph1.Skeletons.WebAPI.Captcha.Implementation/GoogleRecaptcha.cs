@@ -13,7 +13,10 @@ namespace Aleph1.Skeletons.WebAPI.Captcha.Implementation
 		private readonly HttpClient httpClient;
 		public GoogleRecaptcha() => httpClient = new HttpClient();
 
-		public void Dispose() => httpClient.Dispose();
+		public void Dispose()
+		{
+			httpClient.Dispose();
+		}
 
 		[Logged]
 		public async Task ValidateCaptcha(string captchaToken)

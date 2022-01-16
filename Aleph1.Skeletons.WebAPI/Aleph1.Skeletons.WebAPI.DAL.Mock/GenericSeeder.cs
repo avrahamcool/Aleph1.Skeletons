@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Aleph1.Skeletons.WebAPI.DAL.Implementation;
+
 namespace Aleph1.Skeletons.WebAPI.DAL.Mock
 {
 	internal static class GenericSeeder
 	{
 		internal static void SeedAll()
 		{
-			using GenericContextMock context = new(SettingsManager.DBOptions);
+			using GenericContext context = new(SettingsManager.DBOptions);
 
 			Type seederType = typeof(ISeed);
 			IEnumerable<Type> allSeeders = seederType

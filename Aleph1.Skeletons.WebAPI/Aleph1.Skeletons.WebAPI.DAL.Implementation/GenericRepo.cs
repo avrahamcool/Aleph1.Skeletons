@@ -3,38 +3,49 @@
 using Aleph1.Logging;
 using Aleph1.Skeletons.WebAPI.DAL.Contracts;
 using Aleph1.Skeletons.WebAPI.Models;
-using Aleph1.Skeletons.WebAPI.Models.Security;
+
+using Microsoft.EntityFrameworkCore;
 
 namespace Aleph1.Skeletons.WebAPI.DAL.Implementation
 {
-    internal class GenericRepo : IGenericRepo
-    {
-        private readonly GenericContext GenericContext;
-        private readonly AuthenticationInfo CurrentUser;
-        public GenericRepo(GenericContext genericContext, AuthenticationInfo currentUser)
-        {
-            GenericContext = genericContext;
-            CurrentUser = currentUser;
-        }
-        public void Dispose() => GenericContext.Dispose();
+	internal class GenericRepo : IGenericRepo
+	{
+		private readonly GenericContext context;
+		public GenericRepo(GenericContext genericContext) => context = genericContext;
+		public void Dispose()
+		{
+			context.Dispose();
+		}
 
-        [Logged]
-        public IQueryable<TEntity> GetAll<TEntity>() where TEntity : class, IReadableEntity => GenericContext.Set<TEntity>().AsNoTracking();
+		[Logged]
+		public void SaveChanges()
+		{
+			context.SaveChanges();
+		}
 
-        [Logged]
-        public TEntity GetById<TEntity>(params object[] keyValues) where TEntity : class, IWritableEntity => GenericContext.Set<TEntity>().Find(keyValues);
+		[Logged]
+		public IQueryable<TEntity> GetAll<TEntity>() where TEntity : class, IReadableEntity
+		{
+			return context.Set<TEntity>().AsNoTracking();
+		}
 
-        [Logged]
-        public TEntity Insert<TEntity>(TEntity entity) where TEntity : class, IWritableEntity => GenericContext.Set<TEntity>().Add(entity);
+		[Logged]
+		public TEntity GetById<TEntity>(params object[] keyValues) where TEntity : class, IWritableEntity
+		{
+			return context.Set<TEntity>().Find(keyValues);
+		}
 
-        [Logged]
-        public TEntity Delete<TEntity>(params object[] keyValues) where TEntity : class, IWritableEntity
-        {
-            TEntity entity = GetById<TEntity>(keyValues);
-            return GenericContext.Set<TEntity>().Remove(entity);
-        }
+		[Logged]
+		public TEntity Insert<TEntity>(TEntity entity) where TEntity : class, IWritableEntity
+		{
+			return context.Set<TEntity>().Add(entity).Entity;
+		}
 
-        [Logged]
-        public void SaveChanges() => GenericContext.SaveChanges(CurrentUser?.Username);
-    }
+		[Logged]
+		public TEntity Delete<TEntity>(params object[] keyValues) where TEntity : class, IWritableEntity
+		{
+			TEntity entity = GetById<TEntity>(keyValues);
+			return context.Set<TEntity>().Remove(entity).Entity;
+		}
+	}
 }

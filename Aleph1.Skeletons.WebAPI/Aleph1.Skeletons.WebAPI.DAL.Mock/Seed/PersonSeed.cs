@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Aleph1.Skeletons.WebAPI.DAL.Implementation;
 using Aleph1.Skeletons.WebAPI.Models.Entities;
 
 namespace Aleph1.Skeletons.WebAPI.DAL.Mock.Seed
 {
 	internal class PersonSeed : ISeed
 	{
-		public void Seed(GenericContextMock context)
+		public void Seed(GenericContext context)
 		{
 			List<Person> seed = new()
 			{
