@@ -5,12 +5,14 @@ import { PersonModel } from "./person-model";
 @autoinject()
 export class Persons
 {
-	constructor(private personService: PersonService) { }
-	persons: PersonModel[];
+	constructor(
+		private personService: PersonService
+	) { }
 
-	public activate(): Promise<PersonModel[]>
+	public persons: PersonModel[];
+
+	public async activate(): Promise<void>
 	{
-		return this.personService.getPersons()
-			.then(persons => this.persons = persons);
+		this.persons = await this.personService.getPersons();
 	}
 }

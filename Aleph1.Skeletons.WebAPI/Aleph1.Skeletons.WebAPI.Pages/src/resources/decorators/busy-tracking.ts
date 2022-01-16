@@ -1,28 +1,34 @@
-type IMethodDecorator<T> = (target: T, propertyKey: string, descriptor: PropertyDescriptor) => void;
-
-export function busyTracking<T>(isBusyPropertyName?: string): IMethodDecorator<T>
+export function busyTracking(name?: string): MethodDecorator
 {
-	return function (_target: T, propertyKey: string, descriptor: PropertyDescriptor)
+	return function decoratorInstance(target, property, descriptor: PropertyDescriptor)
 	{
-		const givenFunc: (...params: unknown[]) => Promise<unknown> = descriptor.value;
-		if (typeof givenFunc !== "function")
+		if (typeof descriptor.value !== "function")
 		{
-			throw Error(`'busyTracking' Decorator should be used on functions only! you used it on [${ propertyKey }]`);
+			throw new Error(`Decorator 'busyTracking' was used on '${String(property)}', which is not a function.`);
 		}
 
-		isBusyPropertyName = isBusyPropertyName || `${ propertyKey }_isBusy`;
-		// changing the given function by altering it's descriptor value
-		// using "function" syntax to take advantage of correct "this" scope
-		descriptor.value = function (...params: unknown[])
+		const originalMethod = descriptor.value;
+		const pendingPropertyName = name || `${String(property)}_pending`;
+
+		Reflect.set(target, pendingPropertyName, 0);
+
+		// Add 'finally' to the decorated method by altering its' descriptor value,
+		// using 'function' syntax to take advantage of correct 'this' scope
+		descriptor.value = function patch(...args: any[]): any
 		{
-			// increments counter takes care of "NaN" of first time running
-			this[isBusyPropertyName] = (this[isBusyPropertyName] || 0) + 1;
-			const originalRetVal: Promise<unknown> = givenFunc.call(this, ...params);
-			if (!(originalRetVal instanceof Promise))
+			// Increments counter and also takes care of the first time running
+			Reflect.set(this, pendingPropertyName, (Reflect.get(this, pendingPropertyName) || 0) + 1);
+
+			const result = originalMethod.apply(this, args);
+			if (!(result instanceof Promise))
 			{
-				throw Error(`you used 'busyTracking' on a function that is not returning a promise [${ propertyKey }]`);
+				throw new Error("Decorator 'busyTracking' should only be used on functions that return a promise.");
 			}
-			return originalRetVal.finally(() => this[isBusyPropertyName]--);
+
+			return result.finally(() =>
+			{
+				Reflect.set(this, pendingPropertyName, Reflect.get(this, pendingPropertyName) - 1);
+			});
 		};
 	};
 }

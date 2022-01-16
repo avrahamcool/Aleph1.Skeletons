@@ -1,46 +1,50 @@
-import { Router } from "aurelia-router";
-import { PLATFORM } from "aurelia-pal";
-import { IdleModal } from "components/idle-modal/idle-modal";
-import { minute, secondsInMinute } from "./time";
-import { AuthHttpClient } from ".";
-import { Roles, AuthenticationInfo, LoginModel } from "../models";
 import { computedFrom, autoinject, Aurelia } from "aurelia-framework";
-import * as ExpiredStorage from "expired-storage";
-import * as environment from "../../../config/environment.json";
-import { IdleSessionTimeout } from "idle-session-timeout";
-import { json } from "aurelia-fetch-client";
+import { PLATFORM } from "aurelia-pal";
+import { Router } from "aurelia-router";
 import { DialogService } from "aurelia-dialog";
-import { load } from "recaptcha-v3";
+import { serialize } from "class-transformer";
+import { IdleSessionTimeout } from "idle-session-timeout";
+import { default as ExpiredStorage } from "expired-storage";
+import { Identity, Credentials } from "resources/models";
+import { Roles } from "resources/enums";
+import { minute, secondsInMinute } from "resources/helpers";
+import { AuthHttpClient } from "resources/services";
+import { IdleModal } from "components/idle-modal/idle-modal";
+import { default as environment } from "../../../config/environment.json";
 
 @autoinject()
 export class UserService
 {
-	private _authenticationInfo: AuthenticationInfo;
-	private idleGUITimeout: IdleSessionTimeout;
+	private _identity: Identity | null;
+	private idleSessionTimeout: IdleSessionTimeout;
 
-	constructor(private au: Aurelia, private httpClient: AuthHttpClient,
-		private expiredStorage: ExpiredStorage, private dialogService: DialogService,
-		private router: Router)
-	{ }
+	constructor(
+		private au: Aurelia,
+		private httpClient: AuthHttpClient,
+		private expiredStorage: ExpiredStorage,
+		private dialogService: DialogService,
+		private router: Router
+	) { }
 
-	@computedFrom("_authenticationInfo")
-	public get authenticationInfo(): AuthenticationInfo
+	@computedFrom("_identity")
+	public get identity(): Identity | null
 	{
-		if (!this._authenticationInfo)
+		if (!this._identity)
 		{
-			this._authenticationInfo = this.expiredStorage.getJson("_authenticationInfo");
+			this._identity = this.expiredStorage.getJson("_identity");
 		}
-		return this._authenticationInfo;
+		return this._identity;
 	}
-	public set authenticationInfo(value: AuthenticationInfo)
+	public set identity(value: Identity | null)
 	{
-		this._authenticationInfo = value;
-		this.expiredStorage.setJson("_authenticationInfo", value, secondsInMinute * environment.idleDurationUntilWarningMin);
+		this._identity = value;
+		this.expiredStorage.setJson("_identity", value ?? null as any, secondsInMinute * environment.idleDurationUntilWarningInMin);
 	}
-	@computedFrom("authenticationInfo")
-	public get isLoggedIn(): boolean
+
+	@computedFrom("identity")
+	public get isSignedIn(): boolean
 	{
-		return !!this.authenticationInfo;
+		return !!this.identity;
 	}
 
 	public isAllowedForRole(roles: Roles): boolean
@@ -49,64 +53,63 @@ export class UserService
 		{
 			return true;
 		}
-		if (!this.authenticationInfo?.roles)
+		if (!this.identity?.roles)
 		{
 			return false;
 		}
-		return (this.authenticationInfo.roles & roles) === roles;
+		return (this.identity?.roles & roles) === roles;
 	}
 
 	public startIdleTimeout(): void
 	{
-		if (!this.idleGUITimeout)
+		if (!this.idleSessionTimeout)
 		{
-			this.idleGUITimeout = new IdleSessionTimeout(minute * environment.idleDurationUntilWarningMin);
-			this.idleGUITimeout.onTimeOut = () =>
+			this.idleSessionTimeout = new IdleSessionTimeout(
+				minute * environment.idleDurationUntilWarningInMin
+			);
+			this.idleSessionTimeout.onTimeOut = () =>
 			{
 				this.dialogService.open({ viewModel: IdleModal })
 					.whenClosed(result =>
 					{
 						if (result.wasCancelled)
 						{
-							this.logout();
+							this.signOut();
 						}
 						else
 						{
-							this.idleGUITimeout.start();
+							this.idleSessionTimeout.start();
 						}
 					});
 			};
 		}
 
-		this.idleGUITimeout.start();
+		this.idleSessionTimeout.start();
 		this.httpClient.startInactiveSessionTimeout();
 	}
 
-	public async login(credentials: LoginModel): Promise<void>
+	public async signIn(credentials: Credentials): Promise<void>
 	{
-		const captcha = await load(environment.captchaSiteKey);
-		credentials.captchaToken = await captcha.execute();
-		const resp = await this.httpClient.post("/api/login", json(credentials));
-		const authInfo = await resp.json();
-		this.authenticationInfo = authInfo;
+		const response = await this.httpClient.post("/api/sign-in", serialize(credentials));
+		this.identity = await response.json();
 		await this.au.setRoot(PLATFORM.moduleName("shells/app"));
-
-		captcha.hideBadge();
-		return this.startIdleTimeout();
+		this.startIdleTimeout();
 	}
 
-	public logout(): Promise<void>
+	public async signOut(): Promise<void>
 	{
-		return this.httpClient.post("/api/logout")
-			.then(() => this.authenticationInfo = null)
-			.then(() => this.router.navigate("", { replace: true, trigger: false }))
-			.then(() => this.au.setRoot(PLATFORM.moduleName("shells/login")))
-			.then(() =>
-			{
-				this.httpClient.clearInactiveSessionTimeoutHandler();
-				this.idleGUITimeout.dispose();
-			})
-			.then(() => load(environment.captchaSiteKey))
-			.then(captcha => captcha.showBadge());
+		try
+		{
+			await this.httpClient.post("/api/sign-out");
+		}
+		finally
+		{
+			this.identity = null;
+			this.httpClient.clearInactiveSessionTimeoutHandler();
+			this.idleSessionTimeout.dispose();
+			this.dialogService.closeAll();
+			this.router.navigate("", { replace: true, trigger: false });
+			this.au.setRoot(PLATFORM.moduleName("shells/sign-in"));
+		}
 	}
 }

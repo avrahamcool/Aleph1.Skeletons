@@ -1,28 +1,29 @@
-import { second } from "resources/services";
 import { autoinject } from "aurelia-framework";
 import { DialogController } from "aurelia-dialog";
-import * as environment from "../../../config/environment.json";
+import { second } from "resources/helpers";
+import { default as environment } from "../../../config/environment.json";
 
 @autoinject()
 export class IdleModal
 {
-	public secondsTillLogout = environment.idleWarningDurationSec;
-	public intervalHandler: number;
-
 	constructor(private dialogController: DialogController)
 	{
 		this.intervalHandler = window.setInterval(() =>
 		{
-			if (--this.secondsTillLogout === 0)
+			if (--this.secondsTillSignOut === 0)
 			{
-				this.close(false);
+				this.closeHandler(false);
 			}
 		}, second);
 	}
 
-	close(ok: boolean): void
+	public secondsTillSignOut = environment.idleWarningDurationInSec;
+	private intervalHandler: number;
+
+	public closeHandler(ok: boolean): void
 	{
-		clearInterval(this.intervalHandler);
+		window.clearInterval(this.intervalHandler);
+
 		if (ok)
 		{
 			this.dialogController.ok();
