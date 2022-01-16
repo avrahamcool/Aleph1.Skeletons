@@ -13,8 +13,6 @@
 	<PropertyGroup>
 		<OutputPath>bin\$(Configuration)</OutputPath>
 		<LangVersion>latest</LangVersion>
-		<EnableNETAnalyzers>true</EnableNETAnalyzers>
-		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dev|AnyCPU'">
 		<DefineConstants>DEBUG;TRACE;DEV</DefineConstants>
