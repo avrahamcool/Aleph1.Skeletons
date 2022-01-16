@@ -15,7 +15,7 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Mock
 		{
 			Contract.Requires(modelBuilder != null);
 
-			modelBuilder.Entity<Person>().HasKey(p => p.ID);
+			modelBuilder.Entity<Person>().HasKey(p => p.Id);
 		}
 	}
 }
