@@ -1,7 +1,7 @@
 import { autoinject } from "aurelia-framework";
 import { PersonModel } from "./person-model";
 import { AuthHttpClient } from "resources/services/auth-http-client";
-import { plainToClass } from "class-transformer";
+import { plainToInstance } from "class-transformer";
 
 @autoinject()
 export class PersonService
@@ -13,6 +13,6 @@ export class PersonService
 	{
 		return this.httpClient.get("/api/persons")
 			.then(resp => resp.json())
-			.then((fromServer: PersonModel[]) => plainToClass(PersonModel, fromServer));
+			.then((fromServer: PersonModel[]) => plainToInstance(PersonModel, fromServer));
 	}
 }
