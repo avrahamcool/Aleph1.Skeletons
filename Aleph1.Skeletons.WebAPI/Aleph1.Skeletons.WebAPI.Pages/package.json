@@ -55,7 +55,7 @@
 		"@typescript-eslint/eslint-plugin": "^4.29.3",
 		"@typescript-eslint/parser": "^4.29.3",
 		"app-settings-loader": "^2.0.0",
-		"aurelia-path": "^1.1.5",
+		"aurelia-path": "^1.1.7",
 		"aurelia-template-check-loader": "^0.1.0",
 		"aurelia-template-lint": "^0.10.0",
 		"aurelia-templating": "^1.10.4",
