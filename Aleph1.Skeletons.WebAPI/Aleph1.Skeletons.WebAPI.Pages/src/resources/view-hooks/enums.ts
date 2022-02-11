@@ -5,6 +5,6 @@ export class EnumsViewEngineHooks implements ViewEngineHooks
 {
 	beforeBind(view: View): void
 	{
-		view.overrideContext["Roles"] = Roles;
+		Object.assign(view.overrideContext, { Roles } );
 	}
 }

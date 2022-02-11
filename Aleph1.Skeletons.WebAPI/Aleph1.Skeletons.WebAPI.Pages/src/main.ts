@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { UserService } from "resources/services";
 import { Aurelia } from "aurelia-framework";
 import { PLATFORM } from "aurelia-pal";
-import * as environment from "../config/environment.json";
+import environment from "../config/environment.json";
 import { DialogConfiguration } from "aurelia-dialog";
 import { load } from "recaptcha-v3";
 

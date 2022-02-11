@@ -1,12 +1,12 @@
 import { second } from "resources/services";
 import { autoinject } from "aurelia-framework";
 import { DialogController } from "aurelia-dialog";
-import * as environment from "../../../config/environment.json";
+import environment from "../../../config/environment.json";
 
 @autoinject()
 export class IdleModal
 {
-	public secondsTillLogout = environment.idleWarningDurationSec;
+	public secondsTillLogout = environment.idleWarningDurationInSec;
 	public intervalHandler: number;
 
 	constructor(private dialogController: DialogController)

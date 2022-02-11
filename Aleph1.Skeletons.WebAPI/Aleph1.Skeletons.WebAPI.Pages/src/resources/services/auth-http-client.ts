@@ -1,6 +1,6 @@
 import { minute } from ".";
 import { HttpClient } from "aurelia-fetch-client";
-import * as environment from "../../../config/environment.json";
+import environment from "../../../config/environment.json";
 
 export class AuthHttpClient extends HttpClient
 {
@@ -13,7 +13,8 @@ export class AuthHttpClient extends HttpClient
 	private resetInactiveSessionTimeout()
 	{
 		this.clearInactiveSessionTimeoutHandler();
-		this.inactiveSessionTimeoutHandler = window.setTimeout(this.refreshToken, minute * environment.idleDurationUntilWarningMin);
+		this.inactiveSessionTimeoutHandler = window.setTimeout(this.refreshToken,
+			minute * environment.idleDurationUntilWarningInMin);
 	}
 	public clearInactiveSessionTimeoutHandler(): void
 	{

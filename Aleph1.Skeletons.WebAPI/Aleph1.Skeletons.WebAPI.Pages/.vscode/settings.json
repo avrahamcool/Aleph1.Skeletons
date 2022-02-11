@@ -1,11 +1,32 @@
 {
+	"autoimport.doubleQuotes": true,
+	"cSpell.language": "en,he",
+	"cSpell.customDictionaries": {
+		"project-words": {
+			"name": "project-words",
+			"path": "${workspaceRoot}/.vscode/dictionary.txt",
+			"description": "Words used in this project",
+			"addWords": true
+		},
+		"custom": true, // Enable the `custom` dictionary
+	},
+	"css.validate": false,
+	"editor.bracketPairColorization.enabled": true,
 	"editor.codeActionsOnSave": {
 		"source.fixAll": true
 	},
-	"editor.formatOnSave": true,
-	"editor.insertSpaces": false,
 	"editor.detectIndentation": false,
+	"editor.formatOnSave": true,
+	"editor.guides.bracketPairs": "active",
+	"editor.insertSpaces": false,
 	"editor.linkedEditing": true,
+	"eslint.alwaysShowStatus": true,
+	"eslint.format.enable": true,
+	"eslint.packageManager": "yarn",
+	"eslint.validate": [
+		"javascript",
+		"typescript"
+	],
 	"files.eol": "\r\n",
 	"files.exclude": {
 		"**/*.csproj": true,
@@ -14,17 +35,9 @@
 		"**/obj/**": true,
 		"**/node_modules/**": true,
 	},
-	"eslint.packageManager": "yarn",
-	"eslint.format.enable": true,
-	"eslint.alwaysShowStatus": true,
-	"eslint.validate": [
-		"javascript",
-		"typescript"
-	],
-	"typescript.tsdk": "node_modules/typescript/lib",
-	"css.validate": false,
 	"less.validate": false,
 	"scss.validate": false,
 	"stylelint.enable": true,
-	"stylelint.packageManager": "yarn"
+	"stylelint.packageManager": "yarn",
+	"typescript.tsdk": "node_modules/typescript/lib"
 }

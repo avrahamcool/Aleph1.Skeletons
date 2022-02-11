@@ -5,8 +5,8 @@ import { minute, secondsInMinute } from "./time";
 import { AuthHttpClient } from ".";
 import { Roles, AuthenticationInfo, LoginModel } from "../models";
 import { computedFrom, autoinject, Aurelia } from "aurelia-framework";
-import * as ExpiredStorage from "expired-storage";
-import * as environment from "../../../config/environment.json";
+import ExpiredStorage from "expired-storage";
+import environment from "../../../config/environment.json";
 import { IdleSessionTimeout } from "idle-session-timeout";
 import { json } from "aurelia-fetch-client";
 import { DialogService } from "aurelia-dialog";
@@ -15,7 +15,7 @@ import { load } from "recaptcha-v3";
 @autoinject()
 export class UserService
 {
-	private _authenticationInfo: AuthenticationInfo;
+	private _authenticationInfo: AuthenticationInfo | null;
 	private idleGUITimeout: IdleSessionTimeout;
 
 	constructor(private au: Aurelia, private httpClient: AuthHttpClient,
@@ -24,7 +24,7 @@ export class UserService
 	{ }
 
 	@computedFrom("_authenticationInfo")
-	public get authenticationInfo(): AuthenticationInfo
+	public get authenticationInfo(): AuthenticationInfo | null
 	{
 		if (!this._authenticationInfo)
 		{
@@ -32,10 +32,10 @@ export class UserService
 		}
 		return this._authenticationInfo;
 	}
-	public set authenticationInfo(value: AuthenticationInfo)
+	public set authenticationInfo(value: AuthenticationInfo | null)
 	{
 		this._authenticationInfo = value;
-		this.expiredStorage.setJson("_authenticationInfo", value, secondsInMinute * environment.idleDurationUntilWarningMin);
+		this.expiredStorage.setJson("_authenticationInfo", value!, secondsInMinute * environment.idleDurationUntilWarningInMin);
 	}
 	@computedFrom("authenticationInfo")
 	public get isLoggedIn(): boolean
@@ -60,7 +60,7 @@ export class UserService
 	{
 		if (!this.idleGUITimeout)
 		{
-			this.idleGUITimeout = new IdleSessionTimeout(minute * environment.idleDurationUntilWarningMin);
+			this.idleGUITimeout = new IdleSessionTimeout(minute * environment.idleDurationUntilWarningInMin);
 			this.idleGUITimeout.onTimeOut = () =>
 			{
 				this.dialogService.open({ viewModel: IdleModal })
