@@ -10,11 +10,18 @@ namespace Aleph1.Skeletons.WebAPI.WebAPI
 	/// <seealso cref="HttpApplication" />
 	public class WebApiApplication : HttpApplication
 	{
-		/// <summary>Applications start</summary>
+		/// <summary>Application start</summary>
 		[Logged(LogParameters = false)]
 		protected void Application_Start()
 		{
 			GlobalConfiguration.Configure(WebApiConfig.Register);
+		}
+
+		/// <summary>Application end</summary>
+		[Logged(LogParameters = false)]
+		protected void Application_End()
+		{
+			NLog.LogManager.Shutdown();
 		}
 
 		/// <summary>Manage CorrelationID for the logger to use</summary>
