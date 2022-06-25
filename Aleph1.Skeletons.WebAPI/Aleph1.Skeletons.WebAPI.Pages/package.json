@@ -80,7 +80,7 @@
 		"expose-loader": "^3.0.0",
 		"html-loader": "^2.1.2",
 		"html-webpack-plugin": "^5.3.2",
-		"jsdom": "11.5.1",
+		"jsdom": "16.5.0",
 		"json-loader": "^0.5.7",
 		"loader-utils": "^2.0.0",
 		"mini-css-extract-plugin": "^2.2.0",
