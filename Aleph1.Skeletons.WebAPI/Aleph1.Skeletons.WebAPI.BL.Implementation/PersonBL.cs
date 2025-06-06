@@ -9,21 +9,17 @@ using Aleph1.Skeletons.WebAPI.Models.Entities;
 
 namespace Aleph1.Skeletons.WebAPI.BL.Implementation
 {
-	internal class PersonBL : IPersonBL
+	internal sealed class PersonBL(IGenericRepo repo) : IPersonBL
 	{
-		private readonly IGenericRepo Repo;
-
-		public PersonBL(IGenericRepo repo) => Repo = repo;
-
 		public void Dispose()
 		{
-			Repo.Dispose();
+			repo.Dispose();
 		}
 
 		[Logged]
 		public IEnumerable<Person> GetPersons()
 		{
-			return Repo
+			return repo
 				.GetAll<Person>()
 				.ToList();
 		}
@@ -31,7 +27,7 @@ namespace Aleph1.Skeletons.WebAPI.BL.Implementation
 		[Logged]
 		public int GetPersonsCount()
 		{
-			return Repo
+			return repo
 				.GetAll<Person>()
 				.Count();
 		}
@@ -39,7 +35,7 @@ namespace Aleph1.Skeletons.WebAPI.BL.Implementation
 		[Logged]
 		public Person GetPersonById(int ID)
 		{
-			return Repo.GetById<Person>(ID);
+			return repo.GetById<Person>(ID);
 		}
 
 		[Logged]
@@ -48,9 +44,10 @@ namespace Aleph1.Skeletons.WebAPI.BL.Implementation
 			if (string.IsNullOrWhiteSpace(searchTerm))
 			{
 				throw new ArgumentNullException(nameof(searchTerm));
-			};
+			}
+			;
 
-			return Repo
+			return repo
 				.GetAll<Person>()
 				.Where(p => p.FirstName.Contains(searchTerm) || p.LastName.Contains(searchTerm))
 				.ToList();
@@ -59,22 +56,22 @@ namespace Aleph1.Skeletons.WebAPI.BL.Implementation
 		[Logged]
 		public Person InsertPerson(Person person)
 		{
-			Person added = Repo.Insert(person);
-			Repo.SaveChanges();
+			Person added = repo.Insert(person);
+			repo.SaveChanges();
 			return added;
 		}
 
 		[Logged]
 		public Person UpdatePerson(int Id, Person personToUpdate)
 		{
-			Person target = Repo.GetById<Person>(Id);
+			Person target = repo.GetById<Person>(Id);
 			if (target != default)
 			{
 				target.FirstName = personToUpdate.FirstName;
 				target.LastName = personToUpdate.LastName;
 				target.BirthDate = personToUpdate.BirthDate;
 
-				Repo.SaveChanges();
+				repo.SaveChanges();
 			}
 
 			return target;
@@ -83,8 +80,8 @@ namespace Aleph1.Skeletons.WebAPI.BL.Implementation
 		[Logged]
 		public Person DeletePerson(int Id)
 		{
-			Person deleted = Repo.Delete<Person>(Id);
-			Repo.SaveChanges();
+			Person deleted = repo.Delete<Person>(Id);
+			repo.SaveChanges();
 			return deleted;
 		}
 	}

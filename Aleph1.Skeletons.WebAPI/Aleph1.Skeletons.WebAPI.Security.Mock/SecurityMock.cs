@@ -5,7 +5,7 @@ using Aleph1.Skeletons.WebAPI.Security.Contracts;
 
 namespace Aleph1.Skeletons.WebAPI.Security.Mock
 {
-	internal class SecurityMock : ISecurity
+	internal sealed class SecurityMock : ISecurity
 	{
 		private readonly AuthenticationInfo MockAuth = new()
 		{

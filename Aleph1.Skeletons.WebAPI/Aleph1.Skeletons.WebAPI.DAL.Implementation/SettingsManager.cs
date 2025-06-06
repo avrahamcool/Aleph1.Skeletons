@@ -28,7 +28,7 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Implementation
 		}
 	}
 
-	internal class GenericContextFactory : IDesignTimeDbContextFactory<GenericContext>
+	internal sealed class GenericContextFactory : IDesignTimeDbContextFactory<GenericContext>
 	{
 		public GenericContext CreateDbContext(string[] args)
 		{

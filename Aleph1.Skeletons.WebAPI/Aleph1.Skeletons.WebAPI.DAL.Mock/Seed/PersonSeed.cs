@@ -6,12 +6,12 @@ using Aleph1.Skeletons.WebAPI.Models.Entities;
 
 namespace Aleph1.Skeletons.WebAPI.DAL.Mock.Seed
 {
-	internal class PersonSeed : ISeed
+	internal sealed class PersonSeed : ISeed
 	{
 		public void Seed(GenericContext context)
 		{
-			List<Person> seed = new()
-			{
+			List<Person> seed =
+			[
 				new Person()
 				{
 					FirstName = "Avraham",
@@ -24,7 +24,7 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Mock.Seed
 					LastName = "Body",
 					BirthDate = new DateTimeOffset(1989, 1, 1, 0, 0, 0, TimeSpan.Zero)
 				}
-			};
+			];
 			context.AddRange(seed);
 		}
 	}

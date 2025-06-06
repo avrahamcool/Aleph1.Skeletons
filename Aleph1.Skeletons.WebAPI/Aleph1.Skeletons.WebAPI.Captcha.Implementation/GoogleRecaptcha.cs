@@ -8,7 +8,7 @@ using Aleph1.Skeletons.WebAPI.Captcha.Contracts;
 
 namespace Aleph1.Skeletons.WebAPI.Captcha.Implementation
 {
-	internal class GoogleRecaptcha : ICaptcha, IDisposable
+	internal sealed class GoogleRecaptcha : ICaptcha, IDisposable
 	{
 		private readonly HttpClient httpClient;
 		public GoogleRecaptcha() => httpClient = new HttpClient();

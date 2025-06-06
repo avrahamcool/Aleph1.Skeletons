@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Aleph1.Skeletons.WebAPI.Captcha.Implementation
 {
 	/// <summary>https://developers.google.com/recaptcha/docs/verify#api-response</summary>
-	internal class CaptchaResponse
+	internal sealed class CaptchaResponse
 	{
 		/// <summary></summary>
 		public bool Success { get; set; }

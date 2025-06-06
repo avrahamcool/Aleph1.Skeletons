@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Aleph1.Skeletons.WebAPI.DAL.Implementation.Migrations
 {
-	internal partial class Person : Migration
+	internal sealed partial class Person : Migration
 	{
 		protected override void Up(MigrationBuilder migrationBuilder)
 		{
-			migrationBuilder.CreateTable(
+			_ = migrationBuilder.CreateTable(
 				name: "Person",
 				columns: table => new
 				{
@@ -20,13 +20,13 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Implementation.Migrations
 				},
 				constraints: table =>
 				{
-					table.PrimaryKey("PK_Person", x => x.Id);
+					_ = table.PrimaryKey("PK_Person", x => x.Id);
 				});
 		}
 
 		protected override void Down(MigrationBuilder migrationBuilder)
 		{
-			migrationBuilder.DropTable(
+			_ = migrationBuilder.DropTable(
 				name: "Person");
 		}
 	}

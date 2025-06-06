@@ -28,22 +28,26 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Aleph1.DI.Contracts" Version="4.1.1" />
-		<PackageReference Include="Aleph1.Logging" Version="6.0.1" />
-		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0">
+		<PackageReference Include="Aleph1.DI.Contracts" Version="5.0.1" />
+		<PackageReference Include="Aleph1.Logging" Version="7.0.3" />
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="[3.1.21, 5.0.0)" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="[3.1.21, 5.0.0)">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.32" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.32">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="[3.1.21, 5.0.0)" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.32" />
 	</ItemGroup>
 	
 	<ItemGroup>
 		<ProjectReference Include="..\Aleph1.Skeletons.WebAPI.Models\Aleph1.Skeletons.WebAPI.Models.csproj" />
 		<ProjectReference Include="..\Aleph1.Skeletons.WebAPI.DAL.Contracts\Aleph1.Skeletons.WebAPI.DAL.Contracts.csproj" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <Reference Include="System.ComponentModel.Composition" />
 	</ItemGroup>
 </Project>

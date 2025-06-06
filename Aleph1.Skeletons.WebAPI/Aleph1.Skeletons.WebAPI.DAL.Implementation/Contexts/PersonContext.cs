@@ -9,11 +9,11 @@ namespace Aleph1.Skeletons.WebAPI.DAL.Implementation
 	{
 		internal DbSet<Person> Person { get; set; }
 
-		private class PersonConfig : IEntityTypeConfiguration<Person>
+		private sealed class PersonConfig : IEntityTypeConfiguration<Person>
 		{
 			public void Configure(EntityTypeBuilder<Person> builder)
 			{
-				builder.HasKey(p => p.Id);
+				_ = builder.HasKey(p => p.Id);
 			}
 		}
 	}

@@ -8,39 +8,37 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Aleph1.Skeletons.WebAPI.DAL.Mock
 {
-	internal class GenericRepoMock : IGenericRepo
+	internal sealed class GenericRepoMock(GenericContext genericContext) : IGenericRepo
 	{
-		private readonly GenericContext context;
-		public GenericRepoMock(GenericContext genericContext) => context = genericContext;
 		public void Dispose()
 		{
-			context.Dispose();
+			genericContext.Dispose();
 		}
 
 		public void SaveChanges()
 		{
-			context.SaveChanges();
+			_ = genericContext.SaveChanges();
 		}
 
 		public IQueryable<TEntity> GetAll<TEntity>() where TEntity : class, IReadableEntity
 		{
-			return context.Set<TEntity>().AsNoTracking();
+			return genericContext.Set<TEntity>().AsNoTracking();
 		}
 
 		public TEntity GetById<TEntity>(params object[] keyValues) where TEntity : class, IWritableEntity
 		{
-			return context.Set<TEntity>().Find(keyValues);
+			return genericContext.Set<TEntity>().Find(keyValues);
 		}
 
 		public TEntity Insert<TEntity>(TEntity entity) where TEntity : class, IWritableEntity
 		{
-			return context.Set<TEntity>().Add(entity).Entity;
+			return genericContext.Set<TEntity>().Add(entity).Entity;
 		}
 
 		public TEntity Delete<TEntity>(params object[] keyValues) where TEntity : class, IWritableEntity
 		{
 			TEntity entity = GetById<TEntity>(keyValues);
-			return context.Set<TEntity>().Remove(entity).Entity;
+			return genericContext.Set<TEntity>().Remove(entity).Entity;
 		}
 	}
 }
