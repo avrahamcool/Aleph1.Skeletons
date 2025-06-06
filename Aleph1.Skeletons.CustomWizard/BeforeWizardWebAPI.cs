@@ -17,7 +17,7 @@ namespace Aleph1.Skeletons.CustomWizard
 			replacementsDictionary.EnrichTemplateVariables();
 
 			// Close new solution
-			solution = ((Solution2)((DTE)automationObject).Solution);
+			solution = (Solution2)((DTE)automationObject).Solution;
 			solution.Close();
 
 			// Delete old directory(in my case VS creating it) and change destination

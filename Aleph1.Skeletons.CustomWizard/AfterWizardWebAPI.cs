@@ -27,7 +27,7 @@ namespace Aleph1.Skeletons.CustomWizard
 			// Open "old" solution
 			string pathToOldSolution = Path.Combine(destinationDirectory, solutionName + ".sln");
 
-			Solution2 solution = ((Solution2)dte.Solution);
+			Solution2 solution = (Solution2)dte.Solution;
 			solution.Open(pathToOldSolution);
 
 			solution.Properties.Item("StartupProject").Value = solutionName + ".WebAPI";

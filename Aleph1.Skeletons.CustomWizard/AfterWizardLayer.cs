@@ -31,7 +31,7 @@ namespace Aleph1.Skeletons.CustomWizard
 			}
 
 			dte = (DTE2)automationObject;
-			solution = (Solution2)(dte.Solution);
+			solution = (Solution2)dte.Solution;
 
 			string solutionPrefix = replacementsDictionary["$specifiedsolutionname$"];
 			string destinationDirectory = replacementsDictionary["$destinationdirectory$"];
@@ -74,10 +74,10 @@ namespace Aleph1.Skeletons.CustomWizard
 				Project selectedProj = solution.FindProjectInSolution(selectedFolderName);
 				if (selectedProj != null)
 				{
-					SolutionFolder selectedFolder = (SolutionFolder)(selectedProj.Object);
+					SolutionFolder selectedFolder = (SolutionFolder)selectedProj.Object;
 					foreach (string projPath in newProjectsPathToAdd)
 					{
-						selectedFolder.AddFromFile(projPath);
+						_ = selectedFolder.AddFromFile(projPath);
 					}
 				}
 			}
