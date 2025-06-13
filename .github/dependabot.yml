@@ -1,0 +1,36 @@
+version: 2
+updates:
+- package-ecosystem: nuget
+  directory: "/Aleph1.Skeletons.WebAPI"
+  schedule:
+    interval: daily
+    time: "03:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: FluentValidation
+    versions:
+    - ">= 9.a, < 10"
+  - dependency-name: PostSharp.Redist
+    versions:
+    - 6.8.10
+    - 6.8.9
+    - 6.9.3
+  - dependency-name: PostSharp
+    versions:
+    - 6.8.10
+    - 6.8.9
+    - 6.9.3
+  - dependency-name: Microsoft.EntityFrameworkCore.InMemory
+    versions:
+    - 5.0.2
+    - 5.0.3
+    - 5.0.4
+  - dependency-name: NLog.Web
+    versions:
+    - 4.11.0
+  - dependency-name: NLog
+    versions:
+    - 4.7.8
+  - dependency-name: NLog.Schema
+    versions:
+    - 4.7.8
